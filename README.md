@@ -124,7 +124,7 @@ var proxyRequest = ProxyRequestBuilder<SuperCoolResponseDto>
                         .Build();
 ```
 
-But let's be honest with ourselves. We all HATE passing around magic strings, especially when those magic strings are secrets! We also like to look super cool and use cool programming patterns and what not. So it's highly likelye that we want to reach out to a service of some sort to provide us this information auto-magically on every request... and guess what! We can do this by injecting a delegating handler into the request pipeline!!!
+But let's be honest with ourselves. We all HATE passing around magic strings, especially when those magic strings are secrets! We also like to look super cool and use cool programming patterns and what not. So it's highly likely that we want to reach out to a service of some sort to provide us this information auto-magically on every request... and guess what! We can do this by injecting a delegating handler into the request pipeline!!!
 
 First, we create our delegating handler
 
