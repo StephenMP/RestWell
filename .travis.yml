@@ -2,7 +2,7 @@ language: csharp
 solution: RestWell.sln
 dist: trusty
 mono: none
-dotnet: latest
+dotnet: 2.0.0
 install:
   - dotnet restore
 script:
