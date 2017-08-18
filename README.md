@@ -153,9 +153,10 @@ public class SecureRequestDelegatingHandler : DelegatingHandler
 Next, we create a ProxyConfiguration using the ProxyConfigurationBuilder to inject the delegating handler into the pipeline
 
 ```csharp
-var proxyConfiguration = ProxyConfigurationBuilder.CreateBuilder()
-                                                  .AddDelegatingHandler(new SecureRequestDelegatingHandler())
-                                                  .Build()
+var proxyConfiguration = ProxyConfigurationBuilder
+                            .CreateBuilder()
+                            .AddDelegatingHandler(new SecureRequestDelegatingHandler())
+                            .Build()
 ```
 
 We then use that ProxyConfiguration when creating our Proxy
@@ -194,9 +195,10 @@ public class SuperCoolResponseDto {
 public class ProxyExample {
     public async Task ApiRequestDemo() {
         // Create a configuration for our proxy with our new delegating handler
-        var proxyConfiguration = ProxyConfigurationBuilder.CreateBuilder()
-                                                          .AddDelegatingHandler(new SecureRequestDelegatingHandler())
-                                                          .Build()
+        var proxyConfiguration = ProxyConfigurationBuilder
+                                    .CreateBuilder()
+                                    .AddDelegatingHandler(new SecureRequestDelegatingHandler())
+                                    .Build()
         
         // Create the proxy
         var proxy = new Proxy(proxyConfiguration);
