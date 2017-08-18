@@ -1,0 +1,49 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestWell", "RestWell\RestWell.csproj", "{2F7F7E79-42D9-4C2D-BE60-FEB5B9BF8BA3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestWell.Test.Component", "RestWell.Test.Component\RestWell.Test.Component.csproj", "{9DE55000-DC66-41D3-B6E7-A3A329321C23}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestWell.Test.Integration", "RestWell.Test.Integration\RestWell.Test.Integration.csproj", "{D6EBC547-0432-4620-88CB-1631C38D3026}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestWell.Test.Resource.WebApi", "RestWell.Test.Resource.WebApi\RestWell.Test.Resource.WebApi.csproj", "{1319FECB-4E00-4DB2-9A62-0ADB2CA5AFDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestWell.Test.Resource.TestEnvironment", "RestWell.Test.Resource.TestEnvironment\RestWell.Test.Resource.TestEnvironment.csproj", "{F77F68CD-4EA2-45CC-ABF1-F6326FFB452F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F7F7E79-42D9-4C2D-BE60-FEB5B9BF8BA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F7F7E79-42D9-4C2D-BE60-FEB5B9BF8BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F7F7E79-42D9-4C2D-BE60-FEB5B9BF8BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F7F7E79-42D9-4C2D-BE60-FEB5B9BF8BA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DE55000-DC66-41D3-B6E7-A3A329321C23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DE55000-DC66-41D3-B6E7-A3A329321C23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DE55000-DC66-41D3-B6E7-A3A329321C23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DE55000-DC66-41D3-B6E7-A3A329321C23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6EBC547-0432-4620-88CB-1631C38D3026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6EBC547-0432-4620-88CB-1631C38D3026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6EBC547-0432-4620-88CB-1631C38D3026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6EBC547-0432-4620-88CB-1631C38D3026}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1319FECB-4E00-4DB2-9A62-0ADB2CA5AFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1319FECB-4E00-4DB2-9A62-0ADB2CA5AFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1319FECB-4E00-4DB2-9A62-0ADB2CA5AFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1319FECB-4E00-4DB2-9A62-0ADB2CA5AFDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F77F68CD-4EA2-45CC-ABF1-F6326FFB452F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F77F68CD-4EA2-45CC-ABF1-F6326FFB452F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F77F68CD-4EA2-45CC-ABF1-F6326FFB452F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F77F68CD-4EA2-45CC-ABF1-F6326FFB452F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D6FB60D0-D53F-4038-BC72-F5B839A88E22}
+	EndGlobalSection
+EndGlobal
