@@ -40,8 +40,8 @@ namespace RestWell.Test.Integration.Client
         {
             this.basicRequestProxyResponse.ShouldNotBeNull();
             this.basicRequestProxyResponse.HttpRequestMethod.ShouldBe(httpRequestMethod);
-            this.basicRequestProxyResponse.IsSuccessfulStatusCode.ShouldBe(false);
             this.basicRequestProxyResponse.StatusCode.ShouldBe(HttpStatusCode.MethodNotAllowed);
+            this.basicRequestProxyResponse.IsSuccessfulStatusCode.ShouldBe(false);
         }
 
         private IProxyResponse<MessageResponseDto> secureRequestProxyResponse;
@@ -100,9 +100,9 @@ namespace RestWell.Test.Integration.Client
         {
             this.basicRequestProxyResponse.ShouldNotBeNull();
             this.basicRequestProxyResponse.HttpRequestMethod.ShouldBe(httpRequestMethod);
+            this.basicRequestProxyResponse.StatusCode.ShouldBe(HttpStatusCode.NotFound);
             this.basicRequestProxyResponse.IsSuccessfulStatusCode.ShouldBe(false);
             this.basicRequestProxyResponse.RequestUri.ToString().ShouldBe(this.basicRequestProxyResponse.RequestUri.ToString());
-            this.basicRequestProxyResponse.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
 
         internal void GivenIHaveABasicRequestProxyRequest()
@@ -129,9 +129,9 @@ namespace RestWell.Test.Integration.Client
         {
             this.basicRequestProxyResponse.ShouldNotBeNull();
             this.basicRequestProxyResponse.HttpRequestMethod.ShouldBe(httpRequestMethod);
+            this.basicRequestProxyResponse.StatusCode.ShouldBe(HttpStatusCode.InternalServerError);
             this.basicRequestProxyResponse.IsSuccessfulStatusCode.ShouldBe(false);
             this.basicRequestProxyResponse.RequestUri.ToString().ShouldBe(this.basicRequestProxyResponse.RequestUri.ToString());
-            this.basicRequestProxyResponse.StatusCode.ShouldBe(HttpStatusCode.InternalServerError);
         }
 
         internal void GivenIHaveAMessageDtoRequestProxyRequest()
@@ -158,9 +158,9 @@ namespace RestWell.Test.Integration.Client
         {
             this.secureRequestProxyResponse.ShouldNotBeNull();
             this.secureRequestProxyResponse.HttpRequestMethod.ShouldBe(httpRequestMethod);
+            this.secureRequestProxyResponse.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
             this.secureRequestProxyResponse.IsSuccessfulStatusCode.ShouldBe(false);
             this.secureRequestProxyResponse.RequestUri.ToString().ShouldBe(this.secureRequestProxyResponse.RequestUri.ToString());
-            this.secureRequestProxyResponse.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
         }
 
         internal void GivenIHaveAMessageDtoResponseRequestProxyRequest()
@@ -325,6 +325,8 @@ namespace RestWell.Test.Integration.Client
 
             proxyResponse.HttpRequestMethod.ShouldBe(httpRequestMethod);
 
+            proxyResponse.StatusCode.ShouldBe(statusCode);
+
             proxyResponse.IsSuccessfulStatusCode.ShouldBe(isSuccessfulStatusCode);
 
             proxyResponse.RequestHeaders.ShouldNotBeNull();
@@ -334,8 +336,6 @@ namespace RestWell.Test.Integration.Client
 
             proxyResponse.ResponseHeaders.ShouldNotBeNull();
             proxyResponse.ResponseHeaders.ShouldNotBeEmpty();
-
-            proxyResponse.StatusCode.ShouldBe(statusCode);
         }
 
         #endregion Private Methods
