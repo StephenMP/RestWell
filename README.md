@@ -24,7 +24,24 @@ PM> Install-Package RestWell -Version 1.0.0
 > dotnet add package RestWell --version 1.0.0
 ```
 
-# Simple Example
+# Contributing
+If you'd like to contribute, please follow these simple rules
+
+1. Either submit a new issue outlining what you are going to work on OR pick an existing issue to work on
+1. Fork the repository
+1. Create a branch with the following format: `YourGitHubName/IssueNumber` (e.g. `sporter/703`)
+1. Make your code changes
+1. Ensure all added code is covered by tests (I will scrutinize this like a crazy mad man)
+    * Please ensure that you are following the testing pattern. Please reference existing tests to get an idea of the pattern.
+1. When committing changes, please follow the commit message format `git commit -m "IssueNumber : Commit Message"` (e.g. `git commit -m "703 : Added tests around Proxy"`)
+1. Submit a Pull Request into master from your branch
+
+I'll be honest with you all, I'm going to be Mr. Party Pooper when it comes to contributions. I want to ensure the project is kept clean, is well tested, and follows existing patterns and conventions to make it easier to pick it up and run with.
+
+Thanks and happy coding :)
+
+# Usage
+## Simple Example
 RestWell is rediculously easy to use! Let's say you want to call an API with the following: 
  * The API route is https://www.myapi.com/api/test/[message].
  * The request type is Get
@@ -111,7 +128,7 @@ public class ProxyExample {
 }
 ```
 
-# An Even Cooler Example
+## An Even Cooler Example
 Now let's say we have the same API as above, however, this time it requires you to have some sort of API key in your Authorization header in order to use it. There are three ways in which we can achieve this. The first two ways involve setting the Authorization header when creating the ProxyRequest
 
 ```csharp
