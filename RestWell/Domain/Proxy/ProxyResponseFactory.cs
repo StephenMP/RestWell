@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using RestWell.Client.Response;
 using RestWell.Domain.Enums;
 using RestWell.Extensions;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace RestWell.Client.Response
+namespace RestWell.Domain.Proxy
 {
     internal static class ProxyResponseFactory
     {
