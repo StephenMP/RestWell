@@ -98,7 +98,7 @@ public class ProxyExample {
 ```
 
 # An Even Cooler Example
-Now let's say we have the same API as above, however, this time it requires you to have some sort of API key in you Authorization header in order to use that. There are three ways in which we can achieve this. The first two ways involve setting the Authorization header when creating the ProxyRequest
+Now let's say we have the same API as above, however, this time it requires you to have some sort of API key in your Authorization header in order to use that. There are three ways in which we can achieve this. The first two ways involve setting the Authorization header when creating the ProxyRequest
 
 ```csharp
 var proxyRequest = ProxyRequestBuilder<SuperCoolResponseDto>
