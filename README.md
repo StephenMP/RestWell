@@ -1,11 +1,7 @@
 # RestWell
-<center>
-    <p>
-        <a href="https://travis-ci.org/StephenMP/RestWell"><img src="https://travis-ci.org/StephenMP/RestWell.svg?branch=master"></a>
-        <a href="https://badge.fury.io/nu/RestWell"><img src="https://badge.fury.io/nu/RestWell.svg"></a>
-        <a href="https://codeclimate.com/github/StephenMP/RestWell/"><img src="https://codeclimate.com/github/StephenMP/RestWell/badges/issue_count.svg"></a>
-    </p>
-</center>
+![logo](./Logo.png)
+
+[![Build Status](https://travis-ci.org/StephenMP/RestWell.svg?branch=master)](https://travis-ci.org/StephenMP/RestWell) [![NuGet version](https://badge.fury.io/nu/RestWell.svg)](https://badge.fury.io/nu/RestWell)
 
 RestWell is a simple, easy to use, light weight .NET generic client which provides simple abstraction of the communication layer between your code and RESTful Web APIs. This project was inspired by the RestSharp project; however, it is different in that it focuses solely on .NET clients and provides simple mechanisms for controlling your request pipeline.
 
