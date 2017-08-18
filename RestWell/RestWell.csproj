@@ -11,6 +11,8 @@
     <RepositoryUrl>https://github.com/StephenMP/RestWell</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
+    <PackageIconUrl>https://raw.githubusercontent.com/StephenMP/RestWell/master/Logo.png</PackageIconUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
