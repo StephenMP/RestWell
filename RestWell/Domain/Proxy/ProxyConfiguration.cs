@@ -6,11 +6,19 @@ namespace RestWell.Domain.Proxy
 {
     public class ProxyConfiguration : IProxyConfiguration
     {
-        public IEnumerable<DelegatingHandler> DelegatingHandlers { get; set; }
+        #region Public Constructors
 
         public ProxyConfiguration()
         {
             this.DelegatingHandlers = Enumerable.Empty<DelegatingHandler>();
         }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public IEnumerable<DelegatingHandler> DelegatingHandlers { get; set; }
+
+        #endregion Public Properties
     }
 }

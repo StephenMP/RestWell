@@ -9,6 +9,8 @@ namespace RestWell.Client.Request
 {
     public class ProxyRequestBuilder : ProxyRequestBuilder<Missing, Missing>
     {
+        #region Public Constructors
+
         public ProxyRequestBuilder(string baseUri) : base(baseUri)
         {
         }
@@ -16,10 +18,14 @@ namespace RestWell.Client.Request
         public ProxyRequestBuilder(Uri baseUri) : base(baseUri)
         {
         }
+
+        #endregion Public Constructors
     }
 
     public class ProxyRequestBuilder<TResponseDto> : ProxyRequestBuilder<Missing, TResponseDto>
     {
+        #region Public Constructors
+
         public ProxyRequestBuilder(string baseUri) : base(baseUri)
         {
         }
@@ -27,18 +33,20 @@ namespace RestWell.Client.Request
         public ProxyRequestBuilder(Uri baseUri) : base(baseUri)
         {
         }
+
+        #endregion Public Constructors
     }
 
     public class ProxyRequestBuilder<TRequestDto, TResponseDto>
     {
-        public static ProxyRequestBuilder<TRequestDto, TResponseDto> CreateBuilder(string baseUri) => new ProxyRequestBuilder<TRequestDto, TResponseDto>(baseUri);
-        public static ProxyRequestBuilder<TRequestDto, TResponseDto> CreateBuilder(Uri baseUri) => new ProxyRequestBuilder<TRequestDto, TResponseDto>(baseUri);
-
         #region Private Fields
 
         private Uri baseUri;
+
         private List<object> pathArguments;
+
         private IProxyRequest<TRequestDto, TResponseDto> proxyRequest;
+
         private IDictionary<string, object> queryParameters;
 
         #endregion Private Fields
@@ -61,23 +69,9 @@ namespace RestWell.Client.Request
 
         #region Public Methods
 
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AddHeader(string header, params string[] values)
-        {
-            if (this.proxyRequest.Headers.ContainsKey(header))
-            {
-                var acceptHeader = this.proxyRequest.Headers[header].ToList();
-                acceptHeader.AddRange(values);
+        public static ProxyRequestBuilder<TRequestDto, TResponseDto> CreateBuilder(string baseUri) => new ProxyRequestBuilder<TRequestDto, TResponseDto>(baseUri);
 
-                this.proxyRequest.Headers[header] = acceptHeader;
-            }
-
-            else
-            {
-                this.proxyRequest.Headers.Add(header, values);
-            }
-
-            return this;
-        }
+        public static ProxyRequestBuilder<TRequestDto, TResponseDto> CreateBuilder(Uri baseUri) => new ProxyRequestBuilder<TRequestDto, TResponseDto>(baseUri);
 
         public ProxyRequestBuilder<TRequestDto, TResponseDto> Accept(params string[] values)
         {
@@ -88,7 +82,6 @@ namespace RestWell.Client.Request
 
                 this.proxyRequest.Headers["Accept"] = acceptHeader;
             }
-
             else
             {
                 this.proxyRequest.Headers.Add("Accept", values);
@@ -97,16 +90,18 @@ namespace RestWell.Client.Request
             return this;
         }
 
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> Authorization(string scheme, string token)
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AddHeader(string header, params string[] values)
         {
-            if (this.proxyRequest.Headers.ContainsKey("Authorization"))
+            if (this.proxyRequest.Headers.ContainsKey(header))
             {
-                this.proxyRequest.Headers["Authorization"] = new[] { $"{scheme} {token}" };
-            }
+                var acceptHeader = this.proxyRequest.Headers[header].ToList();
+                acceptHeader.AddRange(values);
 
+                this.proxyRequest.Headers[header] = acceptHeader;
+            }
             else
             {
-                this.proxyRequest.Headers.Add("Authorization", new[] { $"{scheme} {token}" });
+                this.proxyRequest.Headers.Add(header, values);
             }
 
             return this;
@@ -124,44 +119,9 @@ namespace RestWell.Client.Request
             return this;
         }
 
-        public IProxyRequest<TRequestDto, TResponseDto> Build()
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AppendToRoute(string appendage)
         {
-            var pathArgumentsBuilder = new StringBuilder();
-            var queryParametersBuilder = new StringBuilder();
-            var requestUri = this.baseUri.ToString();
-
-            if (this.pathArguments.Count > 0)
-            {
-                foreach (var pathArgument in this.pathArguments)
-                {
-                    pathArgumentsBuilder.Append($"{pathArgument}/");
-                }
-            }
-
-            if (this.queryParameters.Count > 0)
-            {
-                queryParametersBuilder.Append('?');
-
-                foreach (var queryParameter in this.queryParameters.Keys)
-                {
-                    queryParametersBuilder.Append($"{queryParameter}={this.queryParameters[queryParameter.ToString()]}&");
-                }
-            }
-
-            this.proxyRequest.RequestUri = new Uri($"{requestUri.TrimEnd('/')}/{pathArgumentsBuilder.ToString().TrimEnd('/')}{queryParametersBuilder.ToString().TrimEnd('&')}");
-
-            return this.proxyRequest;
-        }
-
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> SetRequestDto(TRequestDto requestDto)
-        {
-            this.proxyRequest.RequestDto = requestDto;
-            return this;
-        }
-
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsRequestType(HttpRequestMethod requestMethod)
-        {
-            this.proxyRequest.HttpRequestMethod = requestMethod;
+            this.baseUri = new Uri(this.baseUri, appendage);
             return this;
         }
 
@@ -200,9 +160,58 @@ namespace RestWell.Client.Request
             return this.AsRequestType(HttpRequestMethod.Put);
         }
 
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AppendToRoute(string appendage)
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsRequestType(HttpRequestMethod requestMethod)
         {
-            this.baseUri = new Uri(this.baseUri, appendage);
+            this.proxyRequest.HttpRequestMethod = requestMethod;
+            return this;
+        }
+
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> Authorization(string scheme, string token)
+        {
+            if (this.proxyRequest.Headers.ContainsKey("Authorization"))
+            {
+                this.proxyRequest.Headers["Authorization"] = new[] { $"{scheme} {token}" };
+            }
+            else
+            {
+                this.proxyRequest.Headers.Add("Authorization", new[] { $"{scheme} {token}" });
+            }
+
+            return this;
+        }
+
+        public IProxyRequest<TRequestDto, TResponseDto> Build()
+        {
+            var pathArgumentsBuilder = new StringBuilder();
+            var queryParametersBuilder = new StringBuilder();
+            var requestUri = this.baseUri.ToString();
+
+            if (this.pathArguments.Count > 0)
+            {
+                foreach (var pathArgument in this.pathArguments)
+                {
+                    pathArgumentsBuilder.Append($"{pathArgument}/");
+                }
+            }
+
+            if (this.queryParameters.Count > 0)
+            {
+                queryParametersBuilder.Append('?');
+
+                foreach (var queryParameter in this.queryParameters.Keys)
+                {
+                    queryParametersBuilder.Append($"{queryParameter}={this.queryParameters[queryParameter.ToString()]}&");
+                }
+            }
+
+            this.proxyRequest.RequestUri = new Uri($"{requestUri.TrimEnd('/')}/{pathArgumentsBuilder.ToString().TrimEnd('/')}{queryParametersBuilder.ToString().TrimEnd('&')}");
+
+            return this.proxyRequest;
+        }
+
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> SetRequestDto(TRequestDto requestDto)
+        {
+            this.proxyRequest.RequestDto = requestDto;
             return this;
         }
 

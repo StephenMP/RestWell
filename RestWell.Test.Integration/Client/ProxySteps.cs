@@ -24,6 +24,7 @@ namespace RestWell.Test.Integration.Client
         private string basicMessage;
         private IProxyRequest<Missing, string> basicRequestProxyRequest;
         private IProxyResponse<string> basicRequestProxyResponse;
+        private List<DelegatingHandler> delegatingHandlers;
         private bool disposedValue;
         private HttpRequestMethod httpRequestMethod;
         private IProxyRequest<MessageRequestDto, MessageResponseDto> messageDtoRequestProxyRequest;
@@ -32,18 +33,21 @@ namespace RestWell.Test.Integration.Client
         private IProxyResponse<MessageResponseDto> messageDtoResponseRequestProxyResponse;
         private MessageRequestDto messageRequestDto;
         private IProxy proxy;
-        private TestEnvironment testEnvironment;
-        private IProxyRequest<Missing, MessageResponseDto> secureRequestProxyRequest;
         private IProxyConfiguration proxyConfiguration;
-        private List<DelegatingHandler> delegatingHandlers;
+        private IProxyRequest<Missing, MessageResponseDto> secureRequestProxyRequest;
         private IProxyResponse<MessageResponseDto> secureRequestProxyResponse;
+        private TestEnvironment testEnvironment;
 
         #endregion Private Fields
+
+        #region Public Constructors
 
         public ProxySteps()
         {
             this.delegatingHandlers = new List<DelegatingHandler>();
         }
+
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -113,6 +117,34 @@ namespace RestWell.Test.Integration.Client
             this.proxy = new Proxy(this.proxyConfiguration);
         }
 
+        internal void GivenIHaveAProxyConfiguration()
+        {
+            var proxyConfigurationBuilder = ProxyConfigurationBuilder.CreateBuilder();
+
+            if (this.delegatingHandlers != null)
+            {
+                proxyConfigurationBuilder.AddDelegatingHandlers(this.delegatingHandlers.ToArray());
+            }
+
+            this.proxyConfiguration = proxyConfigurationBuilder.Build();
+        }
+
+        internal void GivenIHaveASecureRequestDelegatingHandler()
+        {
+            var secureRequestDelegatingHandler = new SecureRequestDelegatingHandler();
+            this.delegatingHandlers.Add(secureRequestDelegatingHandler);
+        }
+
+        internal void GivenIHaveASecureRequestProxyRequest()
+        {
+            this.secureRequestProxyRequest = new ProxyRequestBuilder<Missing, MessageResponseDto>(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
+                                          .AddHeader("Accept", this.acceptHeaderValue)
+                                          .AppendToRoute($"api/{nameof(SecureRequestController).Replace("Controller", "")}")
+                                          .AddPathArguments(this.basicMessage)
+                                          .AsRequestType(this.httpRequestMethod)
+                                          .Build();
+        }
+
         internal void GivenIHaveATestEnvironment()
         {
             this.testEnvironment = TestEnvironmentBuilder.CreateBuilder()
@@ -175,39 +207,6 @@ namespace RestWell.Test.Integration.Client
             }
         }
 
-        internal async Task WhenIInvokeAsyncForSecureRequest()
-        {
-            this.secureRequestProxyResponse = await this.proxy.InvokeAsync(this.secureRequestProxyRequest);
-        }
-
-        internal void GivenIHaveAProxyConfiguration()
-        {
-            var proxyConfigurationBuilder = ProxyConfigurationBuilder.CreateBuilder();
-
-            if (this.delegatingHandlers != null)
-            {
-                proxyConfigurationBuilder.AddDelegatingHandlers(this.delegatingHandlers.ToArray());
-            }
-
-            this.proxyConfiguration = proxyConfigurationBuilder.Build();
-        }
-
-        internal void GivenIHaveASecureRequestProxyRequest()
-        {
-            this.secureRequestProxyRequest = new ProxyRequestBuilder<Missing, MessageResponseDto>(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
-                                          .AddHeader("Accept", this.acceptHeaderValue)
-                                          .AppendToRoute($"api/{nameof(SecureRequestController).Replace("Controller", "")}")
-                                          .AddPathArguments(this.basicMessage)
-                                          .AsRequestType(this.httpRequestMethod)
-                                          .Build();
-        }
-
-        internal void GivenIHaveASecureRequestDelegatingHandler()
-        {
-            var secureRequestDelegatingHandler = new SecureRequestDelegatingHandler();
-            this.delegatingHandlers.Add(secureRequestDelegatingHandler);
-        }
-
         internal void ThenICanVerifyIHaveAProxy()
         {
             this.proxy.ShouldNotBeNull();
@@ -226,6 +225,11 @@ namespace RestWell.Test.Integration.Client
         internal async Task WhenIInvokeAsyncForMessageDtoResponseRequest()
         {
             this.messageDtoResponseRequestProxyResponse = await this.proxy.InvokeAsync(this.messageDtoResponseRequestProxyRequest);
+        }
+
+        internal async Task WhenIInvokeAsyncForSecureRequest()
+        {
+            this.secureRequestProxyResponse = await this.proxy.InvokeAsync(this.secureRequestProxyRequest);
         }
 
         #endregion Internal Methods

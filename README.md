@@ -59,7 +59,7 @@ Now, we get the response DTO the API returned to us and use it
 
 ```csharp
 var superCoolResponseDto = proxyResponse.ResponseDto;
-var message = SuperCoolResponseDto.Message; // message = "Hello World"
+var message = superCoolResponseDto.Message; // message = "Hello World"
 ```
 
 Put it all together, and it looks like this
@@ -92,7 +92,7 @@ public class ProxyExample {
         var superCoolResponseDto = proxyResponse.ResponseDto;
 
         // Now we use it
-        var message = SuperCoolResponseDto.Message; // message = "Hello World"
+        var message = superCoolResponseDto.Message; // message = "Hello World"
     }
 }
 ```
@@ -218,7 +218,7 @@ public class ProxyExample {
         var superCoolResponseDto = proxyResponse.ResponseDto;
 
         // Now we use it
-        var message = SuperCoolResponseDto.Message; // message = "Hello World"
+        var message = superCoolResponseDto.Message; // message = "Hello World"
     }
 }
 ```

@@ -36,7 +36,6 @@ namespace RestWell.Client.Response
                     {
                         restfulProxyResponse.ResponseDto = responseContentString.TrimStart('\\').TrimStart('\"').TrimEnd('\"').TrimEnd('\\') as TResponseDto;
                     }
-
                     else if (httpResponseMessage.RequestMessage.Headers.Accept.Any(h => h.MediaType == "application/xml") && responseContentString.StartsWith('<') && responseContentString.EndsWith('>'))
                     {
                         var document = XDocument.Parse(responseContentString);
@@ -49,7 +48,6 @@ namespace RestWell.Client.Response
                             }
                         }
                     }
-
                     else
                     {
                         restfulProxyResponse.ResponseDto = JsonConvert.DeserializeObject<TResponseDto>(responseContentString);

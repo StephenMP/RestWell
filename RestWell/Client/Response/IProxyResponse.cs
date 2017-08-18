@@ -9,6 +9,7 @@ namespace RestWell.Client.Response
     {
         #region Public Properties
 
+        HttpRequestMethod HttpRequestMethod { get; }
         bool IsSuccessfulStatusCode { get; }
         HttpRequestHeaders RequestHeaders { get; }
         Uri RequestUri { get; }
@@ -16,7 +17,6 @@ namespace RestWell.Client.Response
         HttpResponseHeaders ResponseHeaders { get; }
         string ResponseMessage { get; }
         HttpStatusCode StatusCode { get; }
-        HttpRequestMethod HttpRequestMethod { get; }
 
         #endregion Public Properties
     }

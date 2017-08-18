@@ -4,8 +4,6 @@ namespace RestWell.Test.Resource.TestEnvironment.Environment
 {
     public class TestEnvironmentBuilder
     {
-        public static TestEnvironmentBuilder CreateBuilder() => new TestEnvironmentBuilder();
-
         #region Private Fields
 
         private ResourceWebApiConfiguration resourceWebServiceConfiguration;
@@ -13,6 +11,8 @@ namespace RestWell.Test.Resource.TestEnvironment.Environment
         #endregion Private Fields
 
         #region Public Methods
+
+        public static TestEnvironmentBuilder CreateBuilder() => new TestEnvironmentBuilder();
 
         public TestEnvironmentBuilder AddResourceWebApi<TStartup>() where TStartup : class
         {

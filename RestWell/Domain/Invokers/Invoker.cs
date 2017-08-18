@@ -25,7 +25,13 @@ namespace RestWell.Domain.Invokers
 
         #endregion Protected Constructors
 
-        #region Protected Properties
+        #region Public Methods
+
+        public abstract Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class;
+
+        #endregion Public Methods
+
+        #region Protected Methods
 
         protected HttpClient CreateHttpClient()
         {
@@ -37,12 +43,6 @@ namespace RestWell.Domain.Invokers
             return HttpClientFactory.Create();
         }
 
-        #endregion Protected Properties
-
-        #region Public Methods
-
-        public abstract Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class;
-
-        #endregion Public Methods
+        #endregion Protected Methods
     }
 }
