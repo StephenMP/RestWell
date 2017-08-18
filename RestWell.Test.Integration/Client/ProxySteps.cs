@@ -78,7 +78,7 @@ namespace RestWell.Test.Integration.Client
                               .AddHeader("Accept", this.acceptHeaderValue)
                               .AppendToRoute($"api/{nameof(BasicRequestController).Replace("Controller", "")}")
                               .AddPathArguments(this.basicMessage)
-                              .SetRequestType(this.httpRequestMethod)
+                              .AsRequestType(this.httpRequestMethod)
                               .Build();
         }
 
@@ -88,7 +88,7 @@ namespace RestWell.Test.Integration.Client
                               .AddHeader("Accept", this.acceptHeaderValue)
                               .AppendToRoute($"api/{nameof(MessageDtoRequestController).Replace("Controller", "")}")
                               .SetRequestDto(this.messageRequestDto)
-                              .SetRequestType(this.httpRequestMethod)
+                              .AsRequestType(this.httpRequestMethod)
                               .Build();
         }
 
@@ -98,7 +98,7 @@ namespace RestWell.Test.Integration.Client
                               .AddHeader("Accept", this.acceptHeaderValue)
                               .AppendToRoute($"api/{nameof(MessageDtoResponseRequestController).Replace("Controller", "")}")
                               .AddPathArguments(this.basicMessage)
-                              .SetRequestType(this.httpRequestMethod)
+                              .AsRequestType(this.httpRequestMethod)
                               .Build();
         }
 
@@ -198,7 +198,7 @@ namespace RestWell.Test.Integration.Client
                                           .AddHeader("Accept", this.acceptHeaderValue)
                                           .AppendToRoute($"api/{nameof(SecureRequestController).Replace("Controller", "")}")
                                           .AddPathArguments(this.basicMessage)
-                                          .SetRequestType(this.httpRequestMethod)
+                                          .AsRequestType(this.httpRequestMethod)
                                           .Build();
         }
 

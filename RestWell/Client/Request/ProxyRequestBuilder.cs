@@ -31,6 +31,9 @@ namespace RestWell.Client.Request
 
     public class ProxyRequestBuilder<TRequestDto, TResponseDto>
     {
+        public static ProxyRequestBuilder<TRequestDto, TResponseDto> CreateBuilder(string baseUri) => new ProxyRequestBuilder<TRequestDto, TResponseDto>(baseUri);
+        public static ProxyRequestBuilder<TRequestDto, TResponseDto> CreateBuilder(Uri baseUri) => new ProxyRequestBuilder<TRequestDto, TResponseDto>(baseUri);
+
         #region Private Fields
 
         private Uri baseUri;
@@ -156,10 +159,45 @@ namespace RestWell.Client.Request
             return this;
         }
 
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> SetRequestType(HttpRequestMethod requestMethod)
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsRequestType(HttpRequestMethod requestMethod)
         {
             this.proxyRequest.HttpRequestMethod = requestMethod;
             return this;
+        }
+
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsDeleteRequest()
+        {
+            return this.AsRequestType(HttpRequestMethod.Delete);
+        }
+
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsGetRequest()
+        {
+            return this.AsRequestType(HttpRequestMethod.Get);
+        }
+
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsHeadRequest()
+        {
+            return this.AsRequestType(HttpRequestMethod.Head);
+        }
+
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsOptionsRequest()
+        {
+            return this.AsRequestType(HttpRequestMethod.Options);
+        }
+
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsPatchRequest()
+        {
+            return this.AsRequestType(HttpRequestMethod.Patch);
+        }
+
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsPostRequest()
+        {
+            return this.AsRequestType(HttpRequestMethod.Post);
+        }
+
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsPutRequest()
+        {
+            return this.AsRequestType(HttpRequestMethod.Put);
         }
 
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AppendToRoute(string appendage)
