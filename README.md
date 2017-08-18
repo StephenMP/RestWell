@@ -28,12 +28,13 @@ PM> Install-Package RestWell -Version 1.0.0
 If you'd like to contribute, please follow these simple rules
 
 1. Either submit a new issue outlining what you are going to work on OR pick an existing issue to work on
-1. Fork the repository
+1. Clone the repository
 1. Create a branch with the following format: `YourGitHubName/IssueNumber` (e.g. `sporter/703`)
 1. Make your code changes
 1. Ensure all added code is covered by tests (I will scrutinize this like a crazy mad man)
     * Please ensure that you are following the testing pattern. Please reference existing tests to get an idea of the pattern.
 1. When committing changes, please follow the commit message format `git commit -m "IssueNumber : Commit Message"` (e.g. `git commit -m "703 : Added tests around Proxy"`)
+1. Push your branch up
 1. Submit a Pull Request into master from your branch
 
 I'll be honest with you all, I'm going to be Mr. Party Pooper when it comes to contributions. I want to ensure the project is kept clean, is well tested, and follows existing patterns and conventions to make it easier to pick it up and run with.
