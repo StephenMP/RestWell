@@ -5,7 +5,7 @@ using Xunit;
 
 namespace RestWell.Test.Integration.Client
 {
-    public class ProxyFeatures : IDisposable
+    public class ProxyFeatures : IClassFixture<TestEnvironmentClassFixture<Resource.WebApi.Startup>>, IDisposable
     {
         #region Private Fields
 
@@ -16,9 +16,9 @@ namespace RestWell.Test.Integration.Client
 
         #region Public Constructors
 
-        public ProxyFeatures()
+        public ProxyFeatures(TestEnvironmentClassFixture<Resource.WebApi.Startup> testEnvironmentClassFixture)
         {
-            this.steps = new ProxySteps();
+            this.steps = new ProxySteps(testEnvironmentClassFixture.TestEnvironment);
         }
 
         #endregion Public Constructors
@@ -30,6 +30,106 @@ namespace RestWell.Test.Integration.Client
         {
             this.steps.GivenIHaveAProxy();
             this.steps.ThenICanVerifyIHaveAProxy();
+        }
+
+        [Theory]
+        [InlineData(HttpRequestMethod.None, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.None, "Test", "application/xml")]
+        public async Task CannotIssueBasicRequestWithUnrecognizedRequestType(HttpRequestMethod requestMethod, string message, string acceptHeaderValue)
+        {
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
+            this.steps.GivenIHaveABasicRequestMessage(message);
+            this.steps.GivenIAccept(acceptHeaderValue);
+            this.steps.GivenIHaveABasicRequestProxyRequest();
+            this.steps.GivenIHaveAProxy();
+
+            await this.steps.WhenIInvokeAsyncForBasicRequest();
+
+            this.steps.ThenICanVerifyICannotIssueBasicRequestWithUnrecognizedRequestType();
+        }
+
+        [Theory]
+        [InlineData(HttpRequestMethod.Delete, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Get, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Head, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Options, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Patch, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Post, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Put, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Delete, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Get, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Head, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Options, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Patch, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Post, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Put, "Test", "application/xml")]
+        public async Task CannotIssueBasicRequestForNonExistingResource(HttpRequestMethod requestMethod, string message, string acceptHeaderValue)
+        {
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
+            this.steps.GivenIHaveABasicRequestMessage(message);
+            this.steps.GivenIAccept(acceptHeaderValue);
+            this.steps.GivenIHaveABasicRequestProxyRequestForNonExistingResource();
+            this.steps.GivenIHaveAProxy();
+
+            await this.steps.WhenIInvokeAsyncForBasicRequest();
+
+            this.steps.ThenICanVerifyICannotIssueBasicRequestForNonExistingResource();
+        }
+
+        [Theory]
+        [InlineData(HttpRequestMethod.Delete, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Get, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Head, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Options, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Patch, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Post, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Put, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Delete, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Get, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Head, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Options, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Patch, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Post, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Put, "Test", "application/xml")]
+        public async Task CannotIssueBasicRequestDueToException(HttpRequestMethod requestMethod, string message, string acceptHeaderValue)
+        {
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
+            this.steps.GivenIHaveABasicRequestMessage(message);
+            this.steps.GivenIAccept(acceptHeaderValue);
+            this.steps.GivenIHaveABasicRequestProxyRequestForException();
+            this.steps.GivenIHaveAProxy();
+
+            await this.steps.WhenIInvokeAsyncForBasicRequest();
+
+            this.steps.ThenICanVerifyICannotIssueBasicRequestDueToException();
+        }
+
+        [Theory]
+        [InlineData(HttpRequestMethod.Delete, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Get, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Head, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Options, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Patch, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Post, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Put, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Delete, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Get, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Head, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Options, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Patch, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Post, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Put, "Test", "application/xml")]
+        public async Task CannotIssueSecureRequestDueNoAuthHeader(HttpRequestMethod requestMethod, string message, string acceptHeaderValue)
+        {
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
+            this.steps.GivenIHaveABasicRequestMessage(message);
+            this.steps.GivenIAccept(acceptHeaderValue);
+            this.steps.GivenIHaveASecureRequestProxyRequestWithNoAuthHeader();
+            this.steps.GivenIHaveAProxy();
+
+            await this.steps.WhenIInvokeAsyncForSecureRequest();
+
+            this.steps.ThenICanVerifyICannotIssueSecureRequestDueNoAuthHeader();
         }
 
         [Theory]
@@ -49,7 +149,6 @@ namespace RestWell.Test.Integration.Client
         [InlineData(HttpRequestMethod.Put, "Test", "application/xml")]
         public async Task CanIssueBasicRequest(HttpRequestMethod requestMethod, string message, string acceptHeaderValue)
         {
-            this.steps.GivenIHaveATestEnvironment();
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
             this.steps.GivenIHaveABasicRequestMessage(message);
             this.steps.GivenIAccept(acceptHeaderValue);
@@ -62,15 +161,22 @@ namespace RestWell.Test.Integration.Client
         }
 
         [Theory]
+        [InlineData(HttpRequestMethod.Delete, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Get, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Head, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Options, "Test", "application/json")]
         [InlineData(HttpRequestMethod.Patch, "Test", "application/json")]
         [InlineData(HttpRequestMethod.Post, "Test", "application/json")]
         [InlineData(HttpRequestMethod.Put, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.Delete, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Get, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Head, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.Options, "Test", "application/xml")]
         [InlineData(HttpRequestMethod.Patch, "Test", "application/xml")]
         [InlineData(HttpRequestMethod.Post, "Test", "application/xml")]
         [InlineData(HttpRequestMethod.Put, "Test", "application/xml")]
         public async Task CanIssueMessageDtoRequest(HttpRequestMethod requestMethod, string message, string acceptHeaderValue)
         {
-            this.steps.GivenIHaveATestEnvironment();
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
             this.steps.GivenIHaveAMessageRequestDto(message);
             this.steps.GivenIAccept(acceptHeaderValue);
@@ -99,7 +205,6 @@ namespace RestWell.Test.Integration.Client
         [InlineData(HttpRequestMethod.Put, "Test", "application/xml")]
         public async Task CanIssueMessageDtoResponseRequest(HttpRequestMethod requestMethod, string message, string acceptHeaderValue)
         {
-            this.steps.GivenIHaveATestEnvironment();
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
             this.steps.GivenIHaveABasicRequestMessage(message);
             this.steps.GivenIAccept(acceptHeaderValue);
@@ -128,7 +233,6 @@ namespace RestWell.Test.Integration.Client
         [InlineData(HttpRequestMethod.Put, "Test", "application/xml")]
         public async Task CanIssueSecureRequestUsingDelegatingHandler(HttpRequestMethod requestMethod, string message, string acceptHeaderValue)
         {
-            this.steps.GivenIHaveATestEnvironment();
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
             this.steps.GivenIHaveABasicRequestMessage(message);
             this.steps.GivenIAccept(acceptHeaderValue);

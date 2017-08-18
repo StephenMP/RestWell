@@ -13,6 +13,11 @@ namespace RestWell.Test.Resource.WebApi.Controllers
         [HttpDelete("{message}")]
         public async Task<IActionResult> SecureRequestDelete(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var authHeaderIsPresent = Request.Headers.Any(h => h.Key == "Authorization");
 
             if (authHeaderIsPresent)
@@ -31,6 +36,11 @@ namespace RestWell.Test.Resource.WebApi.Controllers
         [HttpGet("{message}")]
         public async Task<IActionResult> SecureRequestGet(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var authHeaderIsPresent = Request.Headers.Any(h => h.Key == "Authorization");
 
             if (authHeaderIsPresent)
@@ -49,6 +59,11 @@ namespace RestWell.Test.Resource.WebApi.Controllers
         [HttpHead("{message}")]
         public async Task<IActionResult> SecureRequestHead(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var authHeaderIsPresent = Request.Headers.Any(h => h.Key == "Authorization");
 
             if (authHeaderIsPresent)
@@ -66,6 +81,11 @@ namespace RestWell.Test.Resource.WebApi.Controllers
         [HttpOptions("{message}")]
         public async Task<IActionResult> SecureRequestOptions(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var authHeaderIsPresent = Request.Headers.Any(h => h.Key == "Authorization");
 
             if (authHeaderIsPresent)
@@ -84,6 +104,11 @@ namespace RestWell.Test.Resource.WebApi.Controllers
         [HttpPatch("{message}")]
         public async Task<IActionResult> SecureRequestPatch(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var authHeaderIsPresent = Request.Headers.Any(h => h.Key == "Authorization");
 
             if (authHeaderIsPresent)
@@ -102,6 +127,11 @@ namespace RestWell.Test.Resource.WebApi.Controllers
         [HttpPost("{message}")]
         public async Task<IActionResult> SecureRequestPost(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var authHeaderIsPresent = Request.Headers.Any(h => h.Key == "Authorization");
 
             if (authHeaderIsPresent)
@@ -120,6 +150,11 @@ namespace RestWell.Test.Resource.WebApi.Controllers
         [HttpPut("{message}")]
         public async Task<IActionResult> SecureRequestPut(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var authHeaderIsPresent = Request.Headers.Any(h => h.Key == "Authorization");
 
             if (authHeaderIsPresent)

@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using RestWell.Client.Request;
+using RestWell.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -12,46 +13,16 @@ namespace RestWell.Extensions
     {
         #region Public Methods
 
-        public static async Task<HttpResponseMessage> InvokeDeleteAsync<TRequestDto, TResponseDto>(this HttpClient client, IProxyRequest<TRequestDto, TResponseDto> request)
+        public static async Task<HttpResponseMessage> InvokeAsync<TRequestDto, TResponseDto>(this HttpClient client, IProxyRequest<TRequestDto, TResponseDto> request)
         {
             AddHeaders(client, request.Headers);
-            return await client.InvokeAsync(request.RequestUri, "DELETE");
-        }
 
-        public static async Task<HttpResponseMessage> InvokeGetAsync<TRequestDto, TResponseDto>(this HttpClient client, IProxyRequest<TRequestDto, TResponseDto> request)
-        {
-            AddHeaders(client, request.Headers);
-            return await client.InvokeAsync(request.RequestUri, "GET");
-        }
+            if (request.RequestDto == null)
+            {
+                return await client.InvokeAsync(request.RequestUri, request.HttpRequestMethod);
+            }
 
-        public static async Task<HttpResponseMessage> InvokeHeadAsync<TRequestDto, TResponseDto>(this HttpClient client, IProxyRequest<TRequestDto, TResponseDto> request)
-        {
-            AddHeaders(client, request.Headers);
-            return await client.InvokeAsync(request.RequestUri, "HEAD");
-        }
-
-        public static async Task<HttpResponseMessage> InvokeOptionsAsync<TRequestDto, TResponseDto>(this HttpClient client, IProxyRequest<TRequestDto, TResponseDto> request)
-        {
-            AddHeaders(client, request.Headers);
-            return await client.InvokeAsync(request.RequestUri, "OPTIONS");
-        }
-
-        public static async Task<HttpResponseMessage> InvokePatchAsync<TRequestDto, TResponseDto>(this HttpClient client, IProxyRequest<TRequestDto, TResponseDto> request)
-        {
-            AddHeaders(client, request.Headers);
-            return await client.InvokeAsJsonAsync(request.RequestUri, "PATCH", request.RequestDto);
-        }
-
-        public static async Task<HttpResponseMessage> InvokePostAsync<TRequestDto, TResponseDto>(this HttpClient client, IProxyRequest<TRequestDto, TResponseDto> request)
-        {
-            AddHeaders(client, request.Headers);
-            return await client.InvokeAsJsonAsync(request.RequestUri, "POST", request.RequestDto);
-        }
-
-        public static async Task<HttpResponseMessage> InvokePutAsync<TRequestDto, TResponseDto>(this HttpClient client, IProxyRequest<TRequestDto, TResponseDto> request)
-        {
-            AddHeaders(client, request.Headers);
-            return await client.InvokeAsJsonAsync(request.RequestUri, "PUT", request.RequestDto);
+            return await client.InvokeAsJsonAsync(request.RequestUri, request.HttpRequestMethod, request.RequestDto);
         }
 
         #endregion Public Methods
@@ -66,18 +37,18 @@ namespace RestWell.Extensions
             }
         }
 
-        private static async Task<HttpResponseMessage> InvokeAsJsonAsync<T>(this HttpClient client, Uri requestUri, string requestType, T value)
+        private static async Task<HttpResponseMessage> InvokeAsJsonAsync<T>(this HttpClient client, Uri requestUri, HttpRequestMethod httpRequestMethod, T value)
         {
             var jsonContent = JsonConvert.SerializeObject(value);
             var stringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            var request = new HttpRequestMessage(new HttpMethod(requestType), requestUri) { Content = stringContent };
+            var request = new HttpRequestMessage(new HttpMethod(httpRequestMethod.ToString().ToUpper()), requestUri) { Content = stringContent };
             return await client.SendAsync(request);
         }
 
-        private static async Task<HttpResponseMessage> InvokeAsync(this HttpClient client, Uri requestUri, string requestType)
+        private static async Task<HttpResponseMessage> InvokeAsync(this HttpClient client, Uri requestUri, HttpRequestMethod httpRequestMethod)
         {
-            var request = new HttpRequestMessage(new HttpMethod(requestType), requestUri);
+            var request = new HttpRequestMessage(new HttpMethod(httpRequestMethod.ToString().ToUpper()), requestUri);
             return await client.SendAsync(request);
         }
 

@@ -16,8 +16,11 @@ namespace RestWell.Test.Resource.TestEnvironment.Environment.Configuration
 
         public void AddWebService<TStartup>() where TStartup : class
         {
-            var baseUri = new Uri($"http://localhost:{TcpPortUtility.GetFreeTcpPort()}");
-            this.Add(typeof(TStartup), ResourceWebApi.Create<TStartup>(baseUri));
+            if (!this.ContainsKey(typeof(TStartup)))
+            {
+                var baseUri = new Uri($"http://localhost:{TcpPortUtility.GetFreeTcpPort()}");
+                this.Add(typeof(TStartup), ResourceWebApi.Create<TStartup>(baseUri));
+            }
         }
 
         public void Dispose()

@@ -12,6 +12,11 @@ namespace RestWell.Test.Resource.WebApi.Controllers
         [HttpDelete("{message}")]
         public async Task<IActionResult> MessageDtoResponseRequestDelete(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var responseDto = new MessageResponseDto { Message = message };
             return await Task.FromResult(Ok(responseDto));
         }
@@ -19,6 +24,11 @@ namespace RestWell.Test.Resource.WebApi.Controllers
         [HttpGet("{message}")]
         public async Task<IActionResult> MessageDtoResponseRequestGet(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var responseDto = new MessageResponseDto { Message = message };
             return await Task.FromResult(Ok(responseDto));
         }
@@ -26,12 +36,22 @@ namespace RestWell.Test.Resource.WebApi.Controllers
         [HttpHead("{message}")]
         public async Task<IActionResult> MessageDtoResponseRequestHead(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             return await Task.FromResult(Ok());
         }
 
         [HttpOptions("{message}")]
         public async Task<IActionResult> MessageDtoResponseRequestOptions(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var responseDto = new MessageResponseDto { Message = message };
             return await Task.FromResult(Ok(responseDto));
         }
@@ -39,6 +59,11 @@ namespace RestWell.Test.Resource.WebApi.Controllers
         [HttpPatch("{message}")]
         public async Task<IActionResult> MessageDtoResponseRequestPatch(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var responseDto = new MessageResponseDto { Message = message };
             return await Task.FromResult(Ok(responseDto));
         }
@@ -46,6 +71,11 @@ namespace RestWell.Test.Resource.WebApi.Controllers
         [HttpPost("{message}")]
         public async Task<IActionResult> MessageDtoResponseRequestPost(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var responseDto = new MessageResponseDto { Message = message };
             return await Task.FromResult(Ok(responseDto));
         }
@@ -53,6 +83,11 @@ namespace RestWell.Test.Resource.WebApi.Controllers
         [HttpPut("{message}")]
         public async Task<IActionResult> MessageDtoResponseRequestPut(string message)
         {
+            if (message == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var responseDto = new MessageResponseDto { Message = message };
             return await Task.FromResult(Ok(responseDto));
         }

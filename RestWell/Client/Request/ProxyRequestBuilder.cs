@@ -121,7 +121,10 @@ namespace RestWell.Client.Request
 
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AppendToRoute(string appendage)
         {
-            this.baseUri = new Uri(this.baseUri, appendage);
+            var baseUriString = this.baseUri.ToString();
+            var newBaseUriString = $"{baseUriString.TrimEnd('/')}/{appendage}";
+            this.baseUri = new Uri(newBaseUriString);
+
             return this;
         }
 
