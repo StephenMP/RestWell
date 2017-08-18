@@ -18,12 +18,12 @@ RestWell is a simple, easy to use, light weight .NET generic client which provid
 # Install
 **Nuget Package Manager:**
 ```
-PM> Install-Package RestWell -Version 1.0.1
+PM> Install-Package RestWell
 ```
 
 **.NET Core CLI:**
 ```
-> dotnet add package RestWell --version 1.0.1
+> dotnet add package RestWell
 ```
 
 # Contributing
