@@ -1,4 +1,4 @@
-![alt text](https://travis-ci.org/StephenMP/RestWell.svg?branch=BRANCH "Travis CI Build Status for RestWell")
+[![Build Status](https://travis-ci.org/StephenMP/RestWell.svg?branch=master)](https://travis-ci.org/StephenMP/RestWell)
 
 # RestWell
 RestWell is a simple, easy to use, light weight .NET generic client which provides simple abstraction of the communication layer between your code and RESTful Web APIs. This project was inspired by the RestSharp project; however, it is different in that it focuses solely on .NET clients and provides simple mechanisms for controlling your request pipeline.
