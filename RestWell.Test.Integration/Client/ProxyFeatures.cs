@@ -163,7 +163,7 @@ namespace RestWell.Test.Integration.Client
         [Theory]
         [InlineData(HttpRequestMethod.Delete, "Test", "application/json")]
         [InlineData(HttpRequestMethod.Get, "Test", "application/json")]
-        [InlineData(HttpRequestMethod.Head, "Test", "application/json")]
+        //[InlineData(HttpRequestMethod.Head, "Test", "application/json")]
         [InlineData(HttpRequestMethod.Options, "Test", "application/json")]
         [InlineData(HttpRequestMethod.Patch, "Test", "application/json")]
         [InlineData(HttpRequestMethod.Post, "Test", "application/json")]
