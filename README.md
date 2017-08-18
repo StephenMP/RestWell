@@ -1,3 +1,4 @@
+# Travis CI Build
 [![Build Status](https://travis-ci.org/StephenMP/RestWell.svg?branch=master)](https://travis-ci.org/StephenMP/RestWell)
 
 # RestWell
@@ -11,6 +12,17 @@ RestWell is a simple, easy to use, light weight .NET generic client which provid
  * Injectable (we all love dependendency injection)
  * Configurable
     * You can inject your own delegating handlers into the request pipeline giving you complete control over the flow of your request (e.g. use a delegating handler to obtain an authorization token prior to issuing a request)
+
+# Install
+**Nuget Package Manager:**
+```
+PM> Install-Package RestWell -Version 1.0.0
+```
+
+**.NET Core CLI:**
+```
+> dotnet add package RestWell --version 1.0.0
+```
 
 # Simple Example
 RestWell is rediculously easy to use! Let's say you want to call an API with the following: 
