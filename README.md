@@ -29,9 +29,11 @@ PM> Install-Package RestWell
 # Contributing
 If you'd like to contribute, please follow these simple rules
 
-1. Either submit a new issue outlining what you are going to work on OR pick an existing issue to work on
+1. Either
+    * Submit a new issue outlining what you are going to work on
+    * Pick an existing issue to work on
 1. Clone the repository
-1. Create a branch with the following format: `YourGitHubName/IssueNumber` (e.g. `sporter/703`)
+1. Create a branch with the following format: `YourGitHubName/IssueNumber` (e.g. `StephenMP/703`)
 1. Make your code changes
 1. Ensure all added code is covered by tests (I will scrutinize this like a crazy mad man)
     * Please ensure that you are following the testing pattern. Please reference existing tests to get an idea of the pattern.
