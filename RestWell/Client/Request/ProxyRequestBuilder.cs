@@ -207,7 +207,7 @@ namespace RestWell.Client.Request
                 }
             }
 
-            this.proxyRequest.RequestUri = new Uri($"{requestUri.TrimEnd('/')}/{pathArgumentsBuilder.ToString().TrimEnd('/')}{queryParametersBuilder.ToString().TrimEnd('&')}");
+            this.proxyRequest.RequestUri = new Uri($"{requestUri.TrimEnd('/')}/{pathArgumentsBuilder.ToString().TrimEnd('/')}{queryParametersBuilder.ToString().TrimEnd('&')}".TrimEnd('/'));
 
             return this.proxyRequest;
         }
