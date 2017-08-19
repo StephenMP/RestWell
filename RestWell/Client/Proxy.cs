@@ -15,7 +15,7 @@ namespace RestWell.Client
 
         #region Public Constructors
 
-        public Proxy() : this(null)
+        public Proxy() : this(new ProxyConfiguration())
         {
         }
 

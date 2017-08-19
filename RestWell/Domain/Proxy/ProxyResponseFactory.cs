@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
@@ -29,29 +30,31 @@ namespace RestWell.Domain.Proxy
                 restfulProxyResponse.ResponseHeaders = httpResponseMessage.Headers;
                 restfulProxyResponse.StatusCode = httpResponseMessage.StatusCode;
 
-                var responseContentString = await httpResponseMessage.Content.ReadAsStringAsync();
-
-                if (!responseContentString.IsNullOrEmptyOrWhitespace())
+                if (typeof(TResponseDto) != typeof(Missing))
                 {
-                    if (typeof(TResponseDto) == typeof(string))
+                    var responseContentString = await httpResponseMessage.Content.ReadAsStringAsync();
+                    if (!responseContentString.IsNullOrEmptyOrWhitespace())
                     {
-                        restfulProxyResponse.ResponseDto = responseContentString.TrimStart('\\').TrimStart('\"').TrimEnd('\"').TrimEnd('\\') as TResponseDto;
-                    }
-                    else if (httpResponseMessage.RequestMessage.Headers.Accept.Any(h => h.MediaType == "application/xml") && responseContentString.StartsWith('<') && responseContentString.EndsWith('>'))
-                    {
-                        var document = XDocument.Parse(responseContentString);
-                        using (var reader = document.CreateReader())
+                        if (typeof(TResponseDto) == typeof(string))
                         {
-                            var serializer = new XmlSerializer(typeof(TResponseDto));
-                            if (serializer.CanDeserialize(reader))
+                            restfulProxyResponse.ResponseDto = responseContentString.TrimStart('\\').TrimStart('\"').TrimEnd('\"').TrimEnd('\\') as TResponseDto;
+                        }
+                        else if (httpResponseMessage.RequestMessage.Headers.Accept.Any(h => h.MediaType == "application/xml") && responseContentString.StartsWith('<') && responseContentString.EndsWith('>'))
+                        {
+                            var document = XDocument.Parse(responseContentString);
+                            using (var reader = document.CreateReader())
                             {
-                                restfulProxyResponse.ResponseDto = serializer.Deserialize(reader) as TResponseDto;
+                                var serializer = new XmlSerializer(typeof(TResponseDto));
+                                if (serializer.CanDeserialize(reader))
+                                {
+                                    restfulProxyResponse.ResponseDto = serializer.Deserialize(reader) as TResponseDto;
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        restfulProxyResponse.ResponseDto = JsonConvert.DeserializeObject<TResponseDto>(responseContentString);
+                        else
+                        {
+                            restfulProxyResponse.ResponseDto = JsonConvert.DeserializeObject<TResponseDto>(responseContentString);
+                        }
                     }
                 }
             }

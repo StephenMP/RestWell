@@ -88,12 +88,13 @@ namespace RestWell.Test.Integration.Client
 
         internal void GivenIHaveABasicRequestProxyRequestForNonExistingResource()
         {
-            this.basicRequestProxyRequest = new ProxyRequestBuilder<string>(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
-                              .AddHeader("Accept", this.acceptHeaderValue)
-                              .AppendToRoute($"api/does/not/exist/{nameof(BasicRequestController).Replace("Controller", "")}")
-                              .AddPathArguments(this.basicMessage)
-                              .AsRequestType(this.httpRequestMethod)
-                              .Build();
+            this.basicRequestProxyRequest = ProxyRequestBuilder<string>
+                                                .CreateBuilder(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
+                                                .Accept(this.acceptHeaderValue)
+                                                .AppendToRoute($"api/does/not/exist/{nameof(BasicRequestController).Replace("Controller", "")}")
+                                                .AddPathArguments(this.basicMessage)
+                                                .AsRequestType(this.httpRequestMethod)
+                                                .Build();
         }
 
         internal void ThenICanVerifyICannotIssueBasicRequestForNonExistingResource()
@@ -107,22 +108,24 @@ namespace RestWell.Test.Integration.Client
 
         internal void GivenIHaveABasicRequestProxyRequest()
         {
-            this.basicRequestProxyRequest = new ProxyRequestBuilder<string>(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
-                              .AddHeader("Accept", this.acceptHeaderValue)
-                              .AppendToRoute($"api/{nameof(BasicRequestController).Replace("Controller", "")}")
-                              .AddPathArguments(this.basicMessage)
-                              .AsRequestType(this.httpRequestMethod)
-                              .Build();
+            this.basicRequestProxyRequest = ProxyRequestBuilder<string>
+                                                .CreateBuilder(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
+                                                .Accept(this.acceptHeaderValue)
+                                                .AppendToRoute($"api/{nameof(BasicRequestController).Replace("Controller", "")}")
+                                                .AddPathArguments(this.basicMessage)
+                                                .AsRequestType(this.httpRequestMethod)
+                                                .Build();
         }
 
         internal void GivenIHaveABasicRequestProxyRequestForException()
         {
-            this.basicRequestProxyRequest = new ProxyRequestBuilder<string>(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
-                              .AddHeader("Accept", this.acceptHeaderValue)
-                              .AppendToRoute($"api/{nameof(BasicRequestController).Replace("Controller", "")}/error")
-                              .AddPathArguments(this.basicMessage)
-                              .AsRequestType(this.httpRequestMethod)
-                              .Build();
+            this.basicRequestProxyRequest = ProxyRequestBuilder<string>
+                                                .CreateBuilder(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
+                                                .Accept(this.acceptHeaderValue)
+                                                .AppendToRoute($"api/{nameof(BasicRequestController).Replace("Controller", "")}/error")
+                                                .AddPathArguments(this.basicMessage)
+                                                .AsRequestType(this.httpRequestMethod)
+                                                .Build();
         }
 
         internal void ThenICanVerifyICannotIssueBasicRequestDueToException()
@@ -136,22 +139,24 @@ namespace RestWell.Test.Integration.Client
 
         internal void GivenIHaveAMessageDtoRequestProxyRequest()
         {
-            this.messageDtoRequestProxyRequest = new ProxyRequestBuilder<MessageRequestDto, MessageResponseDto>(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
-                              .AddHeader("Accept", this.acceptHeaderValue)
-                              .AppendToRoute($"api/{nameof(MessageDtoRequestController).Replace("Controller", "")}")
-                              .SetRequestDto(this.messageRequestDto)
-                              .AsRequestType(this.httpRequestMethod)
-                              .Build();
+            this.messageDtoRequestProxyRequest = ProxyRequestBuilder<MessageRequestDto, MessageResponseDto>
+                                                    .CreateBuilder(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
+                                                    .Accept(this.acceptHeaderValue)
+                                                    .AppendToRoute($"api/{nameof(MessageDtoRequestController).Replace("Controller", "")}")
+                                                    .SetRequestDto(this.messageRequestDto)
+                                                    .AsRequestType(this.httpRequestMethod)
+                                                    .Build();
         }
 
         internal void GivenIHaveASecureRequestProxyRequestWithNoAuthHeader()
         {
-            this.secureRequestProxyRequest = new ProxyRequestBuilder<Missing, MessageResponseDto>(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
-                                          .AddHeader("Accept", this.acceptHeaderValue)
-                                          .AppendToRoute($"api/{nameof(SecureRequestController).Replace("Controller", "")}")
-                                          .AddPathArguments(this.basicMessage)
-                                          .AsRequestType(this.httpRequestMethod)
-                                          .Build();
+            this.secureRequestProxyRequest = ProxyRequestBuilder<MessageResponseDto>
+                                                .CreateBuilder(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
+                                                .Accept(this.acceptHeaderValue)
+                                                .AppendToRoute($"api/{nameof(SecureRequestController).Replace("Controller", "")}")
+                                                .AddPathArguments(this.basicMessage)
+                                                .AsRequestType(this.httpRequestMethod)
+                                                .Build();
         }
 
         internal void ThenICanVerifyICannotIssueSecureRequestDueNoAuthHeader()
@@ -165,12 +170,13 @@ namespace RestWell.Test.Integration.Client
 
         internal void GivenIHaveAMessageDtoResponseRequestProxyRequest()
         {
-            this.messageDtoResponseRequestProxyRequest = new ProxyRequestBuilder<MessageResponseDto>(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
-                              .AddHeader("Accept", this.acceptHeaderValue)
-                              .AppendToRoute($"api/{nameof(MessageDtoResponseRequestController).Replace("Controller", "")}")
-                              .AddPathArguments(this.basicMessage)
-                              .AsRequestType(this.httpRequestMethod)
-                              .Build();
+            this.messageDtoResponseRequestProxyRequest = ProxyRequestBuilder<MessageResponseDto>
+                                                            .CreateBuilder(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
+                                                            .Accept(this.acceptHeaderValue)
+                                                            .AppendToRoute($"api/{nameof(MessageDtoResponseRequestController).Replace("Controller", "")}")
+                                                            .AddPathArguments(this.basicMessage)
+                                                            .AsRequestType(this.httpRequestMethod)
+                                                            .Build();
         }
 
         internal void GivenIHaveAMessageRequestDto(string message)
@@ -204,12 +210,13 @@ namespace RestWell.Test.Integration.Client
 
         internal void GivenIHaveASecureRequestProxyRequest()
         {
-            this.secureRequestProxyRequest = new ProxyRequestBuilder<Missing, MessageResponseDto>(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
-                                          .AddHeader("Accept", this.acceptHeaderValue)
-                                          .AppendToRoute($"api/{nameof(SecureRequestController).Replace("Controller", "")}")
-                                          .AddPathArguments(this.basicMessage)
-                                          .AsRequestType(this.httpRequestMethod)
-                                          .Build();
+            this.secureRequestProxyRequest = ProxyRequestBuilder<MessageResponseDto>
+                                                .CreateBuilder(testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri)
+                                                .AddHeader("Accept", this.acceptHeaderValue)
+                                                .AppendToRoute($"api/{nameof(SecureRequestController).Replace("Controller", "")}")
+                                                .AddPathArguments(this.basicMessage)
+                                                .AsRequestType(this.httpRequestMethod)
+                                                .Build();
         }
 
         internal void ThenICanVerifyICanIssueBasicRequest()
