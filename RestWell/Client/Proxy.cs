@@ -1,3 +1,4 @@
+using Nito.AsyncEx;
 using RestWell.Client.Request;
 using RestWell.Client.Response;
 using RestWell.Domain.Proxy;
@@ -27,6 +28,11 @@ namespace RestWell.Client
         #endregion Public Constructors
 
         #region Public Methods
+
+        public IProxyResponse<TResponseDto> Invoke<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
+        {
+            return AsyncContext.Run(() => this.requestInvoker.InvokeAsync(request));
+        }
 
         public async Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
         {
