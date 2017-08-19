@@ -15,6 +15,9 @@ RestWell is a simple, easy to use, light weight .NET generic client which provid
  * Configurable
     * You can inject your own delegating handlers into the request pipeline giving you complete control over the flow of your request (e.g. use a delegating handler to obtain an authorization token prior to issuing a request)
 
+# Documentation
+Please refer to our [Wiki](https://github.com/StephenMP/RestWell/wiki) for more detailed documentation.
+
 # Install
 **Nuget Package Manager:**
 ```
