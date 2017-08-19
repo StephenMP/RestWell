@@ -97,8 +97,11 @@ var proxyResponse = await proxy.InvokeAsync(proxyRequest);
 Now, we get the response DTO the API returned to us and use it
 
 ```csharp
-var superCoolResponseDto = proxyResponse.ResponseDto;
-var message = superCoolResponseDto.Message; // message = "Hello World"
+if(proxyResponse.IsSuccessfulStatusCode)
+{
+    var superCoolResponseDto = proxyResponse.ResponseDto;
+    var message = superCoolResponseDto.Message; // message = "Hello World"
+}
 ```
 
 Put it all together, and it looks like this
@@ -127,11 +130,14 @@ public class ProxyExample {
         // Invoke the request using the Proxy
         var proxyResponse = await proxy.InvokeAsync(proxyRequest);
         
-        // Get our resulting response body
-        var superCoolResponseDto = proxyResponse.ResponseDto;
+        if(proxyResponse.IsSuccessfulStatusCode)
+        {
+            // Get our resulting response body
+            var superCoolResponseDto = proxyResponse.ResponseDto;
 
-        // Now we use it
-        var message = superCoolResponseDto.Message; // message = "Hello World"
+            // Now we use it
+            var message = superCoolResponseDto.Message; // message = "Hello World"
+        }
     }
 }
 ```
@@ -253,11 +259,14 @@ public class ProxyExample {
         // Invoke the request using the Proxy
         var proxyResponse = await proxy.InvokeAsync(proxyRequest);
         
-        // Get our resulting response body
-        var superCoolResponseDto = proxyResponse.ResponseDto;
+        if(proxyResponse.IsSuccessfulStatusCode)
+        {
+            // Get our resulting response body
+            var superCoolResponseDto = proxyResponse.ResponseDto;
 
-        // Now we use it
-        var message = superCoolResponseDto.Message; // message = "Hello World"
+            // Now we use it
+            var message = superCoolResponseDto.Message; // message = "Hello World"
+        }
     }
 }
 ```
