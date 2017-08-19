@@ -279,24 +279,56 @@ namespace RestWell.Test.Integration.Client
             this.proxy.ShouldNotBeNull();
         }
 
-        internal async Task WhenIInvokeAsyncForBasicRequest()
+        internal async Task WhenIInvokeAsyncForBasicRequest(bool runAsync)
         {
-            this.basicRequestProxyResponse = await this.proxy.InvokeAsync(this.basicRequestProxyRequest);
+            if (runAsync)
+            {
+                this.basicRequestProxyResponse = await this.proxy.InvokeAsync(this.basicRequestProxyRequest);
+            }
+
+            else
+            {
+                this.basicRequestProxyResponse = this.proxy.Invoke(this.basicRequestProxyRequest);
+            }
         }
 
-        internal async Task WhenIInvokeAsyncForMessageDtoRequest()
+        internal async Task WhenIInvokeAsyncForMessageDtoRequest(bool runAsync)
         {
-            this.messageDtoRequestProxyResponse = await this.proxy.InvokeAsync(this.messageDtoRequestProxyRequest);
+            if (runAsync)
+            {
+                this.messageDtoRequestProxyResponse = await this.proxy.InvokeAsync(this.messageDtoRequestProxyRequest);
+            }
+
+            else
+            {
+                this.messageDtoRequestProxyResponse = this.proxy.Invoke(this.messageDtoRequestProxyRequest);
+            }
         }
 
-        internal async Task WhenIInvokeAsyncForMessageDtoResponseRequest()
+        internal async Task WhenIInvokeAsyncForMessageDtoResponseRequest(bool runAsync)
         {
-            this.messageDtoResponseRequestProxyResponse = await this.proxy.InvokeAsync(this.messageDtoResponseRequestProxyRequest);
+            if (runAsync)
+            {
+                this.messageDtoResponseRequestProxyResponse = await this.proxy.InvokeAsync(this.messageDtoResponseRequestProxyRequest);
+            }
+
+            else
+            {
+                this.messageDtoResponseRequestProxyResponse = this.proxy.Invoke(this.messageDtoResponseRequestProxyRequest);
+            }
         }
 
-        internal async Task WhenIInvokeAsyncForSecureRequest()
+        internal async Task WhenIInvokeAsyncForSecureRequest(bool runAsync)
         {
-            this.secureRequestProxyResponse = await this.proxy.InvokeAsync(this.secureRequestProxyRequest);
+            if (runAsync)
+            {
+                this.secureRequestProxyResponse = await this.proxy.InvokeAsync(this.secureRequestProxyRequest);
+            }
+
+            else
+            {
+                this.secureRequestProxyResponse = this.proxy.Invoke(this.secureRequestProxyRequest);
+            }
         }
 
         #endregion Internal Methods
