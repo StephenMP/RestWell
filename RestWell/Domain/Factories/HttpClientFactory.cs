@@ -11,28 +11,21 @@ namespace RestWell.Domain.Factories
     {
         #region Public Methods
 
-        private static DelegatingHandler[] BuildDelegatingHandlers(IDictionary<Type, List<object>> delegatingHandlerTypes)
+        private static DelegatingHandler[] BuildDelegatingHandlers(IDictionary<Type, DelegatingHandler> delegatingHandlers)
         {
-            var delegatingHandlers = new List<DelegatingHandler>();
-            foreach (var delegatingHandlerType in delegatingHandlerTypes)
-            {
-                if (delegatingHandlerType.Value.Any())
-                {
-                    delegatingHandlers.Add((DelegatingHandler)Activator.CreateInstance(delegatingHandlerType.Key, delegatingHandlerType.Value.ToArray()));
-                }
+            var handlers = new List<DelegatingHandler>();
 
-                else
-                {
-                    delegatingHandlers.Add((DelegatingHandler)Activator.CreateInstance(delegatingHandlerType.Key));
-                }
+            foreach (var delegatingHandler in delegatingHandlers.Values)
+            {
+                handlers.Add(delegatingHandler);
             }
 
-            return delegatingHandlers.ToArray();
+            return handlers.ToArray();
         }
 
         public static HttpClient Create(IProxyConfiguration proxyConfiguration)
         {
-            var delegatingHandlers = BuildDelegatingHandlers(proxyConfiguration.DelegatingHandlerTypes);
+            var delegatingHandlers = BuildDelegatingHandlers(proxyConfiguration.DelegatingHandlers);
             var client = Create(new HttpClientHandler(), delegatingHandlers);
             PopulateClientHeaders(client, proxyConfiguration.DefaultProxyRequestHeaders);
 

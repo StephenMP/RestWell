@@ -2,6 +2,7 @@ using Nito.AsyncEx;
 using RestWell.Client.Request;
 using RestWell.Client.Response;
 using RestWell.Domain.Proxy;
+using System;
 using System.Threading.Tasks;
 
 namespace RestWell.Client
@@ -11,6 +12,8 @@ namespace RestWell.Client
         #region Private Fields
 
         private readonly RequestInvoker requestInvoker;
+
+        private bool disposedValue;
 
         #endregion Private Fields
 
@@ -30,6 +33,12 @@ namespace RestWell.Client
 
         #region Public Methods
 
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
         public IProxyResponse<TResponseDto> Invoke<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
         {
             return AsyncContext.Run(() => this.requestInvoker.InvokeAsync(request));
@@ -41,5 +50,22 @@ namespace RestWell.Client
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    this.requestInvoker?.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        #endregion Private Methods
     }
 }

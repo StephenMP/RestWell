@@ -9,7 +9,9 @@ using RestWell.Test.Resource.WebApi.Dtos;
 using Shouldly;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -24,7 +26,7 @@ namespace RestWell.Test.Integration.Client
         private string basicMessage;
         private IProxyRequest<Missing, string> basicRequestProxyRequest;
         private IProxyResponse<string> basicRequestProxyResponse;
-        private Dictionary<Type, List<object>> delegatingHandlers;
+        private Dictionary<Type, DelegatingHandler> delegatingHandlers;
         private bool disposedValue;
         private HttpRequestMethod httpRequestMethod;
         private IProxyRequest<MessageRequestDto, MessageResponseDto> messageDtoRequestProxyRequest;
@@ -46,7 +48,7 @@ namespace RestWell.Test.Integration.Client
 
         public ProxySteps(TestEnvironment testEnvironment)
         {
-            this.delegatingHandlers = new Dictionary<Type, List<object>>();
+            this.delegatingHandlers = new Dictionary<Type, DelegatingHandler>();
             this.testEnvironment = testEnvironment;
         }
 
@@ -207,10 +209,7 @@ namespace RestWell.Test.Integration.Client
 
             if (this.delegatingHandlers != null)
             {
-                foreach (var delegatingHandler in this.delegatingHandlers)
-                {
-                    proxyConfigurationBuilder.AddDelegatingHandler(delegatingHandler.Key, delegatingHandler.Value.ToArray());
-                }
+                proxyConfigurationBuilder.AddDelegatingHandlers(this.delegatingHandlers.Values.ToArray());
             }
 
             if (this.defaultAuthorizationHeader != null)
@@ -228,12 +227,12 @@ namespace RestWell.Test.Integration.Client
 
         internal void GivenIHaveASecureRequestDelegatingHandler()
         {
-            this.delegatingHandlers.Add(typeof(SecureRequestDelegatingHandler), new List<object>());
+            this.delegatingHandlers.Add(typeof(SecureRequestDelegatingHandler), new SecureRequestDelegatingHandler());
         }
 
         internal void GivenIHaveASecureRequestDelegatingHandler(string scheme, string token)
         {
-            this.delegatingHandlers.Add(typeof(SecureRequestDelegatingHandler), new List<object> { scheme, token });
+            this.delegatingHandlers.Add(typeof(SecureRequestDelegatingHandler), new SecureRequestDelegatingHandler(scheme, token));
         }
 
         internal void GivenIHaveASecureRequestProxyRequest()
@@ -368,6 +367,7 @@ namespace RestWell.Test.Integration.Client
             {
                 if (disposing)
                 {
+                    this.proxy?.Dispose();
                 }
 
                 disposedValue = true;

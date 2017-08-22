@@ -1,6 +1,7 @@
 using RestWell.Domain.Request;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace RestWell.Domain.Proxy
 {
@@ -10,7 +11,7 @@ namespace RestWell.Domain.Proxy
 
         public ProxyConfiguration()
         {
-            this.DelegatingHandlerTypes = new Dictionary<Type, List<object>>();
+            this.DelegatingHandlers = new Dictionary<Type, DelegatingHandler>();
             this.DefaultProxyRequestHeaders = new DefaultProxyRequestHeaders();
         }
 
@@ -18,7 +19,7 @@ namespace RestWell.Domain.Proxy
 
         #region Public Properties
 
-        public IDictionary<Type, List<object>> DelegatingHandlerTypes { get; set; }
+        public IDictionary<Type, DelegatingHandler> DelegatingHandlers { get; set; }
 
         public DefaultProxyRequestHeaders DefaultProxyRequestHeaders { get; set; }
 

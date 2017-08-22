@@ -5,15 +5,17 @@ using RestWell.Domain.Factories;
 using RestWell.Extensions;
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace RestWell.Domain.Proxy
 {
-    internal class RequestInvoker
+    internal class RequestInvoker : IDisposable
     {
         #region Private Fields
 
-        private readonly IProxyConfiguration proxyConfiguration;
+        private readonly HttpClient httpClient;
+        private bool disposedValue;
 
         #endregion Private Fields
 
@@ -21,12 +23,18 @@ namespace RestWell.Domain.Proxy
 
         public RequestInvoker(IProxyConfiguration proxyConfiguration)
         {
-            this.proxyConfiguration = proxyConfiguration;
+            this.httpClient = HttpClientFactory.Create(proxyConfiguration);
         }
 
         #endregion Public Constructors
 
         #region Public Methods
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
         public async Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
         {
@@ -40,22 +48,36 @@ namespace RestWell.Domain.Proxy
                 };
             }
 
-            using (var client = HttpClientFactory.Create(this.proxyConfiguration))
+            try
             {
-                try
+                using (var response = await this.httpClient.InvokeAsync(request))
                 {
-                    using (var response = await client.InvokeAsync(request))
-                    {
-                        return await ProxyResponseFactory.CreateAsync<TResponseDto>(response);
-                    }
+                    return await ProxyResponseFactory.CreateAsync<TResponseDto>(response);
                 }
-                catch (Exception e)
-                {
-                    return await ProxyResponseFactory.CreateAsync<TResponseDto>(e);
-                }
+            }
+            catch (Exception e)
+            {
+                return await ProxyResponseFactory.CreateAsync<TResponseDto>(e);
             }
         }
 
         #endregion Public Methods
+
+        #region Protected Methods
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    this.httpClient?.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        #endregion Protected Methods
     }
 }
