@@ -10,7 +10,6 @@ using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -25,7 +24,7 @@ namespace RestWell.Test.Integration.Client
         private string basicMessage;
         private IProxyRequest<Missing, string> basicRequestProxyRequest;
         private IProxyResponse<string> basicRequestProxyResponse;
-        private List<DelegatingHandler> delegatingHandlers;
+        private List<Type> delegatingHandlers;
         private bool disposedValue;
         private HttpRequestMethod httpRequestMethod;
         private IProxyRequest<MessageRequestDto, MessageResponseDto> messageDtoRequestProxyRequest;
@@ -47,7 +46,7 @@ namespace RestWell.Test.Integration.Client
 
         public ProxySteps(TestEnvironment testEnvironment)
         {
-            this.delegatingHandlers = new List<DelegatingHandler>();
+            this.delegatingHandlers = new List<Type>();
             this.testEnvironment = testEnvironment;
         }
 
@@ -208,7 +207,7 @@ namespace RestWell.Test.Integration.Client
 
             if (this.delegatingHandlers != null)
             {
-                proxyConfigurationBuilder.AddDelegatingHandlers(this.delegatingHandlers.ToArray());
+                proxyConfigurationBuilder.AddDelegatingHandler(this.delegatingHandlers.ToArray());
             }
 
             if (this.defaultAuthorizationHeader != null)
@@ -226,8 +225,7 @@ namespace RestWell.Test.Integration.Client
 
         internal void GivenIHaveASecureRequestDelegatingHandler()
         {
-            var secureRequestDelegatingHandler = new SecureRequestDelegatingHandler();
-            this.delegatingHandlers.Add(secureRequestDelegatingHandler);
+            this.delegatingHandlers.Add(typeof(SecureRequestDelegatingHandler));
         }
 
         internal void GivenIHaveASecureRequestProxyRequest()
@@ -362,13 +360,6 @@ namespace RestWell.Test.Integration.Client
             {
                 if (disposing)
                 {
-                    if (this.delegatingHandlers != null)
-                    {
-                        foreach (var handler in this.delegatingHandlers)
-                        {
-                            handler?.Dispose();
-                        }
-                    }
                 }
 
                 disposedValue = true;

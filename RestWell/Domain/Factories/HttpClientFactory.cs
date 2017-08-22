@@ -12,7 +12,13 @@ namespace RestWell.Domain.Factories
 
         public static HttpClient Create(IProxyConfiguration proxyConfiguration)
         {
-            var client = Create(new HttpClientHandler(), proxyConfiguration.DelegatingHandlers.ToArray());
+            var delegatingHandlers = new List<DelegatingHandler>();
+            foreach (var delegatingHandlerType in proxyConfiguration.DelegatingHandlerTypes)
+            {
+                delegatingHandlers.Add((DelegatingHandler)Activator.CreateInstance(delegatingHandlerType));
+            }
+
+            var client = Create(new HttpClientHandler(), delegatingHandlers.ToArray());
 
             if (proxyConfiguration.DefaultProxyRequestHeaders.Authorization != null)
             {
