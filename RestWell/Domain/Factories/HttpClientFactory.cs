@@ -1,3 +1,4 @@
+using RestWell.Domain.Proxy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +10,41 @@ namespace RestWell.Domain.Factories
     {
         #region Public Methods
 
-        public static HttpClient Create(params DelegatingHandler[] handlers)
+        public static HttpClient Create(IProxyConfiguration proxyConfiguration)
         {
-            return Create(new HttpClientHandler(), handlers);
+            var client = Create(new HttpClientHandler(), proxyConfiguration.DelegatingHandlers.ToArray());
+
+            if (proxyConfiguration.DefaultProxyRequestHeaders.Authorization != null)
+            {
+                client.DefaultRequestHeaders.Authorization = proxyConfiguration.DefaultProxyRequestHeaders.Authorization;
+            }
+
+            if (proxyConfiguration.DefaultProxyRequestHeaders.Accept != null)
+            {
+                foreach (var mediaTypeHeader in proxyConfiguration.DefaultProxyRequestHeaders.Accept)
+                {
+                    client.DefaultRequestHeaders.Accept.Add(mediaTypeHeader);
+                }
+            }
+
+            if (proxyConfiguration.DefaultProxyRequestHeaders.AdditionalHeaders.Any())
+            {
+                foreach (var additionalHeader in proxyConfiguration.DefaultProxyRequestHeaders.AdditionalHeaders)
+                {
+                    client.DefaultRequestHeaders.Add(additionalHeader.Key, additionalHeader.Value);
+                }
+            }
+
+            return client;
         }
 
-        public static HttpClient Create(HttpMessageHandler innerHandler, params DelegatingHandler[] handlers)
+        private static HttpClient Create(HttpMessageHandler innerHandler, params DelegatingHandler[] handlers)
         {
             var pipeline = CreatePipeline(innerHandler, handlers);
             return new HttpClient(pipeline);
         }
 
-        public static HttpMessageHandler CreatePipeline(HttpMessageHandler innerHandler, IEnumerable<DelegatingHandler> handlers)
+        private static HttpMessageHandler CreatePipeline(HttpMessageHandler innerHandler, IEnumerable<DelegatingHandler> handlers)
         {
             if (innerHandler == null)
             {

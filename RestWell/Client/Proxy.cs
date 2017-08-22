@@ -22,6 +22,7 @@ namespace RestWell.Client
 
         public Proxy(IProxyConfiguration proxyConfiguration)
         {
+            proxyConfiguration = proxyConfiguration ?? new ProxyConfiguration();
             this.requestInvoker = new RequestInvoker(proxyConfiguration);
         }
 

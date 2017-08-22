@@ -12,11 +12,11 @@ namespace RestWell.Client.Request
     {
         #region Public Constructors
 
-        public ProxyRequestBuilder(string baseUri) : base(baseUri)
+        public ProxyRequestBuilder(string baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod)
         {
         }
 
-        public ProxyRequestBuilder(Uri baseUri) : base(baseUri)
+        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod)
         {
         }
 
@@ -27,11 +27,11 @@ namespace RestWell.Client.Request
     {
         #region Public Constructors
 
-        public ProxyRequestBuilder(string baseUri) : base(baseUri)
+        public ProxyRequestBuilder(string baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod)
         {
         }
 
-        public ProxyRequestBuilder(Uri baseUri) : base(baseUri)
+        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod)
         {
         }
 
@@ -52,7 +52,7 @@ namespace RestWell.Client.Request
 
         #region Public Constructors
 
-        public ProxyRequestBuilder(string baseUri)
+        public ProxyRequestBuilder(string baseUri, HttpRequestMethod requestMethod)
         {
             if (baseUri.IsNullOrEmptyOrWhitespace())
             {
@@ -61,12 +61,13 @@ namespace RestWell.Client.Request
 
             this.baseUri = new Uri(baseUri);
             this.proxyRequest = new ProxyRequest<TRequestDto, TResponseDto>();
+            this.proxyRequest.HttpRequestMethod = requestMethod;
             this.routeAppendages = new List<string>();
             this.pathArguments = new List<string>();
             this.queryParameters = new Dictionary<string, IList<string>>();
         }
 
-        public ProxyRequestBuilder(Uri baseUri) : this(baseUri.ToString())
+        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : this(baseUri.ToString(), requestMethod)
         {
         }
 
@@ -74,9 +75,9 @@ namespace RestWell.Client.Request
 
         #region Public Methods
 
-        public static ProxyRequestBuilder<TRequestDto, TResponseDto> CreateBuilder(string baseUri) => new ProxyRequestBuilder<TRequestDto, TResponseDto>(baseUri);
+        public static ProxyRequestBuilder<TRequestDto, TResponseDto> CreateBuilder(string baseUri, HttpRequestMethod requestMethod) => new ProxyRequestBuilder<TRequestDto, TResponseDto>(baseUri, requestMethod);
 
-        public static ProxyRequestBuilder<TRequestDto, TResponseDto> CreateBuilder(Uri baseUri) => new ProxyRequestBuilder<TRequestDto, TResponseDto>(baseUri);
+        public static ProxyRequestBuilder<TRequestDto, TResponseDto> CreateBuilder(Uri baseUri, HttpRequestMethod requestMethod) => new ProxyRequestBuilder<TRequestDto, TResponseDto>(baseUri, requestMethod);
 
         /// <summary>
         /// Set/Modify the Accept Header
@@ -195,85 +196,6 @@ namespace RestWell.Client.Request
             }
 
             this.routeAppendages.AddRange(appendages);
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the request type to DELETE.
-        /// </summary>
-        /// <returns>Reference to the current builder</returns>
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsDeleteRequest()
-        {
-            return this.AsRequestType(HttpRequestMethod.Delete);
-        }
-
-        /// <summary>
-        /// Sets the request type to GET.
-        /// </summary>
-        /// <returns>Reference to the current builder</returns>
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsGetRequest()
-        {
-            return this.AsRequestType(HttpRequestMethod.Get);
-        }
-
-        /// <summary>
-        /// Sets the request type to HEAD.
-        /// </summary>
-        /// <returns>Reference to the current builder</returns>
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsHeadRequest()
-        {
-            return this.AsRequestType(HttpRequestMethod.Head);
-        }
-
-        /// <summary>
-        /// Sets the request type to OPTIONS.
-        /// </summary>
-        /// <returns>Reference to the current builder</returns>
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsOptionsRequest()
-        {
-            return this.AsRequestType(HttpRequestMethod.Options);
-        }
-
-        /// <summary>
-        /// Sets the request type to PATCH.
-        /// </summary>
-        /// <returns>Reference to the current builder</returns>
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsPatchRequest()
-        {
-            return this.AsRequestType(HttpRequestMethod.Patch);
-        }
-
-        /// <summary>
-        /// Sets the request type to POST.
-        /// </summary>
-        /// <returns>Reference to the current builder</returns>
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsPostRequest()
-        {
-            return this.AsRequestType(HttpRequestMethod.Post);
-        }
-
-        /// <summary>
-        /// Sets the request type to PUT.
-        /// </summary>
-        /// <returns>Reference to the current builder</returns>
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsPutRequest()
-        {
-            return this.AsRequestType(HttpRequestMethod.Put);
-        }
-
-        /// <summary>
-        /// Sets the request type.
-        /// </summary>
-        /// <param name="requestMethod">Request method you wish to use</param>
-        /// <returns>Reference to the current builder</returns>
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AsRequestType(HttpRequestMethod requestMethod)
-        {
-            if (requestMethod == HttpRequestMethod.None)
-            {
-                throw new ArgumentException($"{nameof(requestMethod)} cannot be {HttpRequestMethod.None}. You must use a valid request type when using {nameof(AsRequestType)}");
-            }
-
-            this.proxyRequest.HttpRequestMethod = requestMethod;
             return this;
         }
 

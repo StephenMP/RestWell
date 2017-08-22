@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestWell.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -44,6 +45,7 @@ namespace RestWell.Test.Component.Request
         public void CanBuildSimpleProxyRequestUsingStringUri()
         {
             this.steps.GivenIHaveABaseUri("http://www.this.is/fake");
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(HttpRequestMethod.Get);
 
             this.steps.WhenIBuildASimpleProxyRequestUsingString();
 
@@ -55,11 +57,47 @@ namespace RestWell.Test.Component.Request
         public void CanProperlyBuildRequestUri(string baseUri, Uri completeUri, IEnumerable<string> appendages, IEnumerable<string> pathArguments, IDictionary<string, string> queryParameters)
         {
             this.steps.GivenIHaveABaseUri(baseUri);
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(HttpRequestMethod.Get);
             this.steps.GivenIHaveACompleteUri(completeUri);
 
-            this.steps.WhenIBuildAProxyRequest(appendages, pathArguments, queryParameters);
+            this.steps.WhenIBuildAProxyRequestForUriOnly(appendages, pathArguments, queryParameters);
 
             this.steps.ThenICanVerifyICanProperlyBuildRequestUri();
+        }
+
+        [Theory]
+        [InlineData(HttpRequestMethod.Delete)]
+        [InlineData(HttpRequestMethod.Get)]
+        [InlineData(HttpRequestMethod.Head)]
+        [InlineData(HttpRequestMethod.Options)]
+        [InlineData(HttpRequestMethod.Patch)]
+        [InlineData(HttpRequestMethod.Post)]
+        [InlineData(HttpRequestMethod.Put)]
+        public void CanProperlySetRequestType(HttpRequestMethod requestMethod)
+        {
+            this.steps.GivenIHaveABaseUri("https://www.this.is/fake");
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
+
+            this.steps.WhenIBuildAProxyRequestForRequestTypeOnly();
+
+            this.steps.ThenICanVerifyICanProperlySetRequestType();
+        }
+
+        [Fact]
+        public void CannotSetRequestTypeToNone()
+        {
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(HttpRequestMethod.None);
+
+            this.steps.WhenICreateAProxyRequestAsAnAction();
+
+            this.steps.ThenICanVerifyICannotIssueBasicRequestWithUnrecognizedRequestType();
+        }
+
+        [Fact]
+        public void CanProperlySetRequestDto()
+        {
+            this.steps.GivenIHaveABaseUri("https://www.this.is/fake");
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(HttpRequestMethod.Get);
         }
     }
 }

@@ -4,9 +4,7 @@ using RestWell.Domain.Enums;
 using RestWell.Domain.Factories;
 using RestWell.Extensions;
 using System;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace RestWell.Domain.Proxy
@@ -19,14 +17,14 @@ namespace RestWell.Domain.Proxy
 
         #endregion Private Fields
 
-        #region Protected Constructors
+        #region Public Constructors
 
         public RequestInvoker(IProxyConfiguration proxyConfiguration)
         {
             this.proxyConfiguration = proxyConfiguration;
         }
 
-        #endregion Protected Constructors
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -42,7 +40,7 @@ namespace RestWell.Domain.Proxy
                 };
             }
 
-            using (var client = CreateHttpClient(this.proxyConfiguration))
+            using (var client = HttpClientFactory.Create(this.proxyConfiguration))
             {
                 try
                 {
@@ -51,7 +49,6 @@ namespace RestWell.Domain.Proxy
                         return await ProxyResponseFactory.CreateAsync<TResponseDto>(response);
                     }
                 }
-
                 catch (Exception e)
                 {
                     return await ProxyResponseFactory.CreateAsync<TResponseDto>(e);
@@ -60,19 +57,5 @@ namespace RestWell.Domain.Proxy
         }
 
         #endregion Public Methods
-
-        #region Protected Methods
-
-        private static HttpClient CreateHttpClient(IProxyConfiguration proxyConfiguration)
-        {
-            if (proxyConfiguration?.DelegatingHandlers.Count() > 0)
-            {
-                return HttpClientFactory.Create(proxyConfiguration.DelegatingHandlers.ToArray());
-            }
-
-            return HttpClientFactory.Create();
-        }
-
-        #endregion Protected Methods
     }
 }
