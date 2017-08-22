@@ -26,6 +26,8 @@ namespace RestWell.Test.Integration.Client
         private string basicMessage;
         private IProxyRequest<Missing, string> basicRequestProxyRequest;
         private IProxyResponse<string> basicRequestProxyResponse;
+        private MediaTypeWithQualityHeaderValue defaultAcceptHeader;
+        private AuthenticationHeaderValue defaultAuthorizationHeader;
         private Dictionary<Type, DelegatingHandler> delegatingHandlers;
         private bool disposedValue;
         private HttpRequestMethod httpRequestMethod;
@@ -39,8 +41,6 @@ namespace RestWell.Test.Integration.Client
         private IProxyRequest<Missing, MessageResponseDto> secureRequestProxyRequest;
         private IProxyResponse<MessageResponseDto> secureRequestProxyResponse;
         private TestEnvironment testEnvironment;
-        private AuthenticationHeaderValue defaultAuthorizationHeader;
-        private MediaTypeWithQualityHeaderValue defaultAcceptHeader;
 
         #endregion Private Fields
 
@@ -81,31 +81,32 @@ namespace RestWell.Test.Integration.Client
             this.basicMessage = message;
         }
 
-        internal void GivenIHaveABasicRequestProxyRequestForNonExistingResource()
-        {
-            this.basicRequestProxyRequest = ProxyRequestBuilder<string>
-                                                .CreateBuilder(this.testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri, this.httpRequestMethod)
-                                                .Accept(this.acceptHeaderValue)
-                                                .AppendToRoute($"api/does/not/exist/{nameof(BasicRequestController).Replace("Controller", "")}")
-                                                .AddPathArguments(this.basicMessage)
-                                                .Build();
-        }
-
-        internal void ThenICanVerifyICannotIssueBasicRequestForNonExistingResource()
-        {
-            this.basicRequestProxyResponse.ShouldNotBeNull();
-            this.basicRequestProxyResponse.HttpRequestMethod.ShouldBe(httpRequestMethod);
-            this.basicRequestProxyResponse.StatusCode.ShouldBe(HttpStatusCode.NotFound);
-            this.basicRequestProxyResponse.IsSuccessfulStatusCode.ShouldBe(false);
-            this.basicRequestProxyResponse.RequestUri.ToString().ShouldBe(this.basicRequestProxyResponse.RequestUri.ToString());
-        }
-
         internal void GivenIHaveABasicRequestProxyRequest()
         {
             this.basicRequestProxyRequest = ProxyRequestBuilder<string>
                                                 .CreateBuilder(this.testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri, this.httpRequestMethod)
                                                 .Accept(this.acceptHeaderValue)
                                                 .AppendToRoute($"api/{nameof(BasicRequestController).Replace("Controller", "")}")
+                                                .AddPathArguments(this.basicMessage)
+                                                .Build();
+        }
+
+        internal void GivenIHaveABasicRequestProxyRequestForException()
+        {
+            this.basicRequestProxyRequest = ProxyRequestBuilder<string>
+                                                .CreateBuilder(this.testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri, this.httpRequestMethod)
+                                                .Accept(this.acceptHeaderValue)
+                                                .AppendToRoute($"api/{nameof(BasicRequestController).Replace("Controller", "")}/error")
+                                                .AddPathArguments(this.basicMessage)
+                                                .Build();
+        }
+
+        internal void GivenIHaveABasicRequestProxyRequestForNonExistingResource()
+        {
+            this.basicRequestProxyRequest = ProxyRequestBuilder<string>
+                                                .CreateBuilder(this.testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri, this.httpRequestMethod)
+                                                .Accept(this.acceptHeaderValue)
+                                                .AppendToRoute($"api/does/not/exist/{nameof(BasicRequestController).Replace("Controller", "")}")
                                                 .AddPathArguments(this.basicMessage)
                                                 .Build();
         }
@@ -124,28 +125,9 @@ namespace RestWell.Test.Integration.Client
             this.defaultAcceptHeader = new MediaTypeWithQualityHeaderValue(mediaType);
         }
 
-        internal void ThenICanVerifyICanIssueBasicRequestWithDefaultAcceptHeader()
+        internal void GivenIHaveADefaultAuthorizationHeader()
         {
-            this.basicRequestProxyResponse.RequestHeaders.Accept.ShouldContain(this.defaultAcceptHeader);
-        }
-
-        internal void GivenIHaveABasicRequestProxyRequestForException()
-        {
-            this.basicRequestProxyRequest = ProxyRequestBuilder<string>
-                                                .CreateBuilder(this.testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri, this.httpRequestMethod)
-                                                .Accept(this.acceptHeaderValue)
-                                                .AppendToRoute($"api/{nameof(BasicRequestController).Replace("Controller", "")}/error")
-                                                .AddPathArguments(this.basicMessage)
-                                                .Build();
-        }
-
-        internal void ThenICanVerifyICannotIssueBasicRequestDueToException()
-        {
-            this.basicRequestProxyResponse.ShouldNotBeNull();
-            this.basicRequestProxyResponse.HttpRequestMethod.ShouldBe(httpRequestMethod);
-            this.basicRequestProxyResponse.StatusCode.ShouldBe(HttpStatusCode.InternalServerError);
-            this.basicRequestProxyResponse.IsSuccessfulStatusCode.ShouldBe(false);
-            this.basicRequestProxyResponse.RequestUri.ToString().ShouldBe(this.basicRequestProxyResponse.RequestUri.ToString());
+            this.defaultAuthorizationHeader = new AuthenticationHeaderValue("Basic", "Username:Password");
         }
 
         internal void GivenIHaveAMessageDtoRequestProxyRequest()
@@ -156,30 +138,6 @@ namespace RestWell.Test.Integration.Client
                                                     .AppendToRoute($"api/{nameof(MessageDtoRequestController).Replace("Controller", "")}")
                                                     .SetRequestDto(this.messageRequestDto)
                                                     .Build();
-        }
-
-        internal void GivenIHaveASecureRequestProxyRequestWithNoAuthHeader()
-        {
-            this.secureRequestProxyRequest = ProxyRequestBuilder<MessageResponseDto>
-                                                .CreateBuilder(this.testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri, this.httpRequestMethod)
-                                                .Accept(this.acceptHeaderValue)
-                                                .AppendToRoute($"api/{nameof(SecureRequestController).Replace("Controller", "")}")
-                                                .AddPathArguments(this.basicMessage)
-                                                .Build();
-        }
-
-        internal void ThenICanVerifyICannotIssueSecureRequestDueNoAuthHeader()
-        {
-            this.secureRequestProxyResponse.ShouldNotBeNull();
-            this.secureRequestProxyResponse.HttpRequestMethod.ShouldBe(httpRequestMethod);
-            this.secureRequestProxyResponse.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
-            this.secureRequestProxyResponse.IsSuccessfulStatusCode.ShouldBe(false);
-            this.secureRequestProxyResponse.RequestUri.ToString().ShouldBe(this.secureRequestProxyResponse.RequestUri.ToString());
-        }
-
-        internal void GivenIHaveADefaultAuthorizationHeader()
-        {
-            this.defaultAuthorizationHeader = new AuthenticationHeaderValue("Basic", "Username:Password");
         }
 
         internal void GivenIHaveAMessageDtoResponseRequestProxyRequest()
@@ -245,6 +203,16 @@ namespace RestWell.Test.Integration.Client
                                                 .Build();
         }
 
+        internal void GivenIHaveASecureRequestProxyRequestWithNoAuthHeader()
+        {
+            this.secureRequestProxyRequest = ProxyRequestBuilder<MessageResponseDto>
+                                                .CreateBuilder(this.testEnvironment.GetResourceWebService<Resource.WebApi.Startup>().BaseUri, this.httpRequestMethod)
+                                                .Accept(this.acceptHeaderValue)
+                                                .AppendToRoute($"api/{nameof(SecureRequestController).Replace("Controller", "")}")
+                                                .AddPathArguments(this.basicMessage)
+                                                .Build();
+        }
+
         internal void ThenICanVerifyICanIssueBasicRequest()
         {
             this.ThenICanVerifyIGotAResponse(this.basicRequestProxyResponse, this.basicRequestProxyRequest, HttpStatusCode.OK, true);
@@ -256,6 +224,11 @@ namespace RestWell.Test.Integration.Client
                 this.basicRequestProxyResponse.ResponseDto.ShouldNotBeEmpty();
                 this.basicRequestProxyResponse.ResponseDto.ShouldBe(this.basicMessage);
             }
+        }
+
+        internal void ThenICanVerifyICanIssueBasicRequestWithDefaultAcceptHeader()
+        {
+            this.basicRequestProxyResponse.RequestHeaders.Accept.ShouldContain(this.defaultAcceptHeader);
         }
 
         internal void ThenICanVerifyICanIssueMessageDtoRequest()
@@ -300,6 +273,33 @@ namespace RestWell.Test.Integration.Client
             }
         }
 
+        internal void ThenICanVerifyICannotIssueBasicRequestDueToException()
+        {
+            this.basicRequestProxyResponse.ShouldNotBeNull();
+            this.basicRequestProxyResponse.HttpRequestMethod.ShouldBe(httpRequestMethod);
+            this.basicRequestProxyResponse.StatusCode.ShouldBe(HttpStatusCode.InternalServerError);
+            this.basicRequestProxyResponse.IsSuccessfulStatusCode.ShouldBe(false);
+            this.basicRequestProxyResponse.RequestUri.ToString().ShouldBe(this.basicRequestProxyResponse.RequestUri.ToString());
+        }
+
+        internal void ThenICanVerifyICannotIssueBasicRequestForNonExistingResource()
+        {
+            this.basicRequestProxyResponse.ShouldNotBeNull();
+            this.basicRequestProxyResponse.HttpRequestMethod.ShouldBe(httpRequestMethod);
+            this.basicRequestProxyResponse.StatusCode.ShouldBe(HttpStatusCode.NotFound);
+            this.basicRequestProxyResponse.IsSuccessfulStatusCode.ShouldBe(false);
+            this.basicRequestProxyResponse.RequestUri.ToString().ShouldBe(this.basicRequestProxyResponse.RequestUri.ToString());
+        }
+
+        internal void ThenICanVerifyICannotIssueSecureRequestDueNoAuthHeader()
+        {
+            this.secureRequestProxyResponse.ShouldNotBeNull();
+            this.secureRequestProxyResponse.HttpRequestMethod.ShouldBe(httpRequestMethod);
+            this.secureRequestProxyResponse.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+            this.secureRequestProxyResponse.IsSuccessfulStatusCode.ShouldBe(false);
+            this.secureRequestProxyResponse.RequestUri.ToString().ShouldBe(this.secureRequestProxyResponse.RequestUri.ToString());
+        }
+
         internal void ThenICanVerifyIHaveAProxy()
         {
             this.proxy.ShouldNotBeNull();
@@ -311,7 +311,6 @@ namespace RestWell.Test.Integration.Client
             {
                 this.basicRequestProxyResponse = await this.proxy.InvokeAsync(this.basicRequestProxyRequest);
             }
-
             else
             {
                 this.basicRequestProxyResponse = this.proxy.Invoke(this.basicRequestProxyRequest);
@@ -324,7 +323,6 @@ namespace RestWell.Test.Integration.Client
             {
                 this.messageDtoRequestProxyResponse = await this.proxy.InvokeAsync(this.messageDtoRequestProxyRequest);
             }
-
             else
             {
                 this.messageDtoRequestProxyResponse = this.proxy.Invoke(this.messageDtoRequestProxyRequest);
@@ -337,7 +335,6 @@ namespace RestWell.Test.Integration.Client
             {
                 this.messageDtoResponseRequestProxyResponse = await this.proxy.InvokeAsync(this.messageDtoResponseRequestProxyRequest);
             }
-
             else
             {
                 this.messageDtoResponseRequestProxyResponse = this.proxy.Invoke(this.messageDtoResponseRequestProxyRequest);
@@ -350,7 +347,6 @@ namespace RestWell.Test.Integration.Client
             {
                 this.secureRequestProxyResponse = await this.proxy.InvokeAsync(this.secureRequestProxyRequest);
             }
-
             else
             {
                 this.secureRequestProxyResponse = this.proxy.Invoke(this.secureRequestProxyRequest);

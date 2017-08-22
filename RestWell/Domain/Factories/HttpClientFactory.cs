@@ -11,6 +11,19 @@ namespace RestWell.Domain.Factories
     {
         #region Public Methods
 
+        public static HttpClient Create(IProxyConfiguration proxyConfiguration)
+        {
+            var delegatingHandlers = BuildDelegatingHandlers(proxyConfiguration.DelegatingHandlers);
+            var client = Create(new HttpClientHandler(), delegatingHandlers);
+            PopulateClientHeaders(client, proxyConfiguration.DefaultProxyRequestHeaders);
+
+            return client;
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
         private static DelegatingHandler[] BuildDelegatingHandlers(IDictionary<Type, DelegatingHandler> delegatingHandlers)
         {
             var handlers = new List<DelegatingHandler>();
@@ -21,40 +34,6 @@ namespace RestWell.Domain.Factories
             }
 
             return handlers.ToArray();
-        }
-
-        public static HttpClient Create(IProxyConfiguration proxyConfiguration)
-        {
-            var delegatingHandlers = BuildDelegatingHandlers(proxyConfiguration.DelegatingHandlers);
-            var client = Create(new HttpClientHandler(), delegatingHandlers);
-            PopulateClientHeaders(client, proxyConfiguration.DefaultProxyRequestHeaders);
-
-
-            return client;
-        }
-
-        private static void PopulateClientHeaders(HttpClient client, DefaultProxyRequestHeaders defaultProxyRequestHeaders)
-        {
-            if (defaultProxyRequestHeaders.Authorization != null)
-            {
-                client.DefaultRequestHeaders.Authorization = defaultProxyRequestHeaders.Authorization;
-            }
-
-            if (defaultProxyRequestHeaders.Accept != null)
-            {
-                foreach (var mediaTypeHeader in defaultProxyRequestHeaders.Accept)
-                {
-                    client.DefaultRequestHeaders.Accept.Add(mediaTypeHeader);
-                }
-            }
-
-            if (defaultProxyRequestHeaders.AdditionalHeaders.Any())
-            {
-                foreach (var additionalHeader in defaultProxyRequestHeaders.AdditionalHeaders)
-                {
-                    client.DefaultRequestHeaders.Add(additionalHeader.Key, additionalHeader.Value);
-                }
-            }
         }
 
         private static HttpClient Create(HttpMessageHandler innerHandler, params DelegatingHandler[] handlers)
@@ -96,6 +75,30 @@ namespace RestWell.Domain.Factories
             return pipeline;
         }
 
-        #endregion Public Methods
+        private static void PopulateClientHeaders(HttpClient client, DefaultProxyRequestHeaders defaultProxyRequestHeaders)
+        {
+            if (defaultProxyRequestHeaders.Authorization != null)
+            {
+                client.DefaultRequestHeaders.Authorization = defaultProxyRequestHeaders.Authorization;
+            }
+
+            if (defaultProxyRequestHeaders.Accept != null)
+            {
+                foreach (var mediaTypeHeader in defaultProxyRequestHeaders.Accept)
+                {
+                    client.DefaultRequestHeaders.Accept.Add(mediaTypeHeader);
+                }
+            }
+
+            if (defaultProxyRequestHeaders.AdditionalHeaders.Any())
+            {
+                foreach (var additionalHeader in defaultProxyRequestHeaders.AdditionalHeaders)
+                {
+                    client.DefaultRequestHeaders.Add(additionalHeader.Key, additionalHeader.Value);
+                }
+            }
+        }
+
+        #endregion Private Methods
     }
 }

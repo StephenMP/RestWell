@@ -10,20 +10,31 @@ namespace RestWell.Test.Component.Request
 {
     internal class ProxyRequestBuilderSteps
     {
+        #region Private Fields
+
         private string baseUriString;
-        private IProxyRequest<Missing, Missing> simpleProxyRequest;
         private Uri completeUri;
         private HttpRequestMethod requestMethod;
+        private IProxyRequest<Missing, Missing> simpleProxyRequest;
         private Action simpleProxyRequestAction;
+
+        #endregion Private Fields
+
+        #region Internal Methods
+
+        internal void GivenIAmUsingTheHttpRequestMethodOf(HttpRequestMethod requestMethod)
+        {
+            this.requestMethod = requestMethod;
+        }
 
         internal void GivenIHaveABaseUri(string baseUriString)
         {
             this.baseUriString = baseUriString;
         }
 
-        internal void WhenIBuildASimpleProxyRequestUsingString()
+        internal void GivenIHaveACompleteUri(Uri completeUri)
         {
-            this.simpleProxyRequest = ProxyRequestBuilder.CreateBuilder(this.baseUriString, this.requestMethod).Build();
+            this.completeUri = completeUri;
         }
 
         internal void ThenICanBuildSimpleProxyRequestUsingStringUri()
@@ -32,9 +43,27 @@ namespace RestWell.Test.Component.Request
             this.simpleProxyRequest.RequestUri.ToString().ShouldBe(this.baseUriString);
         }
 
-        internal void GivenIHaveACompleteUri(Uri completeUri)
+        internal void ThenICanVerifyICannotIssueBasicRequestWithUnrecognizedRequestType()
         {
-            this.completeUri = completeUri;
+            this.simpleProxyRequestAction.ShouldThrow<ArgumentException>($"requestMethod cannot be {HttpRequestMethod.None}. You must use a valid request type when using AsRequestType");
+        }
+
+        internal void ThenICanVerifyICanProperlyBuildRequestUri()
+        {
+            this.simpleProxyRequest.RequestUri.ShouldBe(this.completeUri);
+        }
+
+        internal void ThenICanVerifyICanProperlySetRequestType()
+        {
+            this.simpleProxyRequest.ShouldNotBeNull();
+            this.simpleProxyRequest.HttpRequestMethod.ShouldBe(this.requestMethod);
+        }
+
+        internal void WhenIBuildAProxyRequestForRequestTypeOnly()
+        {
+            this.simpleProxyRequest = ProxyRequestBuilder
+                                        .CreateBuilder(this.baseUriString, this.requestMethod)
+                                        .Build();
         }
 
         internal void WhenIBuildAProxyRequestForUriOnly(IEnumerable<string> appendages, IEnumerable<string> pathArguments, IDictionary<string, string> queryParameters)
@@ -52,27 +81,9 @@ namespace RestWell.Test.Component.Request
             this.simpleProxyRequest = proxyRequestBuilder.Build();
         }
 
-        internal void ThenICanVerifyICanProperlyBuildRequestUri()
+        internal void WhenIBuildASimpleProxyRequestUsingString()
         {
-            this.simpleProxyRequest.RequestUri.ShouldBe(this.completeUri);
-        }
-
-        internal void WhenIBuildAProxyRequestForRequestTypeOnly()
-        {
-            this.simpleProxyRequest = ProxyRequestBuilder
-                                        .CreateBuilder(this.baseUriString, this.requestMethod)
-                                        .Build();
-        }
-
-        internal void GivenIAmUsingTheHttpRequestMethodOf(HttpRequestMethod requestMethod)
-        {
-            this.requestMethod = requestMethod;
-        }
-
-        internal void ThenICanVerifyICanProperlySetRequestType()
-        {
-            this.simpleProxyRequest.ShouldNotBeNull();
-            this.simpleProxyRequest.HttpRequestMethod.ShouldBe(this.requestMethod);
+            this.simpleProxyRequest = ProxyRequestBuilder.CreateBuilder(this.baseUriString, this.requestMethod).Build();
         }
 
         internal void WhenICreateAProxyRequestAsAnAction()
@@ -80,9 +91,6 @@ namespace RestWell.Test.Component.Request
             this.simpleProxyRequestAction = new Action(() => ProxyRequestBuilder.CreateBuilder(this.baseUriString, this.requestMethod));
         }
 
-        internal void ThenICanVerifyICannotIssueBasicRequestWithUnrecognizedRequestType()
-        {
-            this.simpleProxyRequestAction.ShouldThrow<ArgumentException>($"requestMethod cannot be {HttpRequestMethod.None}. You must use a valid request type when using AsRequestType");
-        }
+        #endregion Internal Methods
     }
 }
