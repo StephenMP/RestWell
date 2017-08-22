@@ -1,5 +1,5 @@
-using RestWell.Domain.Enums;
-using RestWell.Extensions;
+using RestWell.Client.Enums;
+using RestWell.Domain.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -131,7 +131,9 @@ namespace RestWell.Client.Request
         /// <summary>
         /// Appends path arguments onto the request (e.g. https://www.test.com/api/pathArg/pathArg)
         /// </summary>
-        /// <param name="pathArguments">Must be an object with a valid ToString() which returns a value for the path argument.</param>
+        /// <param name="pathArguments">
+        /// Must be an object with a valid ToString() which returns a value for the path argument.
+        /// </param>
         /// <returns>Reference to the current builder</returns>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AddPathArguments(params object[] pathArguments)
         {
@@ -152,7 +154,9 @@ namespace RestWell.Client.Request
         /// Adds query parameters to be appeneded to the request URI (e.g. https://www.test.com/api?queryParam=value).
         /// </summary>
         /// <param name="queryParam">Must match the query parameter name.</param>
-        /// <param name="value">Must have a valid ToString() which returns a value for the query parameter.</param>
+        /// <param name="value">
+        /// Must have a valid ToString() which returns a value for the query parameter.
+        /// </param>
         /// <returns>Reference to the current builder</returns>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AddQueryParameter(string queryParam, object value)
         {
@@ -245,21 +249,6 @@ namespace RestWell.Client.Request
             return this.proxyRequest;
         }
 
-        private StringBuilder BuildAppendages(StringBuilder requestBuilder)
-        {
-            if (this.routeAppendages.Count > 0)
-            {
-                requestBuilder.Append("/");
-
-                foreach (var appendage in this.routeAppendages)
-                {
-                    requestBuilder.Append($"{appendage}/");
-                }
-            }
-
-            return new StringBuilder(requestBuilder.ToString().TrimEnd('/'));
-        }
-
         /// <summary>
         /// Sets the request body of the request.
         /// </summary>
@@ -279,6 +268,21 @@ namespace RestWell.Client.Request
         #endregion Public Methods
 
         #region Private Methods
+
+        private StringBuilder BuildAppendages(StringBuilder requestBuilder)
+        {
+            if (this.routeAppendages.Count > 0)
+            {
+                requestBuilder.Append("/");
+
+                foreach (var appendage in this.routeAppendages)
+                {
+                    requestBuilder.Append($"{appendage}/");
+                }
+            }
+
+            return new StringBuilder(requestBuilder.ToString().TrimEnd('/'));
+        }
 
         private StringBuilder BuildPathArguments(StringBuilder requestBuilder)
         {

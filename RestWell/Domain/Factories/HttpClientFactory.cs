@@ -1,4 +1,3 @@
-using RestWell.Domain.Proxy;
 using RestWell.Domain.Request;
 using System;
 using System.Collections.Generic;
@@ -7,62 +6,21 @@ using System.Net.Http;
 
 namespace RestWell.Domain.Factories
 {
-    public static class HttpClientFactory
+    internal static class HttpClientFactory
     {
         #region Public Methods
 
-        private static DelegatingHandler[] BuildDelegatingHandlers(IDictionary<Type, List<object>> delegatingHandlerTypes)
+        public static HttpClient Create(DefaultProxyRequestHeaders defaultProxyRequestHeaders, IEnumerable<DelegatingHandler> delegatingHandlers)
         {
-            var delegatingHandlers = new List<DelegatingHandler>();
-            foreach (var delegatingHandlerType in delegatingHandlerTypes)
-            {
-                if (delegatingHandlerType.Value.Any())
-                {
-                    delegatingHandlers.Add((DelegatingHandler)Activator.CreateInstance(delegatingHandlerType.Key, delegatingHandlerType.Value.ToArray()));
-                }
-
-                else
-                {
-                    delegatingHandlers.Add((DelegatingHandler)Activator.CreateInstance(delegatingHandlerType.Key));
-                }
-            }
-
-            return delegatingHandlers.ToArray();
-        }
-
-        public static HttpClient Create(IProxyConfiguration proxyConfiguration)
-        {
-            var delegatingHandlers = BuildDelegatingHandlers(proxyConfiguration.DelegatingHandlerTypes);
-            var client = Create(new HttpClientHandler(), delegatingHandlers);
-            PopulateClientHeaders(client, proxyConfiguration.DefaultProxyRequestHeaders);
-
+            var client = Create(new HttpClientHandler(), delegatingHandlers.ToArray());
+            PopulateClientHeaders(client, defaultProxyRequestHeaders);
 
             return client;
         }
 
-        private static void PopulateClientHeaders(HttpClient client, DefaultProxyRequestHeaders defaultProxyRequestHeaders)
-        {
-            if (defaultProxyRequestHeaders.Authorization != null)
-            {
-                client.DefaultRequestHeaders.Authorization = defaultProxyRequestHeaders.Authorization;
-            }
+        #endregion Public Methods
 
-            if (defaultProxyRequestHeaders.Accept != null)
-            {
-                foreach (var mediaTypeHeader in defaultProxyRequestHeaders.Accept)
-                {
-                    client.DefaultRequestHeaders.Accept.Add(mediaTypeHeader);
-                }
-            }
-
-            if (defaultProxyRequestHeaders.AdditionalHeaders.Any())
-            {
-                foreach (var additionalHeader in defaultProxyRequestHeaders.AdditionalHeaders)
-                {
-                    client.DefaultRequestHeaders.Add(additionalHeader.Key, additionalHeader.Value);
-                }
-            }
-        }
+        #region Private Methods
 
         private static HttpClient Create(HttpMessageHandler innerHandler, params DelegatingHandler[] handlers)
         {
@@ -103,6 +61,30 @@ namespace RestWell.Domain.Factories
             return pipeline;
         }
 
-        #endregion Public Methods
+        private static void PopulateClientHeaders(HttpClient client, DefaultProxyRequestHeaders defaultProxyRequestHeaders)
+        {
+            if (defaultProxyRequestHeaders.Authorization != null)
+            {
+                client.DefaultRequestHeaders.Authorization = defaultProxyRequestHeaders.Authorization;
+            }
+
+            if (defaultProxyRequestHeaders.Accept != null)
+            {
+                foreach (var mediaTypeHeader in defaultProxyRequestHeaders.Accept)
+                {
+                    client.DefaultRequestHeaders.Accept.Add(mediaTypeHeader);
+                }
+            }
+
+            if (defaultProxyRequestHeaders.AdditionalHeaders.Any())
+            {
+                foreach (var additionalHeader in defaultProxyRequestHeaders.AdditionalHeaders)
+                {
+                    client.DefaultRequestHeaders.Add(additionalHeader.Key, additionalHeader.Value);
+                }
+            }
+        }
+
+        #endregion Private Methods
     }
 }

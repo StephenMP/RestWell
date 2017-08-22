@@ -1,4 +1,4 @@
-namespace RestWell.Domain.Enums
+namespace RestWell.Client.Enums
 {
     public enum HttpRequestMethod
     {

@@ -1,8 +1,8 @@
 using System;
 
-namespace RestWell.Extensions
+namespace RestWell.Domain.Extensions
 {
-    public static class StringExtensions
+    internal static class StringExtensions
     {
         #region Public Methods
 

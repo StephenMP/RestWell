@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
+using RestWell.Client.Enums;
 using RestWell.Client.Response;
-using RestWell.Domain.Enums;
-using RestWell.Extensions;
+using RestWell.Domain.Extensions;
 using System;
 using System.Linq;
 using System.Net;
@@ -17,7 +17,7 @@ namespace RestWell.Domain.Proxy
     {
         #region Internal Methods
 
-        internal static async Task<IProxyResponse<TResponseDto>> CreateAsync<TResponseDto>(HttpResponseMessage httpResponseMessage) where TResponseDto : class
+        public static async Task<IProxyResponse<TResponseDto>> CreateAsync<TResponseDto>(HttpResponseMessage httpResponseMessage) where TResponseDto : class
         {
             var restfulProxyResponse = new ProxyResponse<TResponseDto>();
 
@@ -62,7 +62,7 @@ namespace RestWell.Domain.Proxy
             return restfulProxyResponse;
         }
 
-        internal static async Task<IProxyResponse<TResponseDto>> CreateAsync<TResponseDto>(Exception e)
+        public static async Task<IProxyResponse<TResponseDto>> CreateAsync<TResponseDto>(Exception e)
         {
             var restfulProxyResponse = new ProxyResponse<TResponseDto>
             {

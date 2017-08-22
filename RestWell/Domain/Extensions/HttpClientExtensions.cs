@@ -1,13 +1,13 @@
 using Newtonsoft.Json;
+using RestWell.Client.Enums;
 using RestWell.Client.Request;
-using RestWell.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestWell.Extensions
+namespace RestWell.Domain.Extensions
 {
     internal static class HttpClientExtension
     {
