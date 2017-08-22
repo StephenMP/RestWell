@@ -8,7 +8,7 @@ namespace RestWell.Domain.Proxy
     {
         #region Public Properties
 
-        IList<Type> DelegatingHandlerTypes { get; }
+        IDictionary<Type, List<object>> DelegatingHandlerTypes { get; }
         DefaultProxyRequestHeaders DefaultProxyRequestHeaders { get; }
 
         #endregion Public Properties

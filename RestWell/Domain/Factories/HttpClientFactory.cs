@@ -11,12 +11,20 @@ namespace RestWell.Domain.Factories
     {
         #region Public Methods
 
-        private static DelegatingHandler[] BuildDelegatingHandlers(IEnumerable<Type> delegatingHandlerTypes)
+        private static DelegatingHandler[] BuildDelegatingHandlers(IDictionary<Type, List<object>> delegatingHandlerTypes)
         {
             var delegatingHandlers = new List<DelegatingHandler>();
             foreach (var delegatingHandlerType in delegatingHandlerTypes)
             {
-                delegatingHandlers.Add((DelegatingHandler)Activator.CreateInstance(delegatingHandlerType));
+                if (delegatingHandlerType.Value.Any())
+                {
+                    delegatingHandlers.Add((DelegatingHandler)Activator.CreateInstance(delegatingHandlerType.Key, delegatingHandlerType.Value.ToArray()));
+                }
+
+                else
+                {
+                    delegatingHandlers.Add((DelegatingHandler)Activator.CreateInstance(delegatingHandlerType.Key));
+                }
             }
 
             return delegatingHandlers.ToArray();

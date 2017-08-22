@@ -1,5 +1,6 @@
 using RestWell.Domain.Proxy;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
@@ -26,24 +27,21 @@ namespace RestWell.Client
 
         public static ProxyConfigurationBuilder CreateBuilder() => new ProxyConfigurationBuilder();
 
-        public ProxyConfigurationBuilder AddDelegatingHandler<TDelegatingHandler>() where TDelegatingHandler : DelegatingHandler
+        public ProxyConfigurationBuilder AddDelegatingHandler<TDelegatingHandler>(params object[] parameters) where TDelegatingHandler : DelegatingHandler
         {
-            if (!this.proxyConfiguration.DelegatingHandlerTypes.Contains(typeof(TDelegatingHandler)))
+            if (!this.proxyConfiguration.DelegatingHandlerTypes.ContainsKey(typeof(TDelegatingHandler)))
             {
-                this.proxyConfiguration.DelegatingHandlerTypes.Add(typeof(TDelegatingHandler));
+                this.proxyConfiguration.DelegatingHandlerTypes.Add(typeof(TDelegatingHandler), parameters.ToList());
             }
 
             return this;
         }
 
-        public ProxyConfigurationBuilder AddDelegatingHandler(params Type[] delegatingHandlerTypes)
+        public ProxyConfigurationBuilder AddDelegatingHandler(Type delegatingHandlerType, params object[] constructorParameters)
         {
-            foreach (var delegatingHandlerType in delegatingHandlerTypes)
+            if (!this.proxyConfiguration.DelegatingHandlerTypes.ContainsKey(delegatingHandlerType))
             {
-                if (!this.proxyConfiguration.DelegatingHandlerTypes.Contains(delegatingHandlerType))
-                {
-                    this.proxyConfiguration.DelegatingHandlerTypes.Add(delegatingHandlerType);
-                }
+                this.proxyConfiguration.DelegatingHandlerTypes.Add(delegatingHandlerType, constructorParameters.ToList());
             }
 
             return this;

@@ -185,6 +185,43 @@ namespace RestWell.Test.Integration.Client
 
         [Theory]
         [MemberData(nameof(GetGenericTestData), true)]
+        public async Task CanIssueMultipleSecureRequestsUsingDelegatingHandler(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
+        {
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
+            this.steps.GivenIHaveABasicRequestMessage(message);
+            this.steps.GivenIAccept(acceptHeaderValue);
+            this.steps.GivenIHaveASecureRequestDelegatingHandler();
+            this.steps.GivenIHaveASecureRequestProxyRequest();
+            this.steps.GivenIHaveAProxyConfiguration();
+            this.steps.GivenIHaveAProxy();
+
+            for (int i = 0; i < 5; i++)
+            {
+                await this.steps.WhenIInvokeAsyncForSecureRequest(runAsync);
+
+                this.steps.ThenICanVerifyICanIssueSecureRequestUsingDelegatingHandler();
+            }
+        }
+
+        [Theory]
+        [MemberData(nameof(GetGenericTestData), true)]
+        public async Task CanIssueSecureRequestUsingDelegatingHandlerWithArguments(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
+        {
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
+            this.steps.GivenIHaveABasicRequestMessage(message);
+            this.steps.GivenIAccept(acceptHeaderValue);
+            this.steps.GivenIHaveASecureRequestDelegatingHandler("Basic", "Username:Password");
+            this.steps.GivenIHaveASecureRequestProxyRequest();
+            this.steps.GivenIHaveAProxyConfiguration();
+            this.steps.GivenIHaveAProxy();
+
+            await this.steps.WhenIInvokeAsyncForSecureRequest(runAsync);
+
+            this.steps.ThenICanVerifyICanIssueSecureRequestUsingDelegatingHandler();
+        }
+
+        [Theory]
+        [MemberData(nameof(GetGenericTestData), true)]
         public async Task CanIssueSecureRequestUsingDefaultAuthorizationHeader(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
         {
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);

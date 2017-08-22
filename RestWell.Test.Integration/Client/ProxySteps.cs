@@ -24,7 +24,7 @@ namespace RestWell.Test.Integration.Client
         private string basicMessage;
         private IProxyRequest<Missing, string> basicRequestProxyRequest;
         private IProxyResponse<string> basicRequestProxyResponse;
-        private List<Type> delegatingHandlers;
+        private Dictionary<Type, List<object>> delegatingHandlers;
         private bool disposedValue;
         private HttpRequestMethod httpRequestMethod;
         private IProxyRequest<MessageRequestDto, MessageResponseDto> messageDtoRequestProxyRequest;
@@ -46,7 +46,7 @@ namespace RestWell.Test.Integration.Client
 
         public ProxySteps(TestEnvironment testEnvironment)
         {
-            this.delegatingHandlers = new List<Type>();
+            this.delegatingHandlers = new Dictionary<Type, List<object>>();
             this.testEnvironment = testEnvironment;
         }
 
@@ -207,7 +207,10 @@ namespace RestWell.Test.Integration.Client
 
             if (this.delegatingHandlers != null)
             {
-                proxyConfigurationBuilder.AddDelegatingHandler(this.delegatingHandlers.ToArray());
+                foreach (var delegatingHandler in this.delegatingHandlers)
+                {
+                    proxyConfigurationBuilder.AddDelegatingHandler(delegatingHandler.Key, delegatingHandler.Value.ToArray());
+                }
             }
 
             if (this.defaultAuthorizationHeader != null)
@@ -225,7 +228,12 @@ namespace RestWell.Test.Integration.Client
 
         internal void GivenIHaveASecureRequestDelegatingHandler()
         {
-            this.delegatingHandlers.Add(typeof(SecureRequestDelegatingHandler));
+            this.delegatingHandlers.Add(typeof(SecureRequestDelegatingHandler), new List<object>());
+        }
+
+        internal void GivenIHaveASecureRequestDelegatingHandler(string scheme, string token)
+        {
+            this.delegatingHandlers.Add(typeof(SecureRequestDelegatingHandler), new List<object> { scheme, token });
         }
 
         internal void GivenIHaveASecureRequestProxyRequest()

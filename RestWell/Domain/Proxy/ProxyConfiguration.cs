@@ -10,7 +10,7 @@ namespace RestWell.Domain.Proxy
 
         public ProxyConfiguration()
         {
-            this.DelegatingHandlerTypes = new List<Type>();
+            this.DelegatingHandlerTypes = new Dictionary<Type, List<object>>();
             this.DefaultProxyRequestHeaders = new DefaultProxyRequestHeaders();
         }
 
@@ -18,7 +18,7 @@ namespace RestWell.Domain.Proxy
 
         #region Public Properties
 
-        public IList<Type> DelegatingHandlerTypes { get; set; }
+        public IDictionary<Type, List<object>> DelegatingHandlerTypes { get; set; }
 
         public DefaultProxyRequestHeaders DefaultProxyRequestHeaders { get; set; }
 
