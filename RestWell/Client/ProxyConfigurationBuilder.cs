@@ -1,6 +1,7 @@
 using RestWell.Domain.Proxy;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace RestWell.Client
 {
@@ -38,6 +39,24 @@ namespace RestWell.Client
         public IProxyConfiguration Build()
         {
             return this.proxyConfiguration;
+        }
+
+        public ProxyConfigurationBuilder UseDefaultAcceptHeader(MediaTypeWithQualityHeaderValue mediaType)
+        {
+            this.proxyConfiguration.DefaultProxyRequestHeaders.Accept.Add(mediaType);
+            return this;
+        }
+
+        public ProxyConfigurationBuilder UseDefaultAuthorizationHeader(AuthenticationHeaderValue authenticationHeaderValue)
+        {
+            this.proxyConfiguration.DefaultProxyRequestHeaders.Authorization = authenticationHeaderValue;
+            return this;
+        }
+
+        public ProxyConfigurationBuilder UseDefaultHeader(string header, params string[] values)
+        {
+            this.proxyConfiguration.DefaultProxyRequestHeaders.AdditionalHeaders.Add(header, values);
+            return this;
         }
 
         #endregion Public Methods

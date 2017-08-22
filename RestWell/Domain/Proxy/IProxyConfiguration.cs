@@ -1,3 +1,4 @@
+using RestWell.Domain.Request;
 using System.Collections.Generic;
 using System.Net.Http;
 
@@ -8,6 +9,7 @@ namespace RestWell.Domain.Proxy
         #region Public Properties
 
         IEnumerable<DelegatingHandler> DelegatingHandlers { get; }
+        DefaultProxyRequestHeaders DefaultProxyRequestHeaders { get; }
 
         #endregion Public Properties
     }

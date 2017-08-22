@@ -24,8 +24,9 @@ namespace RestWell.Test.Integration.Client
 
         #endregion Public Constructors
 
-        private static IEnumerable<object[]> GetTestData(bool includeHeadRequest)
+        private static IEnumerable<object[]> GetGenericTestData(bool includeHeadRequest)
         {
+            var testData = new List<object[]>();
             var methods = new List<HttpRequestMethod> { HttpRequestMethod.Delete, HttpRequestMethod.Get, HttpRequestMethod.Options, HttpRequestMethod.Patch, HttpRequestMethod.Post, HttpRequestMethod.Put };
             if (includeHeadRequest)
             {
@@ -33,14 +34,13 @@ namespace RestWell.Test.Integration.Client
             }
 
             var accepts = new[] { "application/json", "application/xml" };
-            var booleans = new[] { true, false };
-            var testData = new List<object[]>();
+            var runAsyncBools = new[] { true, false };
 
             foreach (var method in methods)
             {
                 foreach (var accept in accepts)
                 {
-                    foreach (var boolean in booleans)
+                    foreach (var boolean in runAsyncBools)
                     {
                         testData.Add(new object[] { method, Guid.NewGuid().ToString(), accept, boolean });
                     }
@@ -60,21 +60,7 @@ namespace RestWell.Test.Integration.Client
         }
 
         [Theory]
-        [InlineData(HttpRequestMethod.None, "Test", "application/json")]
-        [InlineData(HttpRequestMethod.None, "Test", "application/xml")]
-        [InlineData(HttpRequestMethod.None, "Test", "application/json")]
-        [InlineData(HttpRequestMethod.None, "Test", "application/xml")]
-        public void CannotIssueBasicRequestWithUnrecognizedRequestType(HttpRequestMethod requestMethod, string message, string acceptHeaderValue)
-        {
-            this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
-
-            this.steps.WhenICreateAProxyRequestAsAnAction();
-
-            this.steps.ThenICanVerifyICannotIssueBasicRequestWithUnrecognizedRequestType();
-        }
-
-        [Theory]
-        [MemberData(nameof(GetTestData), true)]
+        [MemberData(nameof(GetGenericTestData), true)]
         public async Task CannotIssueBasicRequestForNonExistingResource(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
         {
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
@@ -89,7 +75,7 @@ namespace RestWell.Test.Integration.Client
         }
 
         [Theory]
-        [MemberData(nameof(GetTestData), true)]
+        [MemberData(nameof(GetGenericTestData), true)]
         public async Task CannotIssueBasicRequestDueToException(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
         {
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
@@ -104,7 +90,7 @@ namespace RestWell.Test.Integration.Client
         }
 
         [Theory]
-        [MemberData(nameof(GetTestData), true)]
+        [MemberData(nameof(GetGenericTestData), true)]
         public async Task CannotIssueSecureRequestDueNoAuthHeader(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
         {
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
@@ -119,7 +105,7 @@ namespace RestWell.Test.Integration.Client
         }
 
         [Theory]
-        [MemberData(nameof(GetTestData), true)]
+        [MemberData(nameof(GetGenericTestData), true)]
         public async Task CanIssueBasicRequest(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
         {
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
@@ -134,7 +120,24 @@ namespace RestWell.Test.Integration.Client
         }
 
         [Theory]
-        [MemberData(nameof(GetTestData), false)]
+        [MemberData(nameof(GetGenericTestData), true)]
+        public async Task CanIssueBasicRequestWithDefaultAcceptHeader(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
+        {
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
+            this.steps.GivenIHaveABasicRequestMessage(message);
+            this.steps.GivenIHaveABasicRequestProxyRequestWithNoAcceptHeader();
+            this.steps.GivenIHaveADefaultAcceptHeader(acceptHeaderValue);
+            this.steps.GivenIHaveAProxyConfiguration();
+            this.steps.GivenIHaveAProxy();
+
+            await this.steps.WhenIInvokeAsyncForBasicRequest(runAsync);
+
+            this.steps.ThenICanVerifyICanIssueBasicRequest();
+            this.steps.ThenICanVerifyICanIssueBasicRequestWithDefaultAcceptHeader();
+        }
+
+        [Theory]
+        [MemberData(nameof(GetGenericTestData), false)]
         public async Task CanIssueMessageDtoRequest(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
         {
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
@@ -149,7 +152,7 @@ namespace RestWell.Test.Integration.Client
         }
 
         [Theory]
-        [MemberData(nameof(GetTestData), true)]
+        [MemberData(nameof(GetGenericTestData), true)]
         public async Task CanIssueMessageDtoResponseRequest(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
         {
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
@@ -164,7 +167,7 @@ namespace RestWell.Test.Integration.Client
         }
 
         [Theory]
-        [MemberData(nameof(GetTestData), true)]
+        [MemberData(nameof(GetGenericTestData), true)]
         public async Task CanIssueSecureRequestUsingDelegatingHandler(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
         {
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
@@ -172,6 +175,23 @@ namespace RestWell.Test.Integration.Client
             this.steps.GivenIAccept(acceptHeaderValue);
             this.steps.GivenIHaveASecureRequestDelegatingHandler();
             this.steps.GivenIHaveASecureRequestProxyRequest();
+            this.steps.GivenIHaveAProxyConfiguration();
+            this.steps.GivenIHaveAProxy();
+
+            await this.steps.WhenIInvokeAsyncForSecureRequest(runAsync);
+
+            this.steps.ThenICanVerifyICanIssueSecureRequestUsingDelegatingHandler();
+        }
+
+        [Theory]
+        [MemberData(nameof(GetGenericTestData), true)]
+        public async Task CanIssueSecureRequestUsingDefaultAuthorizationHeader(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
+        {
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
+            this.steps.GivenIHaveABasicRequestMessage(message);
+            this.steps.GivenIAccept(acceptHeaderValue);
+            this.steps.GivenIHaveASecureRequestProxyRequest();
+            this.steps.GivenIHaveADefaultAuthorizationHeader();
             this.steps.GivenIHaveAProxyConfiguration();
             this.steps.GivenIHaveAProxy();
 
