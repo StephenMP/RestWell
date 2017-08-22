@@ -9,6 +9,19 @@ namespace RestWell.Test.Integration
     {
         #region Protected Methods
 
+        private readonly string scheme;
+        private readonly string token;
+
+        public SecureRequestDelegatingHandler(string scheme, string token)
+        {
+            this.scheme = scheme;
+            this.token = token;
+        }
+
+        public SecureRequestDelegatingHandler() : this("Basic", "Username:Password")
+        {
+        }
+
         protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic", "Username:Password");
