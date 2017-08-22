@@ -1,4 +1,5 @@
 using RestWell.Domain.Enums;
+using RestWell.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,27 +43,31 @@ namespace RestWell.Client.Request
         #region Private Fields
 
         private Uri baseUri;
-
-        private List<object> pathArguments;
-
+        private List<string> pathArguments;
         private IProxyRequest<TRequestDto, TResponseDto> proxyRequest;
-
-        private IDictionary<string, object> queryParameters;
+        private Dictionary<string, IList<string>> queryParameters;
+        private List<string> routeAppendages;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ProxyRequestBuilder(string baseUri) : this(new Uri(baseUri))
+        public ProxyRequestBuilder(string baseUri)
         {
+            if (baseUri.IsNullOrEmptyOrWhitespace())
+            {
+                throw new ArgumentException($"{nameof(baseUri)} must be a valid URI scheme (e.g. https://www.test.com/api");
+            }
+
+            this.baseUri = new Uri(baseUri);
+            this.proxyRequest = new ProxyRequest<TRequestDto, TResponseDto>();
+            this.routeAppendages = new List<string>();
+            this.pathArguments = new List<string>();
+            this.queryParameters = new Dictionary<string, IList<string>>();
         }
 
-        public ProxyRequestBuilder(Uri baseUri)
+        public ProxyRequestBuilder(Uri baseUri) : this(baseUri.ToString())
         {
-            this.baseUri = baseUri;
-            this.proxyRequest = new ProxyRequest<TRequestDto, TResponseDto>();
-            this.queryParameters = new Dictionary<string, object>();
-            this.pathArguments = new List<object>();
         }
 
         #endregion Public Constructors
@@ -73,104 +78,223 @@ namespace RestWell.Client.Request
 
         public static ProxyRequestBuilder<TRequestDto, TResponseDto> CreateBuilder(Uri baseUri) => new ProxyRequestBuilder<TRequestDto, TResponseDto>(baseUri);
 
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> Accept(params string[] values)
+        /// <summary>
+        /// Set/Modify the Accept Header
+        /// </summary>
+        /// <param name="mediaTypeValues">Accept header media type values (e.g. application/json)</param>
+        /// <returns>Reference to the current builder</returns>
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> Accept(params string[] mediaTypeValues)
         {
-            if (this.proxyRequest.Headers.ContainsKey("Accept"))
+            if (mediaTypeValues == null || mediaTypeValues.Length == 0)
             {
-                var acceptHeader = this.proxyRequest.Headers["Accept"].ToList();
-                acceptHeader.AddRange(values);
+                throw new ArgumentException($"{nameof(mediaTypeValues)} was null or empty. You must specify media type values when using {nameof(Accept)}.");
+            }
 
-                this.proxyRequest.Headers["Accept"] = acceptHeader;
+            return this.AddHeader("Accept", mediaTypeValues);
+        }
+
+        /// <summary>
+        /// Add/Modify a header on the request.
+        /// Note: This method does not restrict header modifications. Please ensure you follow proper standards.
+        /// </summary>
+        /// <param name="headerName">Name of the header to modify</param>
+        /// <param name="values">Values for the header</param>
+        /// <returns>Reference to the current builder</returns>
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AddHeader(string headerName, params string[] values)
+        {
+            if (headerName.IsNullOrEmptyOrWhitespace())
+            {
+                throw new ArgumentException($"{nameof(headerName)} was null or empty. You must specify a header name when using {nameof(AddHeader)}.");
+            }
+
+            if (values == null || values.Length == 0)
+            {
+                throw new ArgumentException($"{nameof(values)} was null or empty. You must specify header values when using {nameof(AddHeader)}");
+            }
+
+            if (this.proxyRequest.Headers.ContainsKey(headerName))
+            {
+                var header = this.proxyRequest.Headers[headerName].ToList();
+                header.AddRange(values);
+
+                this.proxyRequest.Headers[headerName] = header;
             }
             else
             {
-                this.proxyRequest.Headers.Add("Accept", values);
+                this.proxyRequest.Headers.Add(headerName, values);
             }
 
             return this;
         }
 
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AddHeader(string header, params string[] values)
+        /// <summary>
+        /// Appends path arguments onto the request (e.g. https://www.test.com/api/pathArg/pathArg)
+        /// </summary>
+        /// <param name="pathArguments">Must be an object with a valid ToString() which returns a value for the path argument.</param>
+        /// <returns>Reference to the current builder</returns>
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AddPathArguments(params object[] pathArguments)
         {
-            if (this.proxyRequest.Headers.ContainsKey(header))
+            if (pathArguments == null || pathArguments.Length == 0)
             {
-                var acceptHeader = this.proxyRequest.Headers[header].ToList();
-                acceptHeader.AddRange(values);
-
-                this.proxyRequest.Headers[header] = acceptHeader;
+                throw new ArgumentException($"{nameof(pathArguments)} was null or empty. You must specify path arguments when using {nameof(AddPathArguments)}");
             }
-            else
+
+            foreach (var argument in pathArguments)
             {
-                this.proxyRequest.Headers.Add(header, values);
+                this.pathArguments.Add(argument.ToString());
             }
 
             return this;
         }
 
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AddPathArguments(params object[] arguments)
+        /// <summary>
+        /// Adds query parameters to be appeneded to the request URI (e.g. https://www.test.com/api?queryParam=value).
+        /// </summary>
+        /// <param name="queryParam">Must match the query parameter name.</param>
+        /// <param name="value">Must have a valid ToString() which returns a value for the query parameter.</param>
+        /// <returns>Reference to the current builder</returns>
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AddQueryParameter(string queryParam, object value)
         {
-            this.pathArguments.AddRange(arguments);
+            if (queryParam.IsNullOrEmptyOrWhitespace())
+            {
+                throw new ArgumentException($"{nameof(queryParam)} was null or empty. You must specify the query parameter when using {nameof(AddQueryParameter)}");
+            }
+
+            if (value == null || value.ToString().IsNullOrEmptyOrWhitespace())
+            {
+                throw new ArgumentException($"{nameof(value)} was null or empty. You must specify the query parameter value when using {nameof(AddQueryParameter)}");
+            }
+
+            if (!queryParam.IsNullOrEmptyOrWhitespace() && value != null)
+            {
+                if (this.queryParameters.ContainsKey(queryParam))
+                {
+                    this.queryParameters[queryParam].Add(value.ToString());
+                }
+                else
+                {
+                    this.queryParameters.Add(queryParam, new List<string> { value.ToString() });
+                }
+
+                return this;
+            }
+
+            throw new ArgumentException("You must specify a query param and it's corresponding value!");
+        }
+
+        /// <summary>
+        /// Appends a value to the current route
+        /// </summary>
+        /// <param name="appendage">A value you wish to append (e.g. www.test.com/api/appendage)</param>
+        /// <returns>Reference to the current builder</returns>
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AppendToRoute(params string[] appendages)
+        {
+            if (appendages == null || appendages.Length == 0)
+            {
+                throw new ArgumentException($"{nameof(appendages)} was null or empty. You must specify the appendage when using {nameof(AppendToRoute)}");
+            }
+
+            this.routeAppendages.AddRange(appendages);
             return this;
         }
 
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AddQueryParameter(string parameter, object value)
-        {
-            this.queryParameters.Add(parameter, value);
-            return this;
-        }
-
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AppendToRoute(string appendage)
-        {
-            var baseUriString = this.baseUri.ToString();
-            var newBaseUriString = $"{baseUriString.TrimEnd('/')}/{appendage}";
-            this.baseUri = new Uri(newBaseUriString);
-
-            return this;
-        }
-
+        /// <summary>
+        /// Sets the request type to DELETE.
+        /// </summary>
+        /// <returns>Reference to the current builder</returns>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AsDeleteRequest()
         {
             return this.AsRequestType(HttpRequestMethod.Delete);
         }
 
+        /// <summary>
+        /// Sets the request type to GET.
+        /// </summary>
+        /// <returns>Reference to the current builder</returns>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AsGetRequest()
         {
             return this.AsRequestType(HttpRequestMethod.Get);
         }
 
+        /// <summary>
+        /// Sets the request type to HEAD.
+        /// </summary>
+        /// <returns>Reference to the current builder</returns>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AsHeadRequest()
         {
             return this.AsRequestType(HttpRequestMethod.Head);
         }
 
+        /// <summary>
+        /// Sets the request type to OPTIONS.
+        /// </summary>
+        /// <returns>Reference to the current builder</returns>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AsOptionsRequest()
         {
             return this.AsRequestType(HttpRequestMethod.Options);
         }
 
+        /// <summary>
+        /// Sets the request type to PATCH.
+        /// </summary>
+        /// <returns>Reference to the current builder</returns>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AsPatchRequest()
         {
             return this.AsRequestType(HttpRequestMethod.Patch);
         }
 
+        /// <summary>
+        /// Sets the request type to POST.
+        /// </summary>
+        /// <returns>Reference to the current builder</returns>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AsPostRequest()
         {
             return this.AsRequestType(HttpRequestMethod.Post);
         }
 
+        /// <summary>
+        /// Sets the request type to PUT.
+        /// </summary>
+        /// <returns>Reference to the current builder</returns>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AsPutRequest()
         {
             return this.AsRequestType(HttpRequestMethod.Put);
         }
 
+        /// <summary>
+        /// Sets the request type.
+        /// </summary>
+        /// <param name="requestMethod">Request method you wish to use</param>
+        /// <returns>Reference to the current builder</returns>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AsRequestType(HttpRequestMethod requestMethod)
         {
+            if (requestMethod == HttpRequestMethod.None)
+            {
+                throw new ArgumentException($"{nameof(requestMethod)} cannot be {HttpRequestMethod.None}. You must use a valid request type when using {nameof(AsRequestType)}");
+            }
+
             this.proxyRequest.HttpRequestMethod = requestMethod;
             return this;
         }
 
+        /// <summary>
+        /// Sets the authorization header of the request.
+        /// </summary>
+        /// <param name="scheme">The scheme you'd like to use (e.g. Bearer, Basic, etc.).</param>
+        /// <param name="token">The authorization token (e.g. an api key).</param>
+        /// <returns>Reference to the current builder</returns>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> Authorization(string scheme, string token)
         {
+            if (scheme.IsNullOrEmptyOrWhitespace())
+            {
+                throw new ArgumentException($"{nameof(scheme)} was null or empty. You must specify a scheme when using {nameof(Authorization)}");
+            }
+
+            if (token.IsNullOrEmptyOrWhitespace())
+            {
+                throw new ArgumentException($"{nameof(token)} was null or empty. You must specify a token when using {nameof(Authorization)}");
+            }
+
             if (this.proxyRequest.Headers.ContainsKey("Authorization"))
             {
                 this.proxyRequest.Headers["Authorization"] = new[] { $"{scheme} {token}" };
@@ -183,41 +307,90 @@ namespace RestWell.Client.Request
             return this;
         }
 
+        /// <summary>
+        /// Builds the proxy request.
+        /// </summary>
+        /// <returns>An IProxyRequest representing your request.</returns>
         public IProxyRequest<TRequestDto, TResponseDto> Build()
         {
-            var pathArgumentsBuilder = new StringBuilder();
-            var queryParametersBuilder = new StringBuilder();
-            var requestUri = this.baseUri.ToString();
+            var requestBuilder = new StringBuilder(this.baseUri.ToString().TrimEnd('/'));
+            requestBuilder = this.BuildAppendages(requestBuilder);
+            requestBuilder = this.BuildPathArguments(requestBuilder);
+            requestBuilder = this.BuildQueryParameters(requestBuilder);
 
-            if (this.pathArguments.Count > 0)
-            {
-                foreach (var pathArgument in this.pathArguments)
-                {
-                    pathArgumentsBuilder.Append($"{pathArgument}/");
-                }
-            }
-
-            if (this.queryParameters.Count > 0)
-            {
-                queryParametersBuilder.Append('?');
-
-                foreach (var queryParameter in this.queryParameters.Keys)
-                {
-                    queryParametersBuilder.Append($"{queryParameter}={this.queryParameters[queryParameter.ToString()]}&");
-                }
-            }
-
-            this.proxyRequest.RequestUri = new Uri($"{requestUri.TrimEnd('/')}/{pathArgumentsBuilder.ToString().TrimEnd('/')}{queryParametersBuilder.ToString().TrimEnd('&')}".TrimEnd('/'));
+            this.proxyRequest.RequestUri = new Uri(requestBuilder.ToString());
 
             return this.proxyRequest;
         }
 
+        private StringBuilder BuildAppendages(StringBuilder requestBuilder)
+        {
+            if (this.routeAppendages.Count > 0)
+            {
+                requestBuilder.Append("/");
+
+                foreach (var appendage in this.routeAppendages)
+                {
+                    requestBuilder.Append($"{appendage}/");
+                }
+            }
+
+            return new StringBuilder(requestBuilder.ToString().TrimEnd('/'));
+        }
+
+        /// <summary>
+        /// Sets the request body of the request.
+        /// </summary>
+        /// <param name="requestDto">A DTO which represents the request body</param>
+        /// <returns>Reference to the current builder</returns>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> SetRequestDto(TRequestDto requestDto)
         {
+            if (requestDto == null)
+            {
+                throw new ArgumentException($"{nameof(requestDto)} was null. You must specify a valud request DTO when using {nameof(SetRequestDto)}");
+            }
+
             this.proxyRequest.RequestDto = requestDto;
             return this;
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private StringBuilder BuildPathArguments(StringBuilder requestBuilder)
+        {
+            if (this.pathArguments.Count > 0)
+            {
+                requestBuilder.Append("/");
+
+                foreach (var pathArgument in this.pathArguments)
+                {
+                    requestBuilder.Append($"{pathArgument}/");
+                }
+            }
+
+            return new StringBuilder(requestBuilder.ToString().TrimEnd('/'));
+        }
+
+        private StringBuilder BuildQueryParameters(StringBuilder requestBuilder)
+        {
+            if (this.queryParameters.Count > 0)
+            {
+                requestBuilder.Append("?");
+
+                foreach (var queryParameter in this.queryParameters)
+                {
+                    foreach (var value in queryParameter.Value)
+                    {
+                        requestBuilder.Append($"{queryParameter.Key}={value}&");
+                    }
+                }
+            }
+
+            return new StringBuilder(requestBuilder.ToString().TrimEnd('&'));
+        }
+
+        #endregion Private Methods
     }
 }

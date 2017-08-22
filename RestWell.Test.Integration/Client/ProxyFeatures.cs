@@ -60,19 +60,15 @@ namespace RestWell.Test.Integration.Client
         }
 
         [Theory]
-        [InlineData(HttpRequestMethod.None, "Test", "application/json", true)]
-        [InlineData(HttpRequestMethod.None, "Test", "application/xml", true)]
-        [InlineData(HttpRequestMethod.None, "Test", "application/json", false)]
-        [InlineData(HttpRequestMethod.None, "Test", "application/xml", false)]
-        public async Task CannotIssueBasicRequestWithUnrecognizedRequestType(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
+        [InlineData(HttpRequestMethod.None, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.None, "Test", "application/xml")]
+        [InlineData(HttpRequestMethod.None, "Test", "application/json")]
+        [InlineData(HttpRequestMethod.None, "Test", "application/xml")]
+        public void CannotIssueBasicRequestWithUnrecognizedRequestType(HttpRequestMethod requestMethod, string message, string acceptHeaderValue)
         {
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
-            this.steps.GivenIHaveABasicRequestMessage(message);
-            this.steps.GivenIAccept(acceptHeaderValue);
-            this.steps.GivenIHaveABasicRequestProxyRequest();
-            this.steps.GivenIHaveAProxy();
 
-            await this.steps.WhenIInvokeAsyncForBasicRequest(runAsync);
+            this.steps.WhenICreateAProxyRequestAsAnAction();
 
             this.steps.ThenICanVerifyICannotIssueBasicRequestWithUnrecognizedRequestType();
         }
