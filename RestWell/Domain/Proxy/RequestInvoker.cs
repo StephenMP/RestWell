@@ -1,8 +1,9 @@
+using RestWell.Client;
+using RestWell.Client.Enums;
 using RestWell.Client.Request;
 using RestWell.Client.Response;
-using RestWell.Domain.Enums;
+using RestWell.Domain.Extensions;
 using RestWell.Domain.Factories;
-using RestWell.Extensions;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -23,7 +24,7 @@ namespace RestWell.Domain.Proxy
 
         public RequestInvoker(IProxyConfiguration proxyConfiguration)
         {
-            this.httpClient = HttpClientFactory.Create(proxyConfiguration);
+            this.httpClient = HttpClientFactory.Create(proxyConfiguration.DefaultProxyRequestHeaders, proxyConfiguration.DelegatingHandlers.Values);
         }
 
         #endregion Public Constructors

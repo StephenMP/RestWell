@@ -39,11 +39,25 @@ namespace RestWell.Client
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Invokes the ProxyRequest
+        /// </summary>
+        /// <typeparam name="TRequestDto"></typeparam>
+        /// <typeparam name="TResponseDto"></typeparam>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public IProxyResponse<TResponseDto> Invoke<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
         {
             return AsyncContext.Run(() => this.requestInvoker.InvokeAsync(request));
         }
 
+        /// <summary>
+        /// Invokes the ProxyRequest using the async framework
+        /// </summary>
+        /// <typeparam name="TRequestDto"></typeparam>
+        /// <typeparam name="TResponseDto"></typeparam>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
         {
             return await this.requestInvoker.InvokeAsync(request);

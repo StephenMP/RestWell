@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 
-namespace RestWell.Domain.Proxy
+namespace RestWell.Client
 {
     public interface IProxyConfiguration
     {

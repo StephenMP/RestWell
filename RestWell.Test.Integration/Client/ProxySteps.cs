@@ -1,8 +1,7 @@
 using RestWell.Client;
+using RestWell.Client.Enums;
 using RestWell.Client.Request;
 using RestWell.Client.Response;
-using RestWell.Domain.Enums;
-using RestWell.Domain.Proxy;
 using RestWell.Test.Resource.TestEnvironment.Environment;
 using RestWell.Test.Resource.WebApi.Controllers;
 using RestWell.Test.Resource.WebApi.Dtos;

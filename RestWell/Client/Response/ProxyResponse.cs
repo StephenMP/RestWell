@@ -1,4 +1,4 @@
-using RestWell.Domain.Enums;
+using RestWell.Client.Enums;
 using System;
 using System.Net;
 using System.Net.Http.Headers;

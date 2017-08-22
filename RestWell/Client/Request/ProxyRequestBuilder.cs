@@ -1,5 +1,5 @@
-using RestWell.Domain.Enums;
-using RestWell.Extensions;
+using RestWell.Client.Enums;
+using RestWell.Domain.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

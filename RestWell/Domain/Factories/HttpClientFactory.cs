@@ -1,4 +1,3 @@
-using RestWell.Domain.Proxy;
 using RestWell.Domain.Request;
 using System;
 using System.Collections.Generic;
@@ -7,15 +6,14 @@ using System.Net.Http;
 
 namespace RestWell.Domain.Factories
 {
-    public static class HttpClientFactory
+    internal static class HttpClientFactory
     {
         #region Public Methods
 
-        public static HttpClient Create(IProxyConfiguration proxyConfiguration)
+        public static HttpClient Create(DefaultProxyRequestHeaders defaultProxyRequestHeaders, IEnumerable<DelegatingHandler> delegatingHandlers)
         {
-            var delegatingHandlers = BuildDelegatingHandlers(proxyConfiguration.DelegatingHandlers);
-            var client = Create(new HttpClientHandler(), delegatingHandlers);
-            PopulateClientHeaders(client, proxyConfiguration.DefaultProxyRequestHeaders);
+            var client = Create(new HttpClientHandler(), delegatingHandlers.ToArray());
+            PopulateClientHeaders(client, defaultProxyRequestHeaders);
 
             return client;
         }
@@ -23,18 +21,6 @@ namespace RestWell.Domain.Factories
         #endregion Public Methods
 
         #region Private Methods
-
-        private static DelegatingHandler[] BuildDelegatingHandlers(IDictionary<Type, DelegatingHandler> delegatingHandlers)
-        {
-            var handlers = new List<DelegatingHandler>();
-
-            foreach (var delegatingHandler in delegatingHandlers.Values)
-            {
-                handlers.Add(delegatingHandler);
-            }
-
-            return handlers.ToArray();
-        }
 
         private static HttpClient Create(HttpMessageHandler innerHandler, params DelegatingHandler[] handlers)
         {

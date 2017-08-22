@@ -1,5 +1,5 @@
-﻿using RestWell.Client.Request;
-using RestWell.Domain.Enums;
+﻿using RestWell.Client.Enums;
+using RestWell.Client.Request;
 using Shouldly;
 using System;
 using System.Collections.Generic;

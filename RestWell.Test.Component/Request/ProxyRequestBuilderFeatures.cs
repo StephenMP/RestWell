@@ -1,4 +1,4 @@
-﻿using RestWell.Domain.Enums;
+﻿using RestWell.Client.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

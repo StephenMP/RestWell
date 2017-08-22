@@ -1,15 +1,16 @@
+using RestWell.Domain.Proxy;
 using RestWell.Domain.Request;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 
-namespace RestWell.Domain.Proxy
+namespace RestWell.Client
 {
     public class ProxyConfiguration : IProxyConfiguration
     {
         #region Public Constructors
 
-        public ProxyConfiguration()
+        internal ProxyConfiguration()
         {
             this.DelegatingHandlers = new Dictionary<Type, DelegatingHandler>();
             this.DefaultProxyRequestHeaders = new DefaultProxyRequestHeaders();
