@@ -54,7 +54,3 @@ If you'd like to contribute, please follow these simple rules
 I'll be honest with you all, I'm going to be Mr. Party Pooper when it comes to contributions. I want to ensure the project is kept clean, is well tested, and follows existing patterns and conventions to make it easier to pick it up and run with.
 
 Thanks and happy coding :)
-
-# Usage
-The best way to demonstrate the usage of RestWell is by example! That's why we've created an example project you can take a peek at:
-https://github.com/StephenMP/RestWell.ExampleProject
