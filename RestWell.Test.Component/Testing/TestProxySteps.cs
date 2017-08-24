@@ -72,6 +72,9 @@ namespace RestWell.Test.Component.Testing
             var response = this.proxyResponse as IProxyResponse<TResponseDto>;
             var returnedResponse = this.proxyReturnedResponse as IProxyResponse<TResponseDto>;
 
+            response.ShouldNotBeNull();
+            returnedResponse.ShouldNotBeNull();
+
             returnedResponse.StatusCode.ShouldBe(response.StatusCode);
             returnedResponse.IsSuccessfulStatusCode.ShouldBe(response.IsSuccessfulStatusCode);
             returnedResponse.ResponseMessage.ShouldBe(response.ResponseMessage);
@@ -93,25 +96,28 @@ namespace RestWell.Test.Component.Testing
 
         internal async Task WhenIInvokeTheMockedRequest<TRequestDto, TResponseDto>(bool runAsync) where TRequestDto : class where TResponseDto : class
         {
+            var request = this.proxyRequest as IProxyRequest<TRequestDto, TResponseDto>;
             if (runAsync)
             {
-                this.proxyReturnedResponse = await this.testProxy.InvokeAsync((IProxyRequest<TRequestDto, TResponseDto>)this.proxyRequest);
+                this.proxyReturnedResponse = await this.testProxy.InvokeAsync(request);
             }
             else
             {
-                this.proxyReturnedResponse = this.testProxy.Invoke((IProxyRequest<TRequestDto, TResponseDto>)this.proxyRequest);
+                this.proxyReturnedResponse = this.testProxy.Invoke(request);
             }
         }
 
         internal void WhenISetupMockedRequest<TRequestDto, TResponseDto>(bool returnOnAnyRequest) where TRequestDto : class where TResponseDto : class
         {
+            var response = this.proxyResponse as IProxyResponse<TResponseDto>;
             if (returnOnAnyRequest)
             {
-                this.testProxy.WhenIReceiveAnyRequest<TRequestDto, TResponseDto>().ThenIShouldReturnThisResponse((IProxyResponse<TResponseDto>)this.proxyResponse);
+                this.testProxy.WhenIReceiveAnyRequest<TRequestDto, TResponseDto>().ThenIShouldReturnThisResponse(response);
             }
             else
             {
-                this.testProxy.WhenIReceiveThisRequest((IProxyRequest<TRequestDto, TResponseDto>)this.proxyRequest).ThenIShouldReturnThisResponse((IProxyResponse<TResponseDto>)this.proxyResponse);
+                var request = this.proxyRequest as IProxyRequest<TRequestDto, TResponseDto>;
+                this.testProxy.WhenIReceiveThisRequest(request).ThenIShouldReturnThisResponse(response);
             }
         }
 

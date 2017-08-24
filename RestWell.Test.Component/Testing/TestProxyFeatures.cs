@@ -33,10 +33,9 @@ namespace RestWell.Test.Component.Testing
             var testData = new List<object[]>();
             var requestMethods = new[] { HttpRequestMethod.Delete, HttpRequestMethod.Get, HttpRequestMethod.Head, HttpRequestMethod.Options, HttpRequestMethod.Patch, HttpRequestMethod.Post, HttpRequestMethod.Put };
             var statusCodes = new[] { HttpStatusCode.Accepted, HttpStatusCode.OK, HttpStatusCode.Unauthorized, HttpStatusCode.InternalServerError };
-            var runAsyncBooleans = new[] { true, false };
             var random = new Random();
 
-            foreach (var runAsync in runAsyncBooleans)
+            foreach (var runAsync in new[] { true, false })
             {
                 for (int i = 0; i < 10; i++)
                 {
