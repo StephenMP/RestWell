@@ -6,8 +6,7 @@
 
 RestWell is a simple, easy to use, light weight .NET generic client which provides simple abstraction of the communication layer between your code and RESTful Web APIs. It is written in .NET Core 2.0 and was inspired by the RestSharp project; however, it is different in that it focuses solely on .NET clients and provides simple mechanisms for controlling your request pipeline. RestWell is distributed as a NuGet Package hosted in the Nuget Gallery here.
 
-**TL;DR**
-RestWell is:
+**Main Features**
  * Small
  * Lightweight
  * Rediculously easy to use
@@ -16,30 +15,7 @@ RestWell is:
  * Configurable
     * You can inject your own delegating handlers into the request pipeline giving you complete control over the flow of your request (e.g. use a delegating handler to obtain an authorization token prior to issuing a request)
 
-# Example
-The best way to demonstrate the usage of RestWell is by example! That's why we've created an example project you can take a peek at:
-https://github.com/StephenMP/RestWell.ExampleProject
-
-# Documentation
-Please refer to our [Wiki](https://github.com/StephenMP/RestWell/wiki) for more detailed documentation.
-
-# Contributing
-To contribute as a user, please feel free to [Submit an Issue](https://github.com/StephenMP/RestWell/issues) if you have encountered any bugs, unexpected bahaviors, or simply have an idea to improve RestWell.
-
-If you'd like to contribute as a developer, please follow these simple rules
-
-1. Either
-    * Submit a new issue outlining what you are going to work on
-    * Pick an existing issue to work on
-1. Clone the repository
-1. Create a branch with the following format: `YourGitHubName/IssueNumber` (e.g. `StephenMP/703`)
-1. Make your code changes
-1. Ensure all added code is covered by tests (I will scrutinize this like a crazy mad man)
-    * Please ensure that you are following the testing pattern. Please reference existing tests to get an idea of the pattern.
-1. When committing changes, please follow the commit message format `git commit -m "IssueNumber : Commit Message"` (e.g. `git commit -m "703 : Added tests around Proxy"`)
-1. Push your branch up
-1. Submit a Pull Request into master from your branch
-
-I'll be honest with you all, I'm going to be Mr. Party Pooper when it comes to contributions. I want to ensure the project is kept clean, is well tested, and follows existing patterns and conventions to make it easier to pick it up and run with.
-
-Thanks and happy coding :)
+**Useful Links**
+* [Example](https://github.com/StephenMP/RestWell.ExampleProject)
+* [Documentation](https://github.com/StephenMP/RestWell/wiki)
+* [Contributing](https://github.com/StephenMP/RestWell/blob/master/CONTRIBUTING.md)
