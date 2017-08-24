@@ -59,6 +59,11 @@ namespace RestWell.Client.Request
                 throw new ArgumentException($"{nameof(baseUri)} must be a valid URI scheme (e.g. https://www.test.com/api");
             }
 
+            if (requestMethod == HttpRequestMethod.None)
+            {
+                throw new ArgumentException($"{nameof(requestMethod)} cannot be {HttpRequestMethod.None}. You must use a valid request type when using AsRequestType");
+            }
+
             this.baseUri = new Uri(baseUri);
             this.proxyRequest = new ProxyRequest<TRequestDto, TResponseDto>();
             this.proxyRequest.HttpRequestMethod = requestMethod;

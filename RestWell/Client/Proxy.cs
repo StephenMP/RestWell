@@ -1,8 +1,13 @@
 using Nito.AsyncEx;
+using RestWell.Client.Enums;
 using RestWell.Client.Request;
 using RestWell.Client.Response;
+using RestWell.Domain.Extensions;
+using RestWell.Domain.Factories;
 using RestWell.Domain.Proxy;
 using System;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace RestWell.Client
@@ -11,8 +16,7 @@ namespace RestWell.Client
     {
         #region Private Fields
 
-        private readonly RequestInvoker requestInvoker;
-
+        private readonly HttpClient httpClient;
         private bool disposedValue;
 
         #endregion Private Fields
@@ -26,7 +30,7 @@ namespace RestWell.Client
         public Proxy(IProxyConfiguration proxyConfiguration)
         {
             proxyConfiguration = proxyConfiguration ?? new ProxyConfiguration();
-            this.requestInvoker = new RequestInvoker(proxyConfiguration);
+            this.httpClient = HttpClientFactory.Create(proxyConfiguration.DefaultProxyRequestHeaders, proxyConfiguration.DelegatingHandlers.Values);
         }
 
         #endregion Public Constructors
@@ -40,27 +44,31 @@ namespace RestWell.Client
         }
 
         /// <summary>
-        /// Invokes the ProxyRequest
+        /// Invokes the specified request.
         /// </summary>
-        /// <typeparam name="TRequestDto"></typeparam>
-        /// <typeparam name="TResponseDto"></typeparam>
-        /// <param name="request"></param>
-        /// <returns></returns>
+        /// <typeparam name="TRequestDto">The type of the request dto.</typeparam>
+        /// <typeparam name="TResponseDto">The type of the response dto.</typeparam>
+        /// <param name="request">The request.</param>
+        /// <returns>
+        /// A ProxyResonse containing request response information
+        /// </returns>
         public IProxyResponse<TResponseDto> Invoke<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
         {
-            return AsyncContext.Run(() => this.requestInvoker.InvokeAsync(request));
+            return AsyncContext.Run(() => this.InvokeRequestAsync(request));
         }
 
         /// <summary>
-        /// Invokes the ProxyRequest using the async framework
+        /// Invokes the specified request using the asynchronous framework.
         /// </summary>
-        /// <typeparam name="TRequestDto"></typeparam>
-        /// <typeparam name="TResponseDto"></typeparam>
-        /// <param name="request"></param>
-        /// <returns></returns>
+        /// <typeparam name="TRequestDto">The type of the request dto.</typeparam>
+        /// <typeparam name="TResponseDto">The type of the response dto.</typeparam>
+        /// <param name="request">The request.</param>
+        /// <returns>
+        /// A ProxyResonse containing request response information
+        /// </returns>
         public async Task<IProxyResponse<TResponseDto>> InvokeAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
         {
-            return await this.requestInvoker.InvokeAsync(request);
+            return await this.InvokeRequestAsync(request);
         }
 
         #endregion Public Methods
@@ -73,10 +81,35 @@ namespace RestWell.Client
             {
                 if (disposing)
                 {
-                    this.requestInvoker?.Dispose();
+                    this.httpClient?.Dispose();
                 }
 
                 disposedValue = true;
+            }
+        }
+
+        private async Task<IProxyResponse<TResponseDto>> InvokeRequestAsync<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
+        {
+            if (request.HttpRequestMethod == HttpRequestMethod.None)
+            {
+                return new ProxyResponse<TResponseDto>
+                {
+                    IsSuccessfulStatusCode = false,
+                    StatusCode = HttpStatusCode.MethodNotAllowed,
+                    ResponseMessage = $"Unrecognized request type. Supported types are DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT."
+                };
+            }
+
+            try
+            {
+                using (var response = await this.httpClient.InvokeAsync(request))
+                {
+                    return await ProxyResponseFactory.CreateAsync<TResponseDto>(response);
+                }
+            }
+            catch (Exception e)
+            {
+                return await ProxyResponseFactory.CreateAsync<TResponseDto>(e);
             }
         }
 
