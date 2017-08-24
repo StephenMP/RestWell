@@ -76,13 +76,16 @@ namespace RestWell.Testing
         /// <returns></returns>
         public TestProxyRequest<TRequestDto, TResponseDto> WhenIReceiveAnyRequest<TRequestDto, TResponseDto>()
         {
-            var request = ProxyRequestBuilder<TRequestDto, TResponseDto>.CreateBuilder("https://www.any.test", HttpRequestMethod.None).Build();
-            var mockedRequest = new TestProxyRequest<TRequestDto, TResponseDto>(request);
+            if (this.genericAnyRequest == null)
+            {
+                var request = ProxyRequestBuilder<TRequestDto, TResponseDto>.CreateBuilder("https://www.any.test", HttpRequestMethod.Get).Build();
+                var mockedRequest = new TestProxyRequest<TRequestDto, TResponseDto>(request);
 
-            this.mockedRequests.Add(request, mockedRequest);
-            this.genericAnyRequest = request;
+                this.genericAnyRequest = request;
+                this.mockedRequests.Add(this.genericAnyRequest, mockedRequest);
+            }
 
-            return mockedRequest;
+            return this.mockedRequests[this.genericAnyRequest] as TestProxyRequest<TRequestDto, TResponseDto>;
         }
 
         /// <summary>
