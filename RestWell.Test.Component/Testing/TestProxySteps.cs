@@ -7,25 +7,26 @@ using Shouldly;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace RestWell.Test.Component.Proxy
+namespace RestWell.Test.Component.Testing
 {
     internal class TestProxySteps
     {
+        #region Private Fields
+
         private string baseUri;
         private HttpRequestMethod httpRequestMethod;
         private object proxyRequest;
         private object proxyResponse;
-        private TestProxy testProxy;
         private object proxyReturnedResponse;
+        private TestProxy testProxy;
+
+        #endregion Private Fields
+
+        #region Internal Methods
 
         internal void GivenIHaveABaseUri(string baseUri)
         {
             this.baseUri = baseUri;
-        }
-
-        internal void GivenIHaveARequestTypeOf(HttpRequestMethod httpRequestMethod)
-        {
-            this.httpRequestMethod = httpRequestMethod;
         }
 
         internal void GivenIHaveAProxyRequest<TRequestDto, TResponseDto>(string nonce) where TRequestDto : class where TResponseDto : class
@@ -39,6 +40,31 @@ namespace RestWell.Test.Component.Proxy
             }
 
             this.proxyRequest = proxyRequestBuilder.Build();
+        }
+
+        internal void GivenIHaveAProxyResponse<TResponseDto>(HttpStatusCode httpStatusCode, bool isSuccessfulStatusCode, string nonce) where TResponseDto : class
+        {
+            this.proxyResponse = new ProxyResponse<TResponseDto>
+            {
+                StatusCode = httpStatusCode,
+                IsSuccessfulStatusCode = isSuccessfulStatusCode,
+                ResponseMessage = nonce
+            };
+
+            if (typeof(TResponseDto) == typeof(TestResponseDto))
+            {
+                ((ProxyResponse<TestResponseDto>)this.proxyResponse).ResponseDto = new TestResponseDto { Message = nonce };
+            }
+        }
+
+        internal void GivenIHaveARequestTypeOf(HttpRequestMethod httpRequestMethod)
+        {
+            this.httpRequestMethod = httpRequestMethod;
+        }
+
+        internal void GivenIHaveATestProxy()
+        {
+            this.testProxy = new TestProxy();
         }
 
         internal void ThenICanVerifyICanMockRequest<TResponseDto>() where TResponseDto : class
@@ -71,7 +97,6 @@ namespace RestWell.Test.Component.Proxy
             {
                 this.proxyReturnedResponse = await this.testProxy.InvokeAsync((IProxyRequest<TRequestDto, TResponseDto>)this.proxyRequest);
             }
-
             else
             {
                 this.proxyReturnedResponse = this.testProxy.Invoke((IProxyRequest<TRequestDto, TResponseDto>)this.proxyRequest);
@@ -84,31 +109,12 @@ namespace RestWell.Test.Component.Proxy
             {
                 this.testProxy.WhenIReceiveAnyRequest<TRequestDto, TResponseDto>().ThenIShouldReturnThisResponse((IProxyResponse<TResponseDto>)this.proxyResponse);
             }
-
             else
             {
                 this.testProxy.WhenIReceiveThisRequest((IProxyRequest<TRequestDto, TResponseDto>)this.proxyRequest).ThenIShouldReturnThisResponse((IProxyResponse<TResponseDto>)this.proxyResponse);
             }
         }
 
-        internal void GivenIHaveATestProxy()
-        {
-            this.testProxy = new TestProxy();
-        }
-
-        internal void GivenIHaveAProxyResponse<TResponseDto>(HttpStatusCode httpStatusCode, bool isSuccessfulStatusCode, string nonce) where TResponseDto : class
-        {
-            this.proxyResponse = new ProxyResponse<TResponseDto>
-            {
-                StatusCode = httpStatusCode,
-                IsSuccessfulStatusCode = isSuccessfulStatusCode,
-                ResponseMessage = nonce
-            };
-
-            if (typeof(TResponseDto) == typeof(TestResponseDto))
-            {
-                ((ProxyResponse<TestResponseDto>)this.proxyResponse).ResponseDto = new TestResponseDto { Message = nonce };
-            }
-        }
+        #endregion Internal Methods
     }
 }

@@ -1,4 +1,3 @@
-using RestWell.Domain.Proxy;
 using RestWell.Domain.Request;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ namespace RestWell.Client
 {
     public class ProxyConfiguration : IProxyConfiguration
     {
-        #region Public Constructors
+        #region Internal Constructors
 
         internal ProxyConfiguration()
         {
@@ -16,11 +15,21 @@ namespace RestWell.Client
             this.DefaultProxyRequestHeaders = new DefaultProxyRequestHeaders();
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 
+        /// <summary>
+        /// The default proxy request headers used on every request. Note this can be overriden by
+        /// the Headers on IProxyRequest
+        /// </summary>
+        /// <value>The default proxy request headers.</value>
         public DefaultProxyRequestHeaders DefaultProxyRequestHeaders { get; set; }
+
+        /// <summary>
+        /// The delegating handlers to be injected into the request pipeline.
+        /// </summary>
+        /// <value>The delegating handlers.</value>
         public IDictionary<Type, DelegatingHandler> DelegatingHandlers { get; set; }
 
         #endregion Public Properties

@@ -9,7 +9,6 @@ namespace RestWell.Client
     {
         #region Public Methods
 
-
         /// <summary>
         /// Invokes the specified request.
         /// </summary>
@@ -18,7 +17,6 @@ namespace RestWell.Client
         /// <param name="request">The request.</param>
         /// <returns>A ProxyResonse containing request response information</returns>
         IProxyResponse<TResponseDto> Invoke<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class;
-
 
         /// <summary>
         /// Invokes the specified request using the asynchronous framework.

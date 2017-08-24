@@ -7,16 +7,26 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RestWell.Test.Component.Proxy
+namespace RestWell.Test.Component.Testing
 {
     public class TestProxyFeatures
     {
+        #region Private Fields
+
         private TestProxySteps steps;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public TestProxyFeatures()
         {
             this.steps = new TestProxySteps();
         }
+
+        #endregion Public Constructors
+
+        #region Public Methods
 
         public static IEnumerable<object[]> GetTestData()
         {
@@ -45,7 +55,24 @@ namespace RestWell.Test.Component.Proxy
 
         [Theory]
         [MemberData(nameof(GetTestData))]
-        public async Task CanMockRequestWithNoRequestDtoAndNoResponseDto(string baseUri, HttpRequestMethod httpRequestMethod, HttpStatusCode httpStatusCode, bool isSuccessfulStatusCode, string nonce, bool runAsync)
+        public async Task CanMockRequestWithAnyRequestAndAResponseDto(string baseUri, HttpRequestMethod httpRequestMethod, HttpStatusCode httpStatusCode, bool isSuccessfulStatusCode, string nonce, bool runAsync)
+        {
+            this.steps.GivenIHaveABaseUri(baseUri);
+            this.steps.GivenIHaveARequestTypeOf(httpRequestMethod);
+            this.steps.GivenIHaveAProxyRequest<Missing, TestResponseDto>(nonce);
+            this.steps.GivenIHaveAProxyResponse<TestResponseDto>(httpStatusCode, isSuccessfulStatusCode, nonce);
+            this.steps.GivenIHaveATestProxy();
+
+            this.steps.WhenISetupMockedRequest<Missing, TestResponseDto>(true);
+            await this.steps.WhenIInvokeTheMockedRequest<Missing, TestResponseDto>(runAsync);
+
+            this.steps.ThenICanVerifyIGotAResponse();
+            this.steps.ThenICanVerifyICanMockRequest<TestResponseDto>();
+        }
+
+        [Theory]
+        [MemberData(nameof(GetTestData))]
+        public async Task CanMockRequestWithAnyRequestAndNoResponseDto(string baseUri, HttpRequestMethod httpRequestMethod, HttpStatusCode httpStatusCode, bool isSuccessfulStatusCode, string nonce, bool runAsync)
         {
             this.steps.GivenIHaveABaseUri(baseUri);
             this.steps.GivenIHaveARequestTypeOf(httpRequestMethod);
@@ -53,7 +80,7 @@ namespace RestWell.Test.Component.Proxy
             this.steps.GivenIHaveAProxyResponse<Missing>(httpStatusCode, isSuccessfulStatusCode, nonce);
             this.steps.GivenIHaveATestProxy();
 
-            this.steps.WhenISetupMockedRequest<Missing, Missing>(false);
+            this.steps.WhenISetupMockedRequest<Missing, Missing>(true);
             await this.steps.WhenIInvokeTheMockedRequest<Missing, Missing>(runAsync);
 
             this.steps.ThenICanVerifyIGotAResponse();
@@ -75,6 +102,23 @@ namespace RestWell.Test.Component.Proxy
 
             this.steps.ThenICanVerifyIGotAResponse();
             this.steps.ThenICanVerifyICanMockRequest<TestResponseDto>();
+        }
+
+        [Theory]
+        [MemberData(nameof(GetTestData))]
+        public async Task CanMockRequestWithNoRequestDtoAndNoResponseDto(string baseUri, HttpRequestMethod httpRequestMethod, HttpStatusCode httpStatusCode, bool isSuccessfulStatusCode, string nonce, bool runAsync)
+        {
+            this.steps.GivenIHaveABaseUri(baseUri);
+            this.steps.GivenIHaveARequestTypeOf(httpRequestMethod);
+            this.steps.GivenIHaveAProxyRequest<Missing, Missing>(nonce);
+            this.steps.GivenIHaveAProxyResponse<Missing>(httpStatusCode, isSuccessfulStatusCode, nonce);
+            this.steps.GivenIHaveATestProxy();
+
+            this.steps.WhenISetupMockedRequest<Missing, Missing>(false);
+            await this.steps.WhenIInvokeTheMockedRequest<Missing, Missing>(runAsync);
+
+            this.steps.ThenICanVerifyIGotAResponse();
+            this.steps.ThenICanVerifyICanMockRequest<Missing>();
         }
 
         [Theory]
@@ -111,38 +155,6 @@ namespace RestWell.Test.Component.Proxy
             this.steps.ThenICanVerifyICanMockRequest<Missing>();
         }
 
-        [Theory]
-        [MemberData(nameof(GetTestData))]
-        public async Task CanMockRequestWithAnyRequestAndNoResponseDto(string baseUri, HttpRequestMethod httpRequestMethod, HttpStatusCode httpStatusCode, bool isSuccessfulStatusCode, string nonce, bool runAsync)
-        {
-            this.steps.GivenIHaveABaseUri(baseUri);
-            this.steps.GivenIHaveARequestTypeOf(httpRequestMethod);
-            this.steps.GivenIHaveAProxyRequest<Missing, Missing>(nonce);
-            this.steps.GivenIHaveAProxyResponse<Missing>(httpStatusCode, isSuccessfulStatusCode, nonce);
-            this.steps.GivenIHaveATestProxy();
-
-            this.steps.WhenISetupMockedRequest<Missing, Missing>(true);
-            await this.steps.WhenIInvokeTheMockedRequest<Missing, Missing>(runAsync);
-
-            this.steps.ThenICanVerifyIGotAResponse();
-            this.steps.ThenICanVerifyICanMockRequest<Missing>();
-        }
-
-        [Theory]
-        [MemberData(nameof(GetTestData))]
-        public async Task CanMockRequestWithAnyRequestAndAResponseDto(string baseUri, HttpRequestMethod httpRequestMethod, HttpStatusCode httpStatusCode, bool isSuccessfulStatusCode, string nonce, bool runAsync)
-        {
-            this.steps.GivenIHaveABaseUri(baseUri);
-            this.steps.GivenIHaveARequestTypeOf(httpRequestMethod);
-            this.steps.GivenIHaveAProxyRequest<Missing, TestResponseDto>(nonce);
-            this.steps.GivenIHaveAProxyResponse<TestResponseDto>(httpStatusCode, isSuccessfulStatusCode, nonce);
-            this.steps.GivenIHaveATestProxy();
-
-            this.steps.WhenISetupMockedRequest<Missing, TestResponseDto>(true);
-            await this.steps.WhenIInvokeTheMockedRequest<Missing, TestResponseDto>(runAsync);
-
-            this.steps.ThenICanVerifyIGotAResponse();
-            this.steps.ThenICanVerifyICanMockRequest<TestResponseDto>();
-        }
+        #endregion Public Methods
     }
 }

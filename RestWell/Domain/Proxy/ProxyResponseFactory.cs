@@ -15,7 +15,7 @@ namespace RestWell.Domain.Proxy
 {
     internal static class ProxyResponseFactory
     {
-        #region Internal Methods
+        #region Public Methods
 
         public static async Task<IProxyResponse<TResponseDto>> CreateAsync<TResponseDto>(HttpResponseMessage httpResponseMessage) where TResponseDto : class
         {
@@ -74,6 +74,6 @@ namespace RestWell.Domain.Proxy
             return await Task.FromResult(restfulProxyResponse);
         }
 
-        #endregion Internal Methods
+        #endregion Public Methods
     }
 }

@@ -88,7 +88,9 @@ namespace RestWell.Client.Request
         /// Set/Modify the Accept Header
         /// </summary>
         /// <param name="mediaTypeValues">Accept header media type values (e.g. application/json)</param>
+        /// <param name="mediaTypeValues">The media type values.</param>
         /// <returns>Reference to the current builder</returns>
+        /// <exception cref="ArgumentException">mediaTypeValues</exception>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> Accept(params string[] mediaTypeValues)
         {
             if (mediaTypeValues == null || mediaTypeValues.Length == 0)
@@ -106,6 +108,7 @@ namespace RestWell.Client.Request
         /// <param name="headerName">Name of the header to modify</param>
         /// <param name="values">Values for the header</param>
         /// <returns>Reference to the current builder</returns>
+        /// <exception cref="ArgumentException">headerName or values</exception>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AddHeader(string headerName, params string[] values)
         {
             if (headerName.IsNullOrEmptyOrWhitespace())
@@ -140,6 +143,7 @@ namespace RestWell.Client.Request
         /// Must be an object with a valid ToString() which returns a value for the path argument.
         /// </param>
         /// <returns>Reference to the current builder</returns>
+        /// <exception cref="ArgumentException">pathArguments</exception>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AddPathArguments(params object[] pathArguments)
         {
             if (pathArguments == null || pathArguments.Length == 0)
@@ -163,6 +167,7 @@ namespace RestWell.Client.Request
         /// Must have a valid ToString() which returns a value for the query parameter.
         /// </param>
         /// <returns>Reference to the current builder</returns>
+        /// <exception cref="ArgumentException">queryParam or value</exception>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AddQueryParameter(string queryParam, object value)
         {
             if (queryParam.IsNullOrEmptyOrWhitespace())
@@ -197,6 +202,7 @@ namespace RestWell.Client.Request
         /// </summary>
         /// <param name="appendage">A value you wish to append (e.g. www.test.com/api/appendage)</param>
         /// <returns>Reference to the current builder</returns>
+        /// <exception cref="ArgumentException">appendages</exception>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> AppendToRoute(params string[] appendages)
         {
             if (appendages == null || appendages.Length == 0)
@@ -214,6 +220,7 @@ namespace RestWell.Client.Request
         /// <param name="scheme">The scheme you'd like to use (e.g. Bearer, Basic, etc.).</param>
         /// <param name="token">The authorization token (e.g. an api key).</param>
         /// <returns>Reference to the current builder</returns>
+        /// <exception cref="ArgumentException">scheme or token</exception>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> Authorization(string scheme, string token)
         {
             if (scheme.IsNullOrEmptyOrWhitespace())
@@ -259,6 +266,7 @@ namespace RestWell.Client.Request
         /// </summary>
         /// <param name="requestDto">A DTO which represents the request body</param>
         /// <returns>Reference to the current builder</returns>
+        /// <exception cref="ArgumentException">requestDto</exception>
         public ProxyRequestBuilder<TRequestDto, TResponseDto> SetRequestDto(TRequestDto requestDto)
         {
             if (requestDto == null)
