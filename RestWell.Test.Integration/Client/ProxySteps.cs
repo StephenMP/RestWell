@@ -2,7 +2,6 @@ using RestWell.Client;
 using RestWell.Client.Enums;
 using RestWell.Client.Request;
 using RestWell.Client.Response;
-using RestWell.Test.Resource.TestEnvironment.Environment;
 using RestWell.Test.Resource.WebApi.Controllers;
 using RestWell.Test.Resource.WebApi.Dtos;
 using Shouldly;
@@ -14,6 +13,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading.Tasks;
+using TestWell.Environment;
 
 namespace RestWell.Test.Integration.Client
 {
@@ -39,13 +39,13 @@ namespace RestWell.Test.Integration.Client
         private IProxyConfiguration proxyConfiguration;
         private IProxyRequest<Missing, MessageResponseDto> secureRequestProxyRequest;
         private IProxyResponse<MessageResponseDto> secureRequestProxyResponse;
-        private TestEnvironment testEnvironment;
+        private TestWellEnvironment testEnvironment;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public ProxySteps(TestEnvironment testEnvironment)
+        public ProxySteps(TestWellEnvironment testEnvironment)
         {
             this.delegatingHandlers = new Dictionary<Type, DelegatingHandler>();
             this.testEnvironment = testEnvironment;

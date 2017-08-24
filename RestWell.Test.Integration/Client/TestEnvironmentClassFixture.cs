@@ -1,5 +1,5 @@
-﻿using RestWell.Test.Resource.TestEnvironment.Environment;
-using System;
+﻿using System;
+using TestWell.Environment;
 
 namespace RestWell.Test.Integration.Client
 {
@@ -15,16 +15,16 @@ namespace RestWell.Test.Integration.Client
 
         public TestEnvironmentClassFixture()
         {
-            this.TestEnvironment = TestEnvironmentBuilder.CreateBuilder()
-                                                                .AddResourceWebApi<TStartup>()
-                                                                .BuildEnvironment();
+            this.TestEnvironment = new TestWellEnvironmentBuilder()
+                                        .AddResourceWebService<TStartup>()
+                                        .BuildEnvironment();
         }
 
         #endregion Public Constructors
 
         #region Public Properties
 
-        public TestEnvironment TestEnvironment { get; }
+        public TestWellEnvironment TestEnvironment { get; }
 
         #endregion Public Properties
 
