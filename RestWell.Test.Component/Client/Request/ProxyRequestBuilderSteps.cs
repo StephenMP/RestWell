@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace RestWell.Test.Component.Request
+namespace RestWell.Test.Component.Client.Testing
 {
     internal class ProxyRequestBuilderSteps
     {

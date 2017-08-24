@@ -1,13 +1,13 @@
 ﻿using RestWell.Client.Enums;
 using RestWell.Client.Request;
 using RestWell.Client.Response;
+using RestWell.Client.Testing;
 using RestWell.Test.Component.TestingResource;
-using RestWell.Testing;
 using Shouldly;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace RestWell.Test.Component.Testing
+namespace RestWell.Test.Component.Client.Testing
 {
     internal class TestProxySteps
     {

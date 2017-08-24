@@ -1,11 +1,10 @@
-﻿using RestWell.Client;
-using RestWell.Client.Enums;
+﻿using RestWell.Client.Enums;
 using RestWell.Client.Request;
 using RestWell.Client.Response;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace RestWell.Testing
+namespace RestWell.Client.Testing
 {
     public class TestProxy : IProxy
     {

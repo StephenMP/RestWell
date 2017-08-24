@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RestWell.Test.Component.Testing
+namespace RestWell.Test.Component.Client.Testing
 {
     public class TestProxyFeatures
     {

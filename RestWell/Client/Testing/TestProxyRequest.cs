@@ -1,7 +1,7 @@
 ﻿using RestWell.Client.Request;
 using RestWell.Client.Response;
 
-namespace RestWell.Testing
+namespace RestWell.Client.Testing
 {
     public sealed class TestProxyRequest<TRequestDto, TResponseDto>
     {

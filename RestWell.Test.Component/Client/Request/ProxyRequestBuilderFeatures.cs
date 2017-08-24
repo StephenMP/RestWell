@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace RestWell.Test.Component.Request
+namespace RestWell.Test.Component.Client.Testing
 {
     public class ProxyRequestBuilderFeatures
     {
