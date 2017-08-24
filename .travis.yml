@@ -6,7 +6,7 @@ dotnet: 2.0.0
 install:
   - dotnet restore
 script:
-  - dotnet test RestWell.Test.Component/RestWell.Test.Component.csproj		 +  - dotnet test
+  - dotnet test RestWell.Test.Component/RestWell.Test.Component.csproj
   - dotnet test RestWell.Test.Integration/RestWell.Test.Integration.csproj
 notifications:
   email: false
