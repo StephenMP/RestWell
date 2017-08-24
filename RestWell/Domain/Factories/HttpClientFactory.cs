@@ -1,4 +1,3 @@
-using RestWell.Domain.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +9,9 @@ namespace RestWell.Domain.Factories
     {
         #region Public Methods
 
-        public static HttpClient Create(DefaultProxyRequestHeaders defaultProxyRequestHeaders, IEnumerable<DelegatingHandler> delegatingHandlers)
+        public static HttpClient Create(IEnumerable<DelegatingHandler> delegatingHandlers)
         {
             var client = Create(new HttpClientHandler(), delegatingHandlers.ToArray());
-            PopulateClientHeaders(client, defaultProxyRequestHeaders);
-
             return client;
         }
 
@@ -59,30 +56,6 @@ namespace RestWell.Domain.Factories
             }
 
             return pipeline;
-        }
-
-        private static void PopulateClientHeaders(HttpClient client, DefaultProxyRequestHeaders defaultProxyRequestHeaders)
-        {
-            if (defaultProxyRequestHeaders.Authorization != null)
-            {
-                client.DefaultRequestHeaders.Authorization = defaultProxyRequestHeaders.Authorization;
-            }
-
-            if (defaultProxyRequestHeaders.Accept != null)
-            {
-                foreach (var mediaTypeHeader in defaultProxyRequestHeaders.Accept)
-                {
-                    client.DefaultRequestHeaders.Accept.Add(mediaTypeHeader);
-                }
-            }
-
-            if (defaultProxyRequestHeaders.AdditionalHeaders.Any())
-            {
-                foreach (var additionalHeader in defaultProxyRequestHeaders.AdditionalHeaders)
-                {
-                    client.DefaultRequestHeaders.Add(additionalHeader.Key, additionalHeader.Value);
-                }
-            }
         }
 
         #endregion Private Methods
