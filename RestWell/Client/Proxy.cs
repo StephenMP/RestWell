@@ -17,6 +17,7 @@ namespace RestWell.Client
         #region Private Fields
 
         private readonly HttpClient httpClient;
+        private readonly IProxyConfiguration proxyConfiguration;
         private bool disposedValue;
 
         #endregion Private Fields
@@ -29,8 +30,8 @@ namespace RestWell.Client
 
         public Proxy(IProxyConfiguration proxyConfiguration)
         {
-            proxyConfiguration = proxyConfiguration ?? new ProxyConfiguration();
-            this.httpClient = HttpClientFactory.Create(proxyConfiguration.DefaultProxyRequestHeaders, proxyConfiguration.DelegatingHandlers.Values);
+            this.proxyConfiguration = proxyConfiguration ?? new ProxyConfiguration();
+            this.httpClient = HttpClientFactory.Create(proxyConfiguration.DelegatingHandlers.Values);
         }
 
         #endregion Public Constructors
@@ -98,7 +99,7 @@ namespace RestWell.Client
 
             try
             {
-                using (var response = await this.httpClient.InvokeAsync(request))
+                using (var response = await this.httpClient.InvokeAsync(this.proxyConfiguration.DefaultProxyRequestHeaders, request))
                 {
                     return await ProxyResponseFactory.CreateAsync<TResponseDto>(response);
                 }
