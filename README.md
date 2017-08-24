@@ -1,12 +1,13 @@
-# RestWell
+# Overview
 ![logo](./Logo.png)
 
 [![Build Status](https://travis-ci.org/StephenMP/RestWell.svg?branch=master)](https://travis-ci.org/StephenMP/RestWell) [![NuGet](https://img.shields.io/nuget/v/RestWell.svg)](https://www.nuget.org/packages/RestWell/)
 [![NuGet downloads](https://img.shields.io/nuget/dt/RestWell.svg)](https://badge.fury.io/nu/RestWell) [![license](https://img.shields.io/github/license/StephenMP/RestWell.svg)]()
 
-RestWell is a simple, easy to use, light weight .NET generic client which provides simple abstraction of the communication layer between your code and RESTful Web APIs. It is written in .NET Core 2.0 and was inspired by the RestSharp project; however, it is different in that it focuses solely on .NET clients and provides simple mechanisms for controlling your request pipeline.
+RestWell is a simple, easy to use, light weight .NET generic client which provides simple abstraction of the communication layer between your code and RESTful Web APIs. It is written in .NET Core 2.0 and was inspired by the RestSharp project; however, it is different in that it focuses solely on .NET clients and provides simple mechanisms for controlling your request pipeline. RestWell is distributed as a NuGet Package hosted in the Nuget Gallery here.
 
-# Main Features
+**TL;DR**
+RestWell is:
  * Small
  * Lightweight
  * Rediculously easy to use
@@ -15,29 +16,17 @@ RestWell is a simple, easy to use, light weight .NET generic client which provid
  * Configurable
     * You can inject your own delegating handlers into the request pipeline giving you complete control over the flow of your request (e.g. use a delegating handler to obtain an authorization token prior to issuing a request)
 
-# 5 Minute Example
+# Example
 The best way to demonstrate the usage of RestWell is by example! That's why we've created an example project you can take a peek at:
 https://github.com/StephenMP/RestWell.ExampleProject
 
 # Documentation
 Please refer to our [Wiki](https://github.com/StephenMP/RestWell/wiki) for more detailed documentation.
 
-# Install
-RestWell is distributed as a NuGet Package hosted in the [Nuget Gallery here](https://www.nuget.org/packages/RestWell).
-
-Add RestWell to your project:
-**Nuget Package Manager:**
-```
-PM> Install-Package RestWell
-```
-
-**.NET Core CLI:**
-```
-> dotnet add package RestWell
-```
-
 # Contributing
-If you'd like to contribute, please follow these simple rules
+To contribute as a user, please feel free to [Submit an Issue](https://github.com/StephenMP/RestWell/issues) if you have encountered any bugs, unexpected bahaviors, or simply have an idea to improve RestWell.
+
+If you'd like to contribute as a developer, please follow these simple rules
 
 1. Either
     * Submit a new issue outlining what you are going to work on
