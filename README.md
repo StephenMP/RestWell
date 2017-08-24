@@ -6,8 +6,7 @@
 
 RestWell is a simple, easy to use, light weight .NET generic client which provides simple abstraction of the communication layer between your code and RESTful Web APIs. It is written in .NET Core 2.0 and was inspired by the RestSharp project; however, it is different in that it focuses solely on .NET clients and provides simple mechanisms for controlling your request pipeline. RestWell is distributed as a NuGet Package hosted in the Nuget Gallery here.
 
-**TL;DR**
-RestWell is:
+**Main Features**
  * Small
  * Lightweight
  * Rediculously easy to use
@@ -16,12 +15,7 @@ RestWell is:
  * Configurable
     * You can inject your own delegating handlers into the request pipeline giving you complete control over the flow of your request (e.g. use a delegating handler to obtain an authorization token prior to issuing a request)
 
-# Example
-The best way to demonstrate the usage of RestWell is by example! That's why we've created an example project you can take a peek at:
-https://github.com/StephenMP/RestWell.ExampleProject
-
-# Documentation
-Please refer to our [Wiki](https://github.com/StephenMP/RestWell/wiki) for more detailed documentation.
-
-# Contributing
-Please reference [CONTRIBUTING.md](https://github.com/StephenMP/RestWell/blob/master/CONTRIBUTING.md) for the contribution guidelines.
+**Useful Links**
+* [Example](https://github.com/StephenMP/RestWell.ExampleProject)
+* [Documentation](https://github.com/StephenMP/RestWell/wiki)
+* [Contributing](https://github.com/StephenMP/RestWell/blob/master/CONTRIBUTING.md)
