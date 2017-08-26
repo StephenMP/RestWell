@@ -1,6 +1,7 @@
 ﻿using RestWell.Client.Enums;
 using RestWell.Client.Request;
 using RestWell.Client.Response;
+using RestWell.Domain.Testing;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

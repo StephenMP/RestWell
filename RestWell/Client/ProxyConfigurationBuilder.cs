@@ -1,4 +1,4 @@
-using RestWell.Domain.Handler;
+using RestWell.Domain.Request;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -28,6 +28,16 @@ namespace RestWell.Client
         public static ProxyConfigurationBuilder CreateBuilder() => new ProxyConfigurationBuilder();
 
         /// <summary>
+        /// Inserts a delegate into the request pipeline to be executed prior to sending the request.
+        /// </summary>
+        /// <param name="actionBeforeSendingRequest">The action before sending request.</param>
+        /// <returns></returns>
+        public ProxyConfigurationBuilder AddDelegatingAction(Action<HttpRequestMessage, CancellationToken> actionBeforeSendingRequest)
+        {
+            return this.AddDelegatingHandlers(new DelegatingAction(actionBeforeSendingRequest));
+        }
+
+        /// <summary>
         /// Insert a delegating handler into the request pipeline.
         /// </summary>
         /// <param name="delegatingHandlers"></param>
@@ -43,16 +53,6 @@ namespace RestWell.Client
             }
 
             return this;
-        }
-
-        /// <summary>
-        /// Inserts a delegate into the request pipeline to be executed prior to sending the request.
-        /// </summary>
-        /// <param name="actionBeforeSendingRequest">The action before sending request.</param>
-        /// <returns></returns>
-        public ProxyConfigurationBuilder AddDelegatingAction(Action<HttpRequestMessage, CancellationToken> actionBeforeSendingRequest)
-        {
-            return this.AddDelegatingHandlers(new LambdaDelegatingHandler(actionBeforeSendingRequest));
         }
 
         /// <summary>

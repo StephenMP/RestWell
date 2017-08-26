@@ -28,6 +28,7 @@ namespace RestWell.Test.Integration.Client
         private IProxyResponse<string> basicRequestProxyResponse;
         private MediaTypeWithQualityHeaderValue defaultAcceptHeader;
         private AuthenticationHeaderValue defaultAuthorizationHeader;
+        private Action<HttpRequestMessage, CancellationToken> delegatingAction;
         private Dictionary<Type, DelegatingHandler> delegatingHandlers;
         private bool disposedValue;
         private HttpRequestMethod httpRequestMethod;
@@ -41,7 +42,6 @@ namespace RestWell.Test.Integration.Client
         private IProxyRequest<Missing, MessageResponseDto> secureRequestProxyRequest;
         private IProxyResponse<MessageResponseDto> secureRequestProxyResponse;
         private TestWellEnvironment testEnvironment;
-        private Action<HttpRequestMessage, CancellationToken> delegatingAction;
 
         #endregion Private Fields
 
@@ -121,11 +121,6 @@ namespace RestWell.Test.Integration.Client
                                                 .Build();
         }
 
-        internal void GivenIHaveASecureRequestDelegatingAction()
-        {
-            this.delegatingAction = new Action<HttpRequestMessage, CancellationToken>((request, cancellationToken) => request.Headers.Authorization = new AuthenticationHeaderValue("Basic", "Username:Password"));
-        }
-
         internal void GivenIHaveADefaultAcceptHeader(string mediaType)
         {
             this.defaultAcceptHeader = new MediaTypeWithQualityHeaderValue(mediaType);
@@ -192,6 +187,11 @@ namespace RestWell.Test.Integration.Client
             }
 
             this.proxyConfiguration = proxyConfigurationBuilder.Build();
+        }
+
+        internal void GivenIHaveASecureRequestDelegatingAction()
+        {
+            this.delegatingAction = new Action<HttpRequestMessage, CancellationToken>((request, cancellationToken) => request.Headers.Authorization = new AuthenticationHeaderValue("Basic", "Username:Password"));
         }
 
         internal void GivenIHaveASecureRequestDelegatingHandler()

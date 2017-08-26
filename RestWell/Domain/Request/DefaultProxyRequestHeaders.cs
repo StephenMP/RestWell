@@ -5,15 +5,15 @@ namespace RestWell.Domain.Request
 {
     public sealed class DefaultProxyRequestHeaders
     {
-        #region Internal Constructors
+        #region Public Constructors
 
-        internal DefaultProxyRequestHeaders()
+        public DefaultProxyRequestHeaders()
         {
             this.Accept = new List<MediaTypeWithQualityHeaderValue>();
             this.AdditionalHeaders = new Dictionary<string, IList<string>>();
         }
 
-        #endregion Internal Constructors
+        #endregion Public Constructors
 
         #region Public Properties
 
