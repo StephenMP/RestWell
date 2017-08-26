@@ -12,6 +12,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using TestWell.Environment;
 
@@ -40,6 +41,7 @@ namespace RestWell.Test.Integration.Client
         private IProxyRequest<Missing, MessageResponseDto> secureRequestProxyRequest;
         private IProxyResponse<MessageResponseDto> secureRequestProxyResponse;
         private TestWellEnvironment testEnvironment;
+        private Action<HttpRequestMessage, CancellationToken> delegatingAction;
 
         #endregion Private Fields
 
@@ -119,6 +121,11 @@ namespace RestWell.Test.Integration.Client
                                                 .Build();
         }
 
+        internal void GivenIHaveASecureRequestDelegatingAction()
+        {
+            this.delegatingAction = new Action<HttpRequestMessage, CancellationToken>((request, cancellationToken) => request.Headers.Authorization = new AuthenticationHeaderValue("Basic", "Username:Password"));
+        }
+
         internal void GivenIHaveADefaultAcceptHeader(string mediaType)
         {
             this.defaultAcceptHeader = new MediaTypeWithQualityHeaderValue(mediaType);
@@ -160,20 +167,6 @@ namespace RestWell.Test.Integration.Client
             this.proxy = new Proxy(this.proxyConfiguration);
         }
 
-        internal void GivenIHaveAProxyConfigurationUsingASecureLambdaDelegatingHandler()
-        {
-            var proxyConfigurationBuilder = ProxyConfigurationBuilder.CreateBuilder();
-
-            if (this.defaultAcceptHeader != null)
-            {
-                proxyConfigurationBuilder.UseDefaultAcceptHeader(this.defaultAcceptHeader);
-            }
-
-            proxyConfigurationBuilder.AddDelegatingAction((request, cancellationToken) => request.Headers.Authorization = new AuthenticationHeaderValue("Basic", "Username:Password"));
-
-            this.proxyConfiguration = proxyConfigurationBuilder.Build();
-        }
-
         internal void GivenIHaveAProxyConfiguration()
         {
             var proxyConfigurationBuilder = ProxyConfigurationBuilder.CreateBuilder();
@@ -191,6 +184,11 @@ namespace RestWell.Test.Integration.Client
             if (this.defaultAcceptHeader != null)
             {
                 proxyConfigurationBuilder.UseDefaultAcceptHeader(this.defaultAcceptHeader);
+            }
+
+            if (this.delegatingAction != null)
+            {
+                proxyConfigurationBuilder.AddDelegatingAction(this.delegatingAction);
             }
 
             this.proxyConfiguration = proxyConfigurationBuilder.Build();
