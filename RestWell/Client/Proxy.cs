@@ -4,7 +4,6 @@ using RestWell.Client.Request;
 using RestWell.Client.Response;
 using RestWell.Domain.Extensions;
 using RestWell.Domain.Factories;
-using RestWell.Domain.Proxy;
 using System;
 using System.Net;
 using System.Net.Http;

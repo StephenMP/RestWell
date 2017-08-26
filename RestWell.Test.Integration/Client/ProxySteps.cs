@@ -12,6 +12,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using TestWell.Environment;
 
@@ -27,6 +28,7 @@ namespace RestWell.Test.Integration.Client
         private IProxyResponse<string> basicRequestProxyResponse;
         private MediaTypeWithQualityHeaderValue defaultAcceptHeader;
         private AuthenticationHeaderValue defaultAuthorizationHeader;
+        private Action<HttpRequestMessage, CancellationToken> delegatingAction;
         private Dictionary<Type, DelegatingHandler> delegatingHandlers;
         private bool disposedValue;
         private HttpRequestMethod httpRequestMethod;
@@ -179,7 +181,17 @@ namespace RestWell.Test.Integration.Client
                 proxyConfigurationBuilder.UseDefaultAcceptHeader(this.defaultAcceptHeader);
             }
 
+            if (this.delegatingAction != null)
+            {
+                proxyConfigurationBuilder.AddDelegatingAction(this.delegatingAction);
+            }
+
             this.proxyConfiguration = proxyConfigurationBuilder.Build();
+        }
+
+        internal void GivenIHaveASecureRequestDelegatingAction()
+        {
+            this.delegatingAction = new Action<HttpRequestMessage, CancellationToken>((request, cancellationToken) => request.Headers.Authorization = new AuthenticationHeaderValue("Basic", "Username:Password"));
         }
 
         internal void GivenIHaveASecureRequestDelegatingHandler()

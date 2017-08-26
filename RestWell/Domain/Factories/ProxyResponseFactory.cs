@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace RestWell.Domain.Proxy
+namespace RestWell.Domain.Factories
 {
     internal static class ProxyResponseFactory
     {

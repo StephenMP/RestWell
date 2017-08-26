@@ -117,6 +117,23 @@ namespace RestWell.Test.Integration.Client
 
         [Theory]
         [MemberData(nameof(GetGenericTestData), true)]
+        public async Task CanIssueSecureRequestsUsingDelegatingAction(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
+        {
+            this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
+            this.steps.GivenIHaveABasicRequestMessage(message);
+            this.steps.GivenIAccept(acceptHeaderValue);
+            this.steps.GivenIHaveASecureRequestDelegatingAction();
+            this.steps.GivenIHaveASecureRequestProxyRequest();
+            this.steps.GivenIHaveAProxyConfiguration();
+            this.steps.GivenIHaveAProxy();
+
+            await this.steps.WhenIInvokeAsyncForSecureRequest(runAsync);
+
+            this.steps.ThenICanVerifyICanIssueSecureRequestUsingDelegatingHandler();
+        }
+
+        [Theory]
+        [MemberData(nameof(GetGenericTestData), true)]
         public async Task CanIssueSecureRequestUsingDefaultAuthorizationHeader(HttpRequestMethod requestMethod, string message, string acceptHeaderValue, bool runAsync)
         {
             this.steps.GivenIAmUsingTheHttpRequestMethodOf(requestMethod);
