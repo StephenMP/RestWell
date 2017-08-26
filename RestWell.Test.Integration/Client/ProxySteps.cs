@@ -160,6 +160,20 @@ namespace RestWell.Test.Integration.Client
             this.proxy = new Proxy(this.proxyConfiguration);
         }
 
+        internal void GivenIHaveAProxyConfigurationUsingASecureLambdaDelegatingHandler()
+        {
+            var proxyConfigurationBuilder = ProxyConfigurationBuilder.CreateBuilder();
+
+            if (this.defaultAcceptHeader != null)
+            {
+                proxyConfigurationBuilder.UseDefaultAcceptHeader(this.defaultAcceptHeader);
+            }
+
+            proxyConfigurationBuilder.AddDelegatingAction((request, cancellationToken) => request.Headers.Authorization = new AuthenticationHeaderValue("Basic", "Username:Password"));
+
+            this.proxyConfiguration = proxyConfigurationBuilder.Build();
+        }
+
         internal void GivenIHaveAProxyConfiguration()
         {
             var proxyConfigurationBuilder = ProxyConfigurationBuilder.CreateBuilder();
