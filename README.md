@@ -13,7 +13,6 @@ RestWell is a simple, easy to use, light weight .NET generic client which provid
  * Mockable (easy to test)
  * Injectable (we all love dependendency injection)
  * Configurable
-    * You can inject your own delegating handlers into the request pipeline giving you complete control over the flow of your request (e.g. use a delegating handler to obtain an authorization token prior to issuing a request)
 
 **Useful Links**
 * [Introduction](https://github.com/StephenMP/RestWell.Examples/tree/master/Introduction)
