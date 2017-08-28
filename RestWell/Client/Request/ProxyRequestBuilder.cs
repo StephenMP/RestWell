@@ -62,11 +62,11 @@ namespace RestWell.Client.Request
             }
 
             this.baseUri = new Uri(baseUri);
-            this.routeAppendages = new List<string>();
+            this.headers = new Dictionary<string, List<string>>();
             this.pathArguments = new List<string>();
             this.queryParameters = new Dictionary<string, List<object>>();
             this.requestMethod = requestMethod;
-            this.headers = new Dictionary<string, List<string>>();
+            this.routeAppendages = new List<string>();
         }
 
         public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : this(baseUri.ToString(), requestMethod) { }
