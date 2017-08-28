@@ -11,7 +11,7 @@ If you'd like to contribute as a developer, please follow these simple rules
 1. Make your code changes
 1. Ensure all added code is covered by tests (I will scrutinize this like a crazy mad man)
     * Please ensure that you are following the testing pattern. Please reference existing tests to get an idea of the pattern.
-1. When committing changes, please follow the commit message format `git commit -m "IssueNumber : Commit Message"` (e.g. `git commit -m "703 : Added tests around Proxy"`)
+1. When committing changes, please follow the commit message format `git commit -m "#IssueNumber : Commit Message"` (e.g. `git commit -m "#703 : Added tests around Proxy"`)
 1. Push your branch up
 1. Submit a Pull Request into master from your branch
 
