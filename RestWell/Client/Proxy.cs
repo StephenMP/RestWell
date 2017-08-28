@@ -105,7 +105,7 @@ namespace RestWell.Client
             }
             catch (Exception e)
             {
-                return await ProxyResponseFactory.CreateAsync<TResponseDto>(e);
+                return ProxyResponseFactory.Create<TResponseDto>(e);
             }
         }
 

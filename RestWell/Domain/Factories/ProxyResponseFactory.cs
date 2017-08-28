@@ -62,7 +62,7 @@ namespace RestWell.Domain.Factories
             return restfulProxyResponse;
         }
 
-        public static async Task<IProxyResponse<TResponseDto>> CreateAsync<TResponseDto>(Exception e)
+        public static IProxyResponse<TResponseDto> Create<TResponseDto>(Exception e)
         {
             var restfulProxyResponse = new ProxyResponse<TResponseDto>
             {
@@ -71,7 +71,7 @@ namespace RestWell.Domain.Factories
                 ResponseMessage = e.Message
             };
 
-            return await Task.FromResult(restfulProxyResponse);
+            return restfulProxyResponse;
         }
 
         #endregion Public Methods
