@@ -17,9 +17,9 @@ namespace RestWell.Domain.Extensions
 
         public static async Task<HttpResponseMessage> InvokeAsync<TRequestDto, TResponseDto>(this HttpClient client, DefaultProxyRequestHeaders defaultProxyRequestHeaders, IProxyRequest<TRequestDto, TResponseDto> request)
         {
-            client.ClearCurrentHeaders();
-            client.PopulateDefaultRequestHeaders(defaultProxyRequestHeaders);
-            client.AddRequestHeaders(request.Headers);
+            client.ClearCurrentHeaders()
+                  .PopulateDefaultRequestHeaders(defaultProxyRequestHeaders)
+                  .AddRequestHeaders(request.Headers);
 
             if (request.RequestDto == null)
             {
@@ -33,7 +33,7 @@ namespace RestWell.Domain.Extensions
 
         #region Private Methods
 
-        private static void AddRequestHeaders(this HttpClient client, IDictionary<string, IEnumerable<string>> requestHeaders)
+        private static HttpClient AddRequestHeaders(this HttpClient client, IDictionary<string, IEnumerable<string>> requestHeaders)
         {
             foreach (var requestHeader in requestHeaders)
             {
@@ -44,29 +44,32 @@ namespace RestWell.Domain.Extensions
 
                 client.DefaultRequestHeaders.Add(requestHeader.Key, requestHeader.Value);
             }
+
+            return client;
         }
 
-        private static void ClearCurrentHeaders(this HttpClient client)
+        private static HttpClient ClearCurrentHeaders(this HttpClient client)
         {
             client.DefaultRequestHeaders.Clear();
+            return client;
         }
 
         private static async Task<HttpResponseMessage> InvokeAsJsonAsync<T>(this HttpClient client, Uri requestUri, HttpRequestMethod httpRequestMethod, T value)
         {
             var jsonContent = JsonConvert.SerializeObject(value);
             var stringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(new HttpMethod(httpRequestMethod.ToString()), requestUri) { Content = stringContent };
 
-            var request = new HttpRequestMessage(new HttpMethod(httpRequestMethod.ToString().ToUpper()), requestUri) { Content = stringContent };
             return await client.SendAsync(request);
         }
 
         private static async Task<HttpResponseMessage> InvokeAsync(this HttpClient client, Uri requestUri, HttpRequestMethod httpRequestMethod)
         {
-            var request = new HttpRequestMessage(new HttpMethod(httpRequestMethod.ToString().ToUpper()), requestUri);
+            var request = new HttpRequestMessage(new HttpMethod(httpRequestMethod.ToString()), requestUri);
             return await client.SendAsync(request);
         }
 
-        private static void PopulateDefaultRequestHeaders(this HttpClient client, DefaultProxyRequestHeaders defaultProxyRequestHeaders)
+        private static HttpClient PopulateDefaultRequestHeaders(this HttpClient client, DefaultProxyRequestHeaders defaultProxyRequestHeaders)
         {
             if (defaultProxyRequestHeaders.Authorization != null)
             {
@@ -88,6 +91,8 @@ namespace RestWell.Domain.Extensions
                     client.DefaultRequestHeaders.Add(additionalHeader.Key, additionalHeader.Value);
                 }
             }
+
+            return client;
         }
 
         #endregion Private Methods

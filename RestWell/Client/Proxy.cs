@@ -30,7 +30,7 @@ namespace RestWell.Client
         public Proxy(IProxyConfiguration proxyConfiguration)
         {
             this.proxyConfiguration = proxyConfiguration ?? new ProxyConfiguration();
-            this.httpClient = HttpClientFactory.Create(this.proxyConfiguration.DelegatingHandlers.Values);
+            this.httpClient = ProxyClientFactory.Create(this.proxyConfiguration.DelegatingHandlers.Values);
         }
 
         #endregion Public Constructors

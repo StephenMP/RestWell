@@ -5,14 +5,13 @@ using System.Net.Http;
 
 namespace RestWell.Domain.Factories
 {
-    internal static class HttpClientFactory
+    internal static class ProxyClientFactory
     {
         #region Public Methods
 
         public static HttpClient Create(IEnumerable<DelegatingHandler> delegatingHandlers)
         {
-            var client = Create(new HttpClientHandler(), delegatingHandlers.ToArray());
-            return client;
+            return Create(new HttpClientHandler(), delegatingHandlers.ToArray());
         }
 
         #endregion Public Methods

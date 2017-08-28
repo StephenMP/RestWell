@@ -1,4 +1,3 @@
-using RestWell.Domain.Extensions;
 using RestWell.Domain.Request;
 using System;
 using System.Net.Http;
@@ -35,11 +34,6 @@ namespace RestWell.Client
         /// <returns></returns>
         public ProxyConfigurationBuilder AddDelegatingAction(Action<HttpRequestMessage, CancellationToken> actionBeforeSendingRequest)
         {
-            if (actionBeforeSendingRequest == null)
-            {
-                throw new ArgumentException($"{nameof(actionBeforeSendingRequest)} was null. This value cannot be null when using {nameof(AddDelegatingAction)}");
-            }
-
             return this.AddDelegatingHandlers(new DelegatingAction(actionBeforeSendingRequest));
         }
 
@@ -50,11 +44,6 @@ namespace RestWell.Client
         /// <returns>A reference to this ProxyConfigurationBuilder</returns>
         public ProxyConfigurationBuilder AddDelegatingHandlers(params DelegatingHandler[] delegatingHandlers)
         {
-            if (delegatingHandlers == null || delegatingHandlers.Length == 0)
-            {
-                throw new ArgumentException($"{nameof(delegatingHandlers)} was null or empty. This value cannot be null or empty when using {nameof(AddDelegatingHandlers)}");
-            }
-
             foreach (var delegatingHandler in delegatingHandlers)
             {
                 if (!this.proxyConfiguration.DelegatingHandlers.ContainsKey(delegatingHandler.GetType()))
@@ -82,11 +71,6 @@ namespace RestWell.Client
         /// <returns>A reference to this ProxyConfigurationBuilder</returns>
         public ProxyConfigurationBuilder UseDefaultAcceptHeader(MediaTypeWithQualityHeaderValue mediaType)
         {
-            if (mediaType == null)
-            {
-                throw new ArgumentException($"{nameof(mediaType)} was null. This value cannot be null when using {nameof(UseDefaultAcceptHeader)}");
-            }
-
             this.proxyConfiguration.DefaultProxyRequestHeaders.Accept.Add(mediaType);
             return this;
         }
@@ -98,11 +82,6 @@ namespace RestWell.Client
         /// <returns>A reference to this ProxyConfigurationBuilder</returns>
         public ProxyConfigurationBuilder UseDefaultAuthorizationHeader(AuthenticationHeaderValue authenticationHeaderValue)
         {
-            if (authenticationHeaderValue == null)
-            {
-                throw new ArgumentException($"{nameof(authenticationHeaderValue)} was null. This value cannot be null when using {nameof(UseDefaultAuthorizationHeader)}");
-            }
-
             this.proxyConfiguration.DefaultProxyRequestHeaders.Authorization = authenticationHeaderValue;
             return this;
         }
@@ -115,16 +94,6 @@ namespace RestWell.Client
         /// <returns>A reference to this ProxyConfigurationBuilder</returns>
         public ProxyConfigurationBuilder UseDefaultHeader(string header, params string[] values)
         {
-            if (header.IsNullOrEmptyOrWhitespace())
-            {
-                throw new ArgumentException($"{nameof(header)} was null or empty. This value cannot be null or empty when using {nameof(UseDefaultHeader)}");
-            }
-
-            if (values == null || values.Length == 0)
-            {
-                throw new ArgumentException($"{nameof(values)} was null or empty. This value cannot be null or empty when using {nameof(UseDefaultHeader)}");
-            }
-
             this.proxyConfiguration.DefaultProxyRequestHeaders.AdditionalHeaders.Add(header, values);
             return this;
         }
