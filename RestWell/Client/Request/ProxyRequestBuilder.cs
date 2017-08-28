@@ -10,43 +10,40 @@ namespace RestWell.Client.Request
 {
     public class ProxyRequestBuilder : ProxyRequestBuilder<Missing, Missing>
     {
+
         #region Public Constructors
 
-        public ProxyRequestBuilder(string baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod)
-        {
-        }
-
-        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod)
-        {
-        }
+        public ProxyRequestBuilder(string baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod) { }
+        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod) { }
 
         #endregion Public Constructors
+
     }
 
     public class ProxyRequestBuilder<TResponseDto> : ProxyRequestBuilder<Missing, TResponseDto>
     {
+
         #region Public Constructors
 
-        public ProxyRequestBuilder(string baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod)
-        {
-        }
-
-        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod)
-        {
-        }
+        public ProxyRequestBuilder(string baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod) { }
+        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod) { }
 
         #endregion Public Constructors
+
     }
 
     public class ProxyRequestBuilder<TRequestDto, TResponseDto>
     {
+
         #region Private Fields
 
-        private Uri baseUri;
-        private List<string> pathArguments;
-        private IProxyRequest<TRequestDto, TResponseDto> proxyRequest;
-        private Dictionary<string, IList<string>> queryParameters;
-        private List<string> routeAppendages;
+        private readonly Uri baseUri;
+        private readonly Dictionary<string, List<string>> headers;
+        private readonly List<string> pathArguments;
+        private readonly Dictionary<string, List<object>> queryParameters;
+        private readonly HttpRequestMethod requestMethod;
+        private readonly List<string> routeAppendages;
+        private TRequestDto requestDto;
 
         #endregion Private Fields
 
@@ -65,16 +62,14 @@ namespace RestWell.Client.Request
             }
 
             this.baseUri = new Uri(baseUri);
-            this.proxyRequest = new ProxyRequest<TRequestDto, TResponseDto>();
-            this.proxyRequest.HttpRequestMethod = requestMethod;
-            this.routeAppendages = new List<string>();
+            this.headers = new Dictionary<string, List<string>>();
             this.pathArguments = new List<string>();
-            this.queryParameters = new Dictionary<string, IList<string>>();
+            this.queryParameters = new Dictionary<string, List<object>>();
+            this.requestMethod = requestMethod;
+            this.routeAppendages = new List<string>();
         }
 
-        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : this(baseUri.ToString(), requestMethod)
-        {
-        }
+        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : this(baseUri.ToString(), requestMethod) { }
 
         #endregion Public Constructors
 
@@ -121,17 +116,12 @@ namespace RestWell.Client.Request
                 throw new ArgumentException($"{nameof(values)} was null or empty. You must specify header values when using {nameof(AddHeader)}");
             }
 
-            if (this.proxyRequest.Headers.ContainsKey(headerName))
+            if (!this.headers.ContainsKey(headerName))
             {
-                var header = this.proxyRequest.Headers[headerName].ToList();
-                header.AddRange(values);
+                this.headers.Add(headerName, new List<string>());
+            }
 
-                this.proxyRequest.Headers[headerName] = header;
-            }
-            else
-            {
-                this.proxyRequest.Headers.Add(headerName, values);
-            }
+            this.headers[headerName].AddRange(values);
 
             return this;
         }
@@ -168,33 +158,26 @@ namespace RestWell.Client.Request
         /// </param>
         /// <returns>Reference to the current builder</returns>
         /// <exception cref="ArgumentException">queryParam or value</exception>
-        public ProxyRequestBuilder<TRequestDto, TResponseDto> AddQueryParameter(string queryParam, object value)
+        public ProxyRequestBuilder<TRequestDto, TResponseDto> AddQueryParameter(string queryParam, params object[] values)
         {
             if (queryParam.IsNullOrEmptyOrWhitespace())
             {
                 throw new ArgumentException($"{nameof(queryParam)} was null or empty. You must specify the query parameter when using {nameof(AddQueryParameter)}");
             }
 
-            if (value == null || value.ToString().IsNullOrEmptyOrWhitespace())
+            if (values == null || values.Length == 0)
             {
-                throw new ArgumentException($"{nameof(value)} was null or empty. You must specify the query parameter value when using {nameof(AddQueryParameter)}");
+                throw new ArgumentException($"{nameof(values)} was null or empty. You must specify the query parameter value when using {nameof(AddQueryParameter)}");
             }
 
-            if (!queryParam.IsNullOrEmptyOrWhitespace() && value != null)
+            if (!this.queryParameters.ContainsKey(queryParam))
             {
-                if (this.queryParameters.ContainsKey(queryParam))
-                {
-                    this.queryParameters[queryParam].Add(value.ToString());
-                }
-                else
-                {
-                    this.queryParameters.Add(queryParam, new List<string> { value.ToString() });
-                }
-
-                return this;
+                this.queryParameters.Add(queryParam, new List<object>());
             }
 
-            throw new ArgumentException("You must specify a query param and it's corresponding value!");
+            this.queryParameters[queryParam].AddRange(values);
+
+            return this;
         }
 
         /// <summary>
@@ -211,6 +194,7 @@ namespace RestWell.Client.Request
             }
 
             this.routeAppendages.AddRange(appendages);
+
             return this;
         }
 
@@ -233,16 +217,7 @@ namespace RestWell.Client.Request
                 throw new ArgumentException($"{nameof(token)} was null or empty. You must specify a token when using {nameof(Authorization)}");
             }
 
-            if (this.proxyRequest.Headers.ContainsKey("Authorization"))
-            {
-                this.proxyRequest.Headers["Authorization"] = new[] { $"{scheme} {token}" };
-            }
-            else
-            {
-                this.proxyRequest.Headers.Add("Authorization", new[] { $"{scheme} {token}" });
-            }
-
-            return this;
+            return this.AddHeader("Authorization", $"{scheme} {token}");
         }
 
         /// <summary>
@@ -251,14 +226,17 @@ namespace RestWell.Client.Request
         /// <returns>An IProxyRequest representing your request.</returns>
         public IProxyRequest<TRequestDto, TResponseDto> Build()
         {
-            var requestBuilder = new StringBuilder(this.baseUri.ToString().TrimEnd('/'));
-            requestBuilder = this.BuildAppendages(requestBuilder);
-            requestBuilder = this.BuildPathArguments(requestBuilder);
-            requestBuilder = this.BuildQueryParameters(requestBuilder);
+            var routeBuilder = new StringBuilder(this.baseUri.ToString().TrimEnd('/'));
+            routeBuilder = BuildRoute(routeBuilder, this.routeAppendages);
+            routeBuilder = BuildRoute(routeBuilder, this.pathArguments);
+            routeBuilder = BuildQueryParameters(routeBuilder, this.queryParameters);
 
-            this.proxyRequest.RequestUri = new Uri(requestBuilder.ToString());
-
-            return this.proxyRequest;
+            return new ProxyRequest<TRequestDto, TResponseDto>(this.headers)
+            {
+                HttpRequestMethod = this.requestMethod,
+                RequestDto = this.requestDto,
+                RequestUri = new Uri(routeBuilder.ToString())
+            };
         }
 
         /// <summary>
@@ -271,10 +249,11 @@ namespace RestWell.Client.Request
         {
             if (requestDto == null)
             {
-                throw new ArgumentException($"{nameof(requestDto)} was null. You must specify a valud request DTO when using {nameof(SetRequestDto)}");
+                throw new ArgumentException($"{nameof(requestDto)} was null. You must specify a valid request DTO when using {nameof(SetRequestDto)}");
             }
 
-            this.proxyRequest.RequestDto = requestDto;
+            this.requestDto = requestDto;
+
             return this;
         }
 
@@ -282,47 +261,17 @@ namespace RestWell.Client.Request
 
         #region Private Methods
 
-        private StringBuilder BuildAppendages(StringBuilder requestBuilder)
+        private static StringBuilder BuildQueryParameters(StringBuilder requestBuilder, IDictionary<string, List<object>> queryParameters)
         {
-            if (this.routeAppendages.Count > 0)
-            {
-                requestBuilder.Append("/");
-
-                foreach (var appendage in this.routeAppendages)
-                {
-                    requestBuilder.Append($"{appendage}/");
-                }
-            }
-
-            return new StringBuilder(requestBuilder.ToString().TrimEnd('/'));
-        }
-
-        private StringBuilder BuildPathArguments(StringBuilder requestBuilder)
-        {
-            if (this.pathArguments.Count > 0)
-            {
-                requestBuilder.Append("/");
-
-                foreach (var pathArgument in this.pathArguments)
-                {
-                    requestBuilder.Append($"{pathArgument}/");
-                }
-            }
-
-            return new StringBuilder(requestBuilder.ToString().TrimEnd('/'));
-        }
-
-        private StringBuilder BuildQueryParameters(StringBuilder requestBuilder)
-        {
-            if (this.queryParameters.Count > 0)
+            if (queryParameters.Any())
             {
                 requestBuilder.Append("?");
 
-                foreach (var queryParameter in this.queryParameters)
+                foreach (var queryParameter in queryParameters)
                 {
                     foreach (var value in queryParameter.Value)
                     {
-                        requestBuilder.Append($"{queryParameter.Key}={value}&");
+                        requestBuilder.Append($"{queryParameter.Key}={value.ToString()}&");
                     }
                 }
             }
@@ -330,6 +279,22 @@ namespace RestWell.Client.Request
             return new StringBuilder(requestBuilder.ToString().TrimEnd('&'));
         }
 
+        private static StringBuilder BuildRoute(StringBuilder requestBuilder, IEnumerable<string> thingsToAppend)
+        {
+            if (thingsToAppend.Any())
+            {
+                requestBuilder.Append("/");
+
+                foreach (var thingToAppend in thingsToAppend)
+                {
+                    requestBuilder.Append($"{thingToAppend}/");
+                }
+            }
+
+            return new StringBuilder(requestBuilder.ToString().TrimEnd('/'));
+        }
+
         #endregion Private Methods
+
     }
 }

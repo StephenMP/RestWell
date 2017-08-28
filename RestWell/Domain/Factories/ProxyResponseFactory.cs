@@ -3,13 +3,10 @@ using RestWell.Client.Enums;
 using RestWell.Client.Response;
 using RestWell.Domain.Extensions;
 using System;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml.Serialization;
 
 namespace RestWell.Domain.Factories
 {
@@ -33,28 +30,15 @@ namespace RestWell.Domain.Factories
                 if (typeof(TResponseDto) != typeof(Missing))
                 {
                     var responseContentString = await httpResponseMessage.Content.ReadAsStringAsync();
-                    if (!responseContentString.IsNullOrEmptyOrWhitespace())
+
+                    if (typeof(TResponseDto) == typeof(string))
                     {
-                        if (typeof(TResponseDto) == typeof(string))
-                        {
-                            restfulProxyResponse.ResponseDto = responseContentString.TrimStart('\\').TrimStart('\"').TrimEnd('\"').TrimEnd('\\') as TResponseDto;
-                        }
-                        else if (httpResponseMessage.RequestMessage.Headers.Accept.Any(h => h.MediaType == "application/xml") && responseContentString.StartsWith('<') && responseContentString.EndsWith('>'))
-                        {
-                            var document = XDocument.Parse(responseContentString);
-                            using (var reader = document.CreateReader())
-                            {
-                                var serializer = new XmlSerializer(typeof(TResponseDto));
-                                if (serializer.CanDeserialize(reader))
-                                {
-                                    restfulProxyResponse.ResponseDto = serializer.Deserialize(reader) as TResponseDto;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            restfulProxyResponse.ResponseDto = JsonConvert.DeserializeObject<TResponseDto>(responseContentString);
-                        }
+                        restfulProxyResponse.ResponseDto = responseContentString.TrimStart('\\').TrimStart('\"').TrimEnd('\"').TrimEnd('\\') as TResponseDto;
+                    }
+
+                    else if (!responseContentString.IsNullOrEmptyOrWhitespace())
+                    {
+                        restfulProxyResponse.ResponseDto = JsonConvert.DeserializeObject<TResponseDto>(responseContentString);
                     }
                 }
             }
@@ -62,7 +46,7 @@ namespace RestWell.Domain.Factories
             return restfulProxyResponse;
         }
 
-        public static async Task<IProxyResponse<TResponseDto>> CreateAsync<TResponseDto>(Exception e)
+        public static IProxyResponse<TResponseDto> Create<TResponseDto>(Exception e)
         {
             var restfulProxyResponse = new ProxyResponse<TResponseDto>
             {
@@ -71,7 +55,7 @@ namespace RestWell.Domain.Factories
                 ResponseMessage = e.Message
             };
 
-            return await Task.FromResult(restfulProxyResponse);
+            return restfulProxyResponse;
         }
 
         #endregion Public Methods
