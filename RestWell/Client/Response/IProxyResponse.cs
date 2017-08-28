@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 
 namespace RestWell.Client.Response
 {
-    public interface IProxyResponse<TResponseDto>
+    public interface IProxyResponse
     {
         #region Public Properties
 
@@ -36,12 +36,6 @@ namespace RestWell.Client.Response
         Uri RequestUri { get; }
 
         /// <summary>
-        /// Gets the response dto returned in the response body.
-        /// </summary>
-        /// <value>The response dto.</value>
-        TResponseDto ResponseDto { get; }
-
-        /// <summary>
         /// Gets the response headers returned by the service.
         /// </summary>
         /// <value>The response headers.</value>
@@ -58,6 +52,19 @@ namespace RestWell.Client.Response
         /// </summary>
         /// <value>The status code.</value>
         HttpStatusCode StatusCode { get; }
+
+        #endregion Public Properties
+    }
+
+    public interface IProxyResponse<TResponseDto> : IProxyResponse
+    {
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the response dto returned in the response body.
+        /// </summary>
+        /// <value>The response dto.</value>
+        TResponseDto ResponseDto { get; }
 
         #endregion Public Properties
     }
