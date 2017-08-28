@@ -8,9 +8,17 @@ namespace RestWell.Client.Request
     {
         #region Public Constructors
 
-        public ProxyRequest()
+        internal ProxyRequest(IDictionary<string, List<string>> builderHeaders)
         {
             this.Headers = new Dictionary<string, IEnumerable<string>>();
+
+            if (builderHeaders.Count > 0)
+            {
+                foreach (var header in builderHeaders)
+                {
+                    this.Headers.Add(header.Key, header.Value);
+                }
+            }
         }
 
         #endregion Public Constructors
