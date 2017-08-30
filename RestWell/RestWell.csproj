@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFrameworks>netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0</TargetFrameworks>
     <Authors>Stephen Porter</Authors>
     <Company />
     <Description>RestWell is a simple, easy to use, light weight .NET generic client which provides simple abstraction of the communication layer between your code and RESTful Web APIs.</Description>
