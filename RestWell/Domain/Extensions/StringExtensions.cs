@@ -13,7 +13,7 @@ namespace RestWell.Domain.Extensions
 
         public static TEnum ToEnum<TEnum>(this string str, bool ignoreCase) where TEnum : struct
         {
-            return Enum.Parse<TEnum>(str, ignoreCase);
+            return (TEnum)Enum.Parse(typeof(TEnum), str, ignoreCase);
         }
 
         #endregion Public Methods
