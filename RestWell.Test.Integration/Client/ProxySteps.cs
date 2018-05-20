@@ -1,10 +1,3 @@
-using RestWell.Client;
-using RestWell.Client.Enums;
-using RestWell.Client.Request;
-using RestWell.Client.Response;
-using RestWell.Test.Resource.WebApi.Controllers;
-using RestWell.Test.Resource.WebApi.Dtos;
-using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +7,13 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using RestWell.Client;
+using RestWell.Client.Enums;
+using RestWell.Client.Request;
+using RestWell.Client.Response;
+using RestWell.Test.Resource.WebApi.Controllers;
+using RestWell.Test.Resource.WebApi.Dtos;
+using Shouldly;
 using TestWell.Environment;
 
 namespace RestWell.Test.Integration.Client
@@ -316,52 +316,24 @@ namespace RestWell.Test.Integration.Client
             this.proxy.ShouldNotBeNull();
         }
 
-        internal async Task WhenIInvokeAsyncForBasicRequest(bool runAsync)
+        internal async Task WhenIInvokeAsyncForBasicRequest()
         {
-            if (runAsync)
-            {
-                this.basicRequestProxyResponse = await this.proxy.InvokeAsync(this.basicRequestProxyRequest);
-            }
-            else
-            {
-                this.basicRequestProxyResponse = this.proxy.Invoke(this.basicRequestProxyRequest);
-            }
+            this.basicRequestProxyResponse = await this.proxy.InvokeAsync(this.basicRequestProxyRequest);
         }
 
-        internal async Task WhenIInvokeAsyncForMessageDtoRequest(bool runAsync)
+        internal async Task WhenIInvokeAsyncForMessageDtoRequest()
         {
-            if (runAsync)
-            {
-                this.messageDtoRequestProxyResponse = await this.proxy.InvokeAsync(this.messageDtoRequestProxyRequest);
-            }
-            else
-            {
-                this.messageDtoRequestProxyResponse = this.proxy.Invoke(this.messageDtoRequestProxyRequest);
-            }
+            this.messageDtoRequestProxyResponse = await this.proxy.InvokeAsync(this.messageDtoRequestProxyRequest);
         }
 
-        internal async Task WhenIInvokeAsyncForMessageDtoResponseRequest(bool runAsync)
+        internal async Task WhenIInvokeAsyncForMessageDtoResponseRequest()
         {
-            if (runAsync)
-            {
-                this.messageDtoResponseRequestProxyResponse = await this.proxy.InvokeAsync(this.messageDtoResponseRequestProxyRequest);
-            }
-            else
-            {
-                this.messageDtoResponseRequestProxyResponse = this.proxy.Invoke(this.messageDtoResponseRequestProxyRequest);
-            }
+            this.messageDtoResponseRequestProxyResponse = await this.proxy.InvokeAsync(this.messageDtoResponseRequestProxyRequest);
         }
 
-        internal async Task WhenIInvokeAsyncForSecureRequest(bool runAsync)
+        internal async Task WhenIInvokeAsyncForSecureRequest()
         {
-            if (runAsync)
-            {
-                this.secureRequestProxyResponse = await this.proxy.InvokeAsync(this.secureRequestProxyRequest);
-            }
-            else
-            {
-                this.secureRequestProxyResponse = this.proxy.Invoke(this.secureRequestProxyRequest);
-            }
+            this.secureRequestProxyResponse = await this.proxy.InvokeAsync(this.secureRequestProxyRequest);
         }
 
         #endregion Internal Methods

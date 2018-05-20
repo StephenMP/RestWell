@@ -1,9 +1,9 @@
-﻿using RestWell.Client.Enums;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using RestWell.Client.Enums;
 using RestWell.Client.Request;
 using RestWell.Client.Response;
 using RestWell.Domain.Testing;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace RestWell.Client.Testing
 {
@@ -32,14 +32,7 @@ namespace RestWell.Client.Testing
         {
         }
 
-        /// <summary>
-        /// Invokes the specified request.
-        /// </summary>
-        /// <typeparam name="TRequestDto">The type of the request dto.</typeparam>
-        /// <typeparam name="TResponseDto">The type of the response dto.</typeparam>
-        /// <param name="request">The request.</param>
-        /// <returns>A ProxyResonse containing request response information</returns>
-        public IProxyResponse<TResponseDto> Invoke<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
+        private IProxyResponse<TResponseDto> Invoke<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
         {
             var requestKey = this.genericAnyRequest ?? request;
 

@@ -1,11 +1,11 @@
-﻿using RestWell.Client.Enums;
+﻿using System.Net;
+using System.Threading.Tasks;
+using RestWell.Client.Enums;
 using RestWell.Client.Request;
 using RestWell.Client.Response;
 using RestWell.Client.Testing;
 using RestWell.Test.Component.TestingResource;
 using Shouldly;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace RestWell.Test.Component.Client.Testing
 {
@@ -94,17 +94,10 @@ namespace RestWell.Test.Component.Client.Testing
             this.proxyReturnedResponse.ShouldNotBeNull();
         }
 
-        internal async Task WhenIInvokeTheMockedRequest<TRequestDto, TResponseDto>(bool runAsync) where TRequestDto : class where TResponseDto : class
+        internal async Task WhenIInvokeTheMockedRequest<TRequestDto, TResponseDto>() where TRequestDto : class where TResponseDto : class
         {
             var request = this.proxyRequest as IProxyRequest<TRequestDto, TResponseDto>;
-            if (runAsync)
-            {
-                this.proxyReturnedResponse = await this.testProxy.InvokeAsync(request);
-            }
-            else
-            {
-                this.proxyReturnedResponse = this.testProxy.Invoke(request);
-            }
+            this.proxyReturnedResponse = await this.testProxy.InvokeAsync(request);
         }
 
         internal void WhenISetupMockedRequest<TRequestDto, TResponseDto>(bool returnOnAnyRequest) where TRequestDto : class where TResponseDto : class

@@ -1,13 +1,12 @@
-using Nito.AsyncEx;
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using RestWell.Client.Enums;
 using RestWell.Client.Request;
 using RestWell.Client.Response;
 using RestWell.Domain.Extensions;
 using RestWell.Domain.Factories;
-using System;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace RestWell.Client
 {
@@ -41,18 +40,6 @@ namespace RestWell.Client
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Invokes the specified request.
-        /// </summary>
-        /// <typeparam name="TRequestDto">The type of the request dto.</typeparam>
-        /// <typeparam name="TResponseDto">The type of the response dto.</typeparam>
-        /// <param name="request">The request.</param>
-        /// <returns>A ProxyResonse containing request response information</returns>
-        public IProxyResponse<TResponseDto> Invoke<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
-        {
-            return AsyncContext.Run(() => this.InvokeRequestAsync(request));
         }
 
         /// <summary>
