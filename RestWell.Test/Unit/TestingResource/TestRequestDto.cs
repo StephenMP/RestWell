@@ -1,4 +1,4 @@
-﻿namespace RestWell.Test.Component.TestingResource
+﻿namespace RestWell.Test.Unit.TestingResource
 {
     internal class TestRequestDto
     {

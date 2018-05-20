@@ -255,7 +255,7 @@ namespace RestWell.Test.Integration.Client
 
         #region Private Methods
 
-        private static IEnumerable<object[]> GetGenericTestData(bool includeHeadRequest)
+        public static IEnumerable<object[]> GetGenericTestData(bool includeHeadRequest)
         {
             var testData = new List<object[]>();
             var methods = new List<HttpRequestMethod> { HttpRequestMethod.Delete, HttpRequestMethod.Get, HttpRequestMethod.Options, HttpRequestMethod.Patch, HttpRequestMethod.Post, HttpRequestMethod.Put };

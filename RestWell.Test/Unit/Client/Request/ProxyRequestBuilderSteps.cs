@@ -1,12 +1,12 @@
-﻿using RestWell.Client.Enums;
-using RestWell.Client.Request;
-using Shouldly;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using RestWell.Client.Enums;
+using RestWell.Client.Request;
+using Shouldly;
 
-namespace RestWell.Test.Component.Client.Testing
+namespace RestWell.Test.Unit.Client.Testing
 {
     internal class ProxyRequestBuilderSteps
     {

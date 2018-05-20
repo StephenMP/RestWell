@@ -4,10 +4,10 @@ using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using RestWell.Client.Enums;
-using RestWell.Test.Component.TestingResource;
+using RestWell.Test.Unit.TestingResource;
 using Xunit;
 
-namespace RestWell.Test.Component.Client.Testing
+namespace RestWell.Test.Unit.Client.Testing
 {
     public class TestProxyFeatures
     {

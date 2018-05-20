@@ -41,7 +41,7 @@ namespace RestWell.Test.Integration.Client
         private IProxyConfiguration proxyConfiguration;
         private IProxyRequest<Missing, MessageResponseDto> secureRequestProxyRequest;
         private IProxyResponse<MessageResponseDto> secureRequestProxyResponse;
-        private TestWellEnvironment testEnvironment;
+        private readonly TestWellEnvironment testEnvironment;
 
         #endregion Private Fields
 

@@ -4,10 +4,10 @@ using RestWell.Client.Enums;
 using RestWell.Client.Request;
 using RestWell.Client.Response;
 using RestWell.Client.Testing;
-using RestWell.Test.Component.TestingResource;
+using RestWell.Test.Unit.TestingResource;
 using Shouldly;
 
-namespace RestWell.Test.Component.Client.Testing
+namespace RestWell.Test.Unit.Client.Testing
 {
     internal class TestProxySteps
     {

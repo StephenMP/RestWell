@@ -1,0 +1,4820 @@
+{
+ "F:\\Dev\\RestWell\\RestWell.Test\\bin\\Debug\\netcoreapp2.0\\RestWell.dll": {
+  "F:\\Dev\\RestWell\\RestWell\\Domain\\Testing\\TestProxyRequest.cs": {
+   "RestWell.Domain.Testing.TestProxyRequest`2": {
+    "System.Void RestWell.Domain.Testing.TestProxyRequest`2::.ctor(RestWell.Client.Request.IProxyRequest`2<TRequestDto,TResponseDto>)": {
+     "Lines": {
+      "16": {
+       "Hits": 60
+      },
+      "18": {
+       "Hits": 60
+      },
+      "19": {
+       "Hits": 60
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Client.Response.IProxyResponse`1<TResponseDto> RestWell.Domain.Testing.TestProxyRequest`2::get_ResponseToReturn()": {
+     "Lines": {
+      "25": {
+       "Hits": 120
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Void RestWell.Domain.Testing.TestProxyRequest`2::ThenIShouldReturnThisResponse(RestWell.Client.Response.IProxyResponse`1<TResponseDto>)": {
+     "Lines": {
+      "37": {
+       "Hits": 60
+      },
+      "38": {
+       "Hits": 60
+      }
+     },
+     "Branches": {
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell\\Domain\\Request\\DefaultProxyRequestHeaders.cs": {
+   "RestWell.Domain.Request.DefaultProxyRequestHeaders": {
+    "System.Void RestWell.Domain.Request.DefaultProxyRequestHeaders::.ctor()": {
+     "Lines": {
+      "10": {
+       "Hits": 167
+      },
+      "12": {
+       "Hits": 167
+      },
+      "13": {
+       "Hits": 167
+      },
+      "14": {
+       "Hits": 167
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Collections.Generic.IList`1<System.Net.Http.Headers.MediaTypeWithQualityHeaderValue> RestWell.Domain.Request.DefaultProxyRequestHeaders::get_Accept()": {
+     "Lines": {
+      "20": {
+       "Hits": 458
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Collections.Generic.IDictionary`2<System.String,System.Collections.Generic.IList`1<System.String>> RestWell.Domain.Request.DefaultProxyRequestHeaders::get_AdditionalHeaders()": {
+     "Lines": {
+      "21": {
+       "Hits": 222
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Net.Http.Headers.AuthenticationHeaderValue RestWell.Domain.Request.DefaultProxyRequestHeaders::get_Authorization()": {
+     "Lines": {
+      "22": {
+       "Hits": 250
+      }
+     },
+     "Branches": {
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell\\Domain\\Request\\DelegatingAction.cs": {
+   "RestWell.Domain.Request.DelegatingAction": {
+    "System.Void RestWell.Domain.Request.DelegatingAction::.ctor(System.Action`2<System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken>)": {
+     "Lines": {
+      "18": {
+       "Hits": 14
+      },
+      "20": {
+       "Hits": 14
+      },
+      "21": {
+       "Hits": 14
+      }
+     },
+     "Branches": {
+     }
+    }
+   },
+   "RestWell.Domain.Request.DelegatingAction/<SendAsync>d__2": {
+    "System.Void RestWell.Domain.Request.DelegatingAction/<SendAsync>d__2::MoveNext()": {
+     "Lines": {
+      "29": {
+       "Hits": 14
+      },
+      "30": {
+       "Hits": 14
+      },
+      "31": {
+       "Hits": 14
+      }
+     },
+     "Branches": {
+      "30": [{
+       "Offset": 72,
+       "EndOffset": 74,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 72,
+       "EndOffset": 136,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell\\Domain\\Factories\\ProxyClientFactory.cs": {
+   "RestWell.Domain.Factories.ProxyClientFactory": {
+    "System.Net.Http.HttpClient RestWell.Domain.Factories.ProxyClientFactory::Create(System.Collections.Generic.IEnumerable`1<System.Net.Http.DelegatingHandler>)": {
+     "Lines": {
+      "14": {
+       "Hits": 167
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Net.Http.HttpClient RestWell.Domain.Factories.ProxyClientFactory::Create(System.Net.Http.HttpMessageHandler,System.Net.Http.DelegatingHandler[])": {
+     "Lines": {
+      "23": {
+       "Hits": 167
+      },
+      "24": {
+       "Hits": 167
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Net.Http.HttpMessageHandler RestWell.Domain.Factories.ProxyClientFactory::CreatePipeline(System.Net.Http.HttpMessageHandler,System.Collections.Generic.IEnumerable`1<System.Net.Http.DelegatingHandler>)": {
+     "Lines": {
+      "29": {
+       "Hits": 167
+      },
+      "31": {
+       "Hits": 0
+      },
+      "34": {
+       "Hits": 167
+      },
+      "36": {
+       "Hits": 0
+      },
+      "39": {
+       "Hits": 167
+      },
+      "40": {
+       "Hits": 167
+      },
+      "41": {
+       "Hits": 446
+      },
+      "43": {
+       "Hits": 56
+      },
+      "45": {
+       "Hits": 0
+      },
+      "48": {
+       "Hits": 56
+      },
+      "50": {
+       "Hits": 0
+      },
+      "53": {
+       "Hits": 56
+      },
+      "54": {
+       "Hits": 56
+      },
+      "57": {
+       "Hits": 167
+      }
+     },
+     "Branches": {
+      "29": [{
+       "Offset": 1,
+       "EndOffset": 3,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 1,
+       "EndOffset": 14,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "34": [{
+       "Offset": 15,
+       "EndOffset": 17,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 15,
+       "EndOffset": 19,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "41": [{
+       "Offset": 158,
+       "EndOffset": 37,
+       "Path": 1,
+       "Ordinal": 9
+      }, {
+       "Offset": 158,
+       "EndOffset": 160,
+       "Path": 0,
+       "Ordinal": 8
+      }],
+      "43": [{
+       "Offset": 45,
+       "EndOffset": 47,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 45,
+       "EndOffset": 83,
+       "Path": 1,
+       "Ordinal": 5
+      }],
+      "48": [{
+       "Offset": 89,
+       "EndOffset": 91,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 89,
+       "EndOffset": 143,
+       "Path": 1,
+       "Ordinal": 7
+      }]
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell\\Domain\\Factories\\ProxyResponseFactory.cs": {
+   "RestWell.Domain.Factories.ProxyResponseFactory": {
+    "RestWell.Client.Response.IProxyResponse`1<TResponseDto> RestWell.Domain.Factories.ProxyResponseFactory::Create(System.Exception)": {
+     "Lines": {
+      "51": {
+       "Hits": 0
+      },
+      "52": {
+       "Hits": 0
+      },
+      "53": {
+       "Hits": 0
+      },
+      "54": {
+       "Hits": 0
+      },
+      "55": {
+       "Hits": 0
+      },
+      "56": {
+       "Hits": 0
+      },
+      "58": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+     }
+    }
+   },
+   "RestWell.Domain.Factories.ProxyResponseFactory/<CreateAsync>d__0`1": {
+    "System.Void RestWell.Domain.Factories.ProxyResponseFactory/<CreateAsync>d__0`1::MoveNext()": {
+     "Lines": {
+      "19": {
+       "Hits": 222
+      },
+      "21": {
+       "Hits": 222
+      },
+      "23": {
+       "Hits": 222
+      },
+      "24": {
+       "Hits": 222
+      },
+      "25": {
+       "Hits": 222
+      },
+      "26": {
+       "Hits": 222
+      },
+      "27": {
+       "Hits": 222
+      },
+      "28": {
+       "Hits": 222
+      },
+      "30": {
+       "Hits": 222
+      },
+      "32": {
+       "Hits": 222
+      },
+      "34": {
+       "Hits": 222
+      },
+      "36": {
+       "Hits": 56
+      },
+      "37": {
+       "Hits": 56
+      },
+      "39": {
+       "Hits": 166
+      },
+      "41": {
+       "Hits": 132
+      },
+      "44": {
+       "Hits": 222
+      },
+      "46": {
+       "Hits": 222
+      },
+      "47": {
+       "Hits": 222
+      }
+     },
+     "Branches": {
+      "19": [{
+       "Offset": 8,
+       "EndOffset": 10,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 8,
+       "EndOffset": 33,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "21": [{
+       "Offset": 35,
+       "EndOffset": 40,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 35,
+       "EndOffset": 296,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "30": [{
+       "Offset": 223,
+       "EndOffset": 228,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 223,
+       "EndOffset": 439,
+       "Path": 1,
+       "Ordinal": 5
+      }],
+      "32": [{
+       "Offset": 258,
+       "EndOffset": 260,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 258,
+       "EndOffset": 325,
+       "Path": 1,
+       "Ordinal": 7
+      }],
+      "34": [{
+       "Offset": 360,
+       "EndOffset": 362,
+       "Path": 0,
+       "Ordinal": 8
+      }, {
+       "Offset": 360,
+       "EndOffset": 414,
+       "Path": 1,
+       "Ordinal": 9
+      }],
+      "39": [{
+       "Offset": 420,
+       "EndOffset": 422,
+       "Path": 0,
+       "Ordinal": 10
+      }, {
+       "Offset": 420,
+       "EndOffset": 439,
+       "Path": 1,
+       "Ordinal": 11
+      }]
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell\\Domain\\Extensions\\HttpClientExtensions.cs": {
+   "RestWell.Domain.Extensions.HttpClientExtension": {
+    "System.Net.Http.HttpClient RestWell.Domain.Extensions.HttpClientExtension::AddRequestHeaders(System.Net.Http.HttpClient,System.Collections.Generic.IDictionary`2<System.String,System.Collections.Generic.IEnumerable`1<System.String>>)": {
+     "Lines": {
+      "38": {
+       "Hits": 860
+      },
+      "40": {
+       "Hits": 208
+      },
+      "42": {
+       "Hits": 0
+      },
+      "45": {
+       "Hits": 208
+      },
+      "48": {
+       "Hits": 222
+      }
+     },
+     "Branches": {
+      "38": [{
+       "Offset": 86,
+       "EndOffset": 9,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 86,
+       "EndOffset": 88,
+       "Path": 0,
+       "Ordinal": 2
+      }],
+      "40": [{
+       "Offset": 34,
+       "EndOffset": 36,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 34,
+       "EndOffset": 55,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    },
+    "System.Net.Http.HttpClient RestWell.Domain.Extensions.HttpClientExtension::ClearCurrentHeaders(System.Net.Http.HttpClient)": {
+     "Lines": {
+      "53": {
+       "Hits": 222
+      },
+      "54": {
+       "Hits": 222
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Net.Http.HttpClient RestWell.Domain.Extensions.HttpClientExtension::PopulateDefaultRequestHeaders(System.Net.Http.HttpClient,RestWell.Domain.Request.DefaultProxyRequestHeaders)": {
+     "Lines": {
+      "74": {
+       "Hits": 222
+      },
+      "76": {
+       "Hits": 14
+      },
+      "79": {
+       "Hits": 222
+      },
+      "81": {
+       "Hits": 472
+      },
+      "83": {
+       "Hits": 14
+      },
+      "87": {
+       "Hits": 222
+      },
+      "89": {
+       "Hits": 0
+      },
+      "91": {
+       "Hits": 0
+      },
+      "95": {
+       "Hits": 222
+      }
+     },
+     "Branches": {
+      "74": [{
+       "Offset": 6,
+       "EndOffset": 8,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 6,
+       "EndOffset": 25,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "79": [{
+       "Offset": 31,
+       "EndOffset": 33,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 31,
+       "EndOffset": 91,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "81": [{
+       "Offset": 77,
+       "EndOffset": 47,
+       "Path": 1,
+       "Ordinal": 5
+      }, {
+       "Offset": 77,
+       "EndOffset": 79,
+       "Path": 0,
+       "Ordinal": 4
+      }],
+      "87": [{
+       "Offset": 102,
+       "EndOffset": 104,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 102,
+       "EndOffset": 170,
+       "Path": 1,
+       "Ordinal": 7
+      }],
+      "89": [{
+       "Offset": 156,
+       "EndOffset": 118,
+       "Path": 1,
+       "Ordinal": 9
+      }, {
+       "Offset": 156,
+       "EndOffset": 158,
+       "Path": 0,
+       "Ordinal": 8
+      }]
+     }
+    }
+   },
+   "RestWell.Domain.Extensions.HttpClientExtension/<InvokeAsync>d__0`2": {
+    "System.Void RestWell.Domain.Extensions.HttpClientExtension/<InvokeAsync>d__0`2::MoveNext()": {
+     "Lines": {
+      "20": {
+       "Hits": 222
+      },
+      "21": {
+       "Hits": 222
+      },
+      "22": {
+       "Hits": 222
+      },
+      "24": {
+       "Hits": 222
+      },
+      "26": {
+       "Hits": 210
+      },
+      "29": {
+       "Hits": 12
+      },
+      "30": {
+       "Hits": 222
+      }
+     },
+     "Branches": {
+      "20": [{
+       "Offset": 8,
+       "EndOffset": 13,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 15,
+       "EndOffset": 20,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 8,
+       "EndOffset": 160,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 15,
+       "EndOffset": 296,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "24": [{
+       "Offset": 75,
+       "EndOffset": 77,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 75,
+       "EndOffset": 203,
+       "Path": 1,
+       "Ordinal": 5
+      }],
+      "26": [{
+       "Offset": 123,
+       "EndOffset": 125,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 123,
+       "EndOffset": 188,
+       "Path": 1,
+       "Ordinal": 7
+      }],
+      "29": [{
+       "Offset": 261,
+       "EndOffset": 263,
+       "Path": 0,
+       "Ordinal": 8
+      }, {
+       "Offset": 261,
+       "EndOffset": 325,
+       "Path": 1,
+       "Ordinal": 9
+      }]
+     }
+    }
+   },
+   "RestWell.Domain.Extensions.HttpClientExtension/<InvokeAsJsonAsync>d__3`1": {
+    "System.Void RestWell.Domain.Extensions.HttpClientExtension/<InvokeAsJsonAsync>d__3`1::MoveNext()": {
+     "Lines": {
+      "59": {
+       "Hits": 12
+      },
+      "60": {
+       "Hits": 12
+      },
+      "61": {
+       "Hits": 12
+      },
+      "63": {
+       "Hits": 12
+      },
+      "64": {
+       "Hits": 12
+      }
+     },
+     "Branches": {
+      "59": [{
+       "Offset": 8,
+       "EndOffset": 13,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 8,
+       "EndOffset": 151,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "63": [{
+       "Offset": 116,
+       "EndOffset": 118,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 116,
+       "EndOffset": 180,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    }
+   },
+   "RestWell.Domain.Extensions.HttpClientExtension/<InvokeAsync>d__4": {
+    "System.Void RestWell.Domain.Extensions.HttpClientExtension/<InvokeAsync>d__4::MoveNext()": {
+     "Lines": {
+      "68": {
+       "Hits": 210
+      },
+      "69": {
+       "Hits": 210
+      },
+      "70": {
+       "Hits": 210
+      }
+     },
+     "Branches": {
+      "69": [{
+       "Offset": 70,
+       "EndOffset": 72,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 70,
+       "EndOffset": 134,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell\\Domain\\Extensions\\StringExtensions.cs": {
+   "RestWell.Domain.Extensions.StringExtensions": {
+    "System.Boolean RestWell.Domain.Extensions.StringExtensions::IsNullOrEmptyOrWhitespace(System.String)": {
+     "Lines": {
+      "11": {
+       "Hits": 603
+      }
+     },
+     "Branches": {
+      "11": [{
+       "Offset": 6,
+       "EndOffset": 8,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 6,
+       "EndOffset": 20,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    },
+    "TEnum RestWell.Domain.Extensions.StringExtensions::ToEnum(System.String,System.Boolean)": {
+     "Lines": {
+      "16": {
+       "Hits": 222
+      }
+     },
+     "Branches": {
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell\\Client\\Proxy.cs": {
+   "RestWell.Client.Proxy": {
+    "System.Void RestWell.Client.Proxy::.ctor()": {
+     "Lines": {
+      "25": {
+       "Hits": 0
+      },
+      "27": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Void RestWell.Client.Proxy::.ctor(RestWell.Client.IProxyConfiguration)": {
+     "Lines": {
+      "29": {
+       "Hits": 167
+      },
+      "31": {
+       "Hits": 167
+      },
+      "32": {
+       "Hits": 167
+      },
+      "33": {
+       "Hits": 167
+      }
+     },
+     "Branches": {
+      "31": [{
+       "Offset": 9,
+       "EndOffset": 11,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 9,
+       "EndOffset": 17,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    },
+    "System.Void RestWell.Client.Proxy::Dispose()": {
+     "Lines": {
+      "41": {
+       "Hits": 167
+      },
+      "42": {
+       "Hits": 167
+      },
+      "43": {
+       "Hits": 167
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Void RestWell.Client.Proxy::Dispose(System.Boolean)": {
+     "Lines": {
+      "63": {
+       "Hits": 167
+      },
+      "65": {
+       "Hits": 167
+      },
+      "67": {
+       "Hits": 167
+      },
+      "70": {
+       "Hits": 167
+      },
+      "72": {
+       "Hits": 167
+      }
+     },
+     "Branches": {
+      "63": [{
+       "Offset": 6,
+       "EndOffset": 8,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 6,
+       "EndOffset": 35,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "65": [{
+       "Offset": 9,
+       "EndOffset": 11,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 9,
+       "EndOffset": 28,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "67": [{
+       "Offset": 18,
+       "EndOffset": 20,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 18,
+       "EndOffset": 23,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Client.Proxy/<InvokeAsync>d__6`2": {
+    "System.Void RestWell.Client.Proxy/<InvokeAsync>d__6`2::MoveNext()": {
+     "Lines": {
+      "54": {
+       "Hits": 222
+      },
+      "55": {
+       "Hits": 222
+      }
+     },
+     "Branches": {
+      "54": [{
+       "Offset": 15,
+       "EndOffset": 17,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 43,
+       "EndOffset": 45,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 15,
+       "EndOffset": 78,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 43,
+       "EndOffset": 107,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    }
+   },
+   "RestWell.Client.Proxy/<InvokeRequestAsync>d__8`2": {
+    "System.Void RestWell.Client.Proxy/<InvokeRequestAsync>d__8`2::MoveNext()": {
+     "Lines": {
+      "76": {
+       "Hits": 222
+      },
+      "78": {
+       "Hits": 0
+      },
+      "79": {
+       "Hits": 0
+      },
+      "80": {
+       "Hits": 0
+      },
+      "81": {
+       "Hits": 0
+      },
+      "82": {
+       "Hits": 0
+      },
+      "83": {
+       "Hits": 0
+      },
+      "88": {
+       "Hits": 222
+      },
+      "90": {
+       "Hits": 222
+      },
+      "93": {
+       "Hits": 0
+      },
+      "95": {
+       "Hits": 0
+      },
+      "97": {
+       "Hits": 222
+      }
+     },
+     "Branches": {
+      "76": [{
+       "Offset": 16,
+       "EndOffset": 18,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 29,
+       "EndOffset": 31,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 16,
+       "EndOffset": 71,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 29,
+       "EndOffset": 71,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "78": [{
+       "Offset": 73,
+       "EndOffset": 75,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 77,
+       "EndOffset": 79,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 73,
+       "EndOffset": 159,
+       "Path": 1,
+       "Ordinal": 5
+      }, {
+       "Offset": 77,
+       "EndOffset": 203,
+       "Path": 1,
+       "Ordinal": 7
+      }],
+      "88": [{
+       "Offset": 121,
+       "EndOffset": 123,
+       "Path": 0,
+       "Ordinal": 8
+      }, {
+       "Offset": 121,
+       "EndOffset": 188,
+       "Path": 1,
+       "Ordinal": 9
+      }, {
+       "Offset": 206,
+       "EndOffset": 208,
+       "Path": 0,
+       "Ordinal": 10
+      }, {
+       "Offset": 206,
+       "EndOffset": 268,
+       "Path": 1,
+       "Ordinal": 11
+      }],
+      "90": [{
+       "Offset": 233,
+       "EndOffset": 235,
+       "Path": 0,
+       "Ordinal": 12
+      }, {
+       "Offset": 233,
+       "EndOffset": 297,
+       "Path": 1,
+       "Ordinal": 13
+      }]
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell\\Client\\ProxyConfiguration.cs": {
+   "RestWell.Client.ProxyConfiguration": {
+    "System.Void RestWell.Client.ProxyConfiguration::.ctor()": {
+     "Lines": {
+      "12": {
+       "Hits": 167
+      },
+      "14": {
+       "Hits": 167
+      },
+      "15": {
+       "Hits": 167
+      },
+      "16": {
+       "Hits": 167
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Domain.Request.DefaultProxyRequestHeaders RestWell.Client.ProxyConfiguration::get_DefaultProxyRequestHeaders()": {
+     "Lines": {
+      "27": {
+       "Hits": 417
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Collections.Generic.IDictionary`2<System.Type,System.Net.Http.DelegatingHandler> RestWell.Client.ProxyConfiguration::get_DelegatingHandlers()": {
+     "Lines": {
+      "33": {
+       "Hits": 446
+      }
+     },
+     "Branches": {
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell\\Client\\ProxyConfigurationBuilder.cs": {
+   "RestWell.Client.ProxyConfigurationBuilder": {
+    "System.Void RestWell.Client.ProxyConfigurationBuilder::.ctor()": {
+     "Lines": {
+      "19": {
+       "Hits": 84
+      },
+      "21": {
+       "Hits": 84
+      },
+      "22": {
+       "Hits": 84
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Client.ProxyConfigurationBuilder RestWell.Client.ProxyConfigurationBuilder::CreateBuilder()": {
+     "Lines": {
+      "28": {
+       "Hits": 84
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Client.ProxyConfigurationBuilder RestWell.Client.ProxyConfigurationBuilder::AddDelegatingAction(System.Action`2<System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken>)": {
+     "Lines": {
+      "37": {
+       "Hits": 14
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Client.ProxyConfigurationBuilder RestWell.Client.ProxyConfigurationBuilder::AddDelegatingHandlers(System.Net.Http.DelegatingHandler[])": {
+     "Lines": {
+      "47": {
+       "Hits": 308
+      },
+      "49": {
+       "Hits": 56
+      },
+      "51": {
+       "Hits": 56
+      },
+      "55": {
+       "Hits": 98
+      }
+     },
+     "Branches": {
+      "47": [{
+       "Offset": 65,
+       "EndOffset": 6,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 65,
+       "EndOffset": 67,
+       "Path": 0,
+       "Ordinal": 2
+      }],
+      "49": [{
+       "Offset": 32,
+       "EndOffset": 34,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 32,
+       "EndOffset": 57,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    },
+    "RestWell.Client.IProxyConfiguration RestWell.Client.ProxyConfigurationBuilder::Build()": {
+     "Lines": {
+      "64": {
+       "Hits": 84
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Client.ProxyConfigurationBuilder RestWell.Client.ProxyConfigurationBuilder::UseDefaultAcceptHeader(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue)": {
+     "Lines": {
+      "74": {
+       "Hits": 14
+      },
+      "75": {
+       "Hits": 14
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Client.ProxyConfigurationBuilder RestWell.Client.ProxyConfigurationBuilder::UseDefaultAuthorizationHeader(System.Net.Http.Headers.AuthenticationHeaderValue)": {
+     "Lines": {
+      "85": {
+       "Hits": 14
+      },
+      "86": {
+       "Hits": 14
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Client.ProxyConfigurationBuilder RestWell.Client.ProxyConfigurationBuilder::UseDefaultHeader(System.String,System.String[])": {
+     "Lines": {
+      "97": {
+       "Hits": 0
+      },
+      "98": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell\\Client\\Testing\\TestProxy.cs": {
+   "RestWell.Client.Testing.TestProxy": {
+    "System.Void RestWell.Client.Testing.TestProxy::.ctor()": {
+     "Lines": {
+      "21": {
+       "Hits": 60
+      },
+      "23": {
+       "Hits": 60
+      },
+      "24": {
+       "Hits": 60
+      },
+      "25": {
+       "Hits": 60
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Void RestWell.Client.Testing.TestProxy::Dispose()": {
+     "Lines": {
+      "33": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Client.Response.IProxyResponse`1<TResponseDto> RestWell.Client.Testing.TestProxy::Invoke(RestWell.Client.Request.IProxyRequest`2<TRequestDto,TResponseDto>)": {
+     "Lines": {
+      "37": {
+       "Hits": 60
+      },
+      "39": {
+       "Hits": 60
+      },
+      "41": {
+       "Hits": 60
+      },
+      "42": {
+       "Hits": 60
+      },
+      "45": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+      "37": [{
+       "Offset": 7,
+       "EndOffset": 9,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 7,
+       "EndOffset": 11,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "39": [{
+       "Offset": 24,
+       "EndOffset": 26,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 24,
+       "EndOffset": 56,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "42": [{
+       "Offset": 45,
+       "EndOffset": 47,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 45,
+       "EndOffset": 49,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    },
+    "RestWell.Domain.Testing.TestProxyRequest`2<TRequestDto,TResponseDto> RestWell.Client.Testing.TestProxy::WhenIReceiveAnyRequest()": {
+     "Lines": {
+      "68": {
+       "Hits": 20
+      },
+      "70": {
+       "Hits": 20
+      },
+      "71": {
+       "Hits": 20
+      },
+      "73": {
+       "Hits": 20
+      },
+      "74": {
+       "Hits": 20
+      },
+      "77": {
+       "Hits": 20
+      }
+     },
+     "Branches": {
+      "68": [{
+       "Offset": 6,
+       "EndOffset": 8,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 6,
+       "EndOffset": 57,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    },
+    "RestWell.Domain.Testing.TestProxyRequest`2<TRequestDto,TResponseDto> RestWell.Client.Testing.TestProxy::WhenIReceiveThisRequest(RestWell.Client.Request.IProxyRequest`2<TRequestDto,TResponseDto>)": {
+     "Lines": {
+      "89": {
+       "Hits": 40
+      },
+      "90": {
+       "Hits": 40
+      },
+      "91": {
+       "Hits": 40
+      },
+      "93": {
+       "Hits": 40
+      }
+     },
+     "Branches": {
+     }
+    }
+   },
+   "RestWell.Client.Testing.TestProxy/<InvokeAsync>d__5`2": {
+    "System.Void RestWell.Client.Testing.TestProxy/<InvokeAsync>d__5`2::MoveNext()": {
+     "Lines": {
+      "57": {
+       "Hits": 60
+      },
+      "58": {
+       "Hits": 60
+      }
+     },
+     "Branches": {
+      "57": [{
+       "Offset": 15,
+       "EndOffset": 17,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 48,
+       "EndOffset": 50,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 15,
+       "EndOffset": 83,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 48,
+       "EndOffset": 112,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell\\Client\\Response\\ProxyResponse.cs": {
+   "RestWell.Client.Response.ProxyResponse`1": {
+    "RestWell.Client.Enums.HttpRequestMethod RestWell.Client.Response.ProxyResponse`1::get_HttpRequestMethod()": {
+     "Lines": {
+      "16": {
+       "Hits": 444
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Client.Response.ProxyResponse`1::get_IsSuccessfulStatusCode()": {
+     "Lines": {
+      "24": {
+       "Hits": 624
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Net.Http.Headers.HttpRequestHeaders RestWell.Client.Response.ProxyResponse`1::get_RequestHeaders()": {
+     "Lines": {
+      "30": {
+       "Hits": 596
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Uri RestWell.Client.Response.ProxyResponse`1::get_RequestUri()": {
+     "Lines": {
+      "36": {
+       "Hits": 486
+      }
+     },
+     "Branches": {
+     }
+    },
+    "TResponseDto RestWell.Client.Response.ProxyResponse`1::get_ResponseDto()": {
+     "Lines": {
+      "42": {
+       "Hits": 1094
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Net.Http.Headers.HttpResponseHeaders RestWell.Client.Response.ProxyResponse`1::get_ResponseHeaders()": {
+     "Lines": {
+      "48": {
+       "Hits": 582
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.String RestWell.Client.Response.ProxyResponse`1::get_ResponseMessage()": {
+     "Lines": {
+      "54": {
+       "Hits": 180
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Net.HttpStatusCode RestWell.Client.Response.ProxyResponse`1::get_StatusCode()": {
+     "Lines": {
+      "60": {
+       "Hits": 624
+      }
+     },
+     "Branches": {
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell\\Client\\Request\\ProxyRequest.cs": {
+   "RestWell.Client.Request.ProxyRequest`2": {
+    "System.Void RestWell.Client.Request.ProxyRequest`2::.ctor(System.Collections.Generic.IDictionary`2<System.String,System.Collections.Generic.List`1<System.String>>)": {
+     "Lines": {
+      "11": {
+       "Hits": 264
+      },
+      "13": {
+       "Hits": 264
+      },
+      "15": {
+       "Hits": 264
+      },
+      "17": {
+       "Hits": 608
+      },
+      "19": {
+       "Hits": 152
+      },
+      "22": {
+       "Hits": 264
+      }
+     },
+     "Branches": {
+      "15": [{
+       "Offset": 24,
+       "EndOffset": 26,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 24,
+       "EndOffset": 87,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "17": [{
+       "Offset": 73,
+       "EndOffset": 35,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 73,
+       "EndOffset": 75,
+       "Path": 0,
+       "Ordinal": 2
+      }]
+     }
+    },
+    "System.Collections.Generic.IDictionary`2<System.String,System.Collections.Generic.IEnumerable`1<System.String>> RestWell.Client.Request.ProxyRequest`2::get_Headers()": {
+     "Lines": {
+      "32": {
+       "Hits": 638
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Client.Enums.HttpRequestMethod RestWell.Client.Request.ProxyRequest`2::get_HttpRequestMethod()": {
+     "Lines": {
+      "38": {
+       "Hits": 715
+      }
+     },
+     "Branches": {
+     }
+    },
+    "TRequestDto RestWell.Client.Request.ProxyRequest`2::get_RequestDto()": {
+     "Lines": {
+      "44": {
+       "Hits": 498
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Uri RestWell.Client.Request.ProxyRequest`2::get_RequestUri()": {
+     "Lines": {
+      "50": {
+       "Hits": 677
+      }
+     },
+     "Branches": {
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell\\Client\\Request\\ProxyRequestBuilder.cs": {
+   "RestWell.Client.Request.ProxyRequestBuilder": {
+    "System.Void RestWell.Client.Request.ProxyRequestBuilder::.ctor(System.String,RestWell.Client.Enums.HttpRequestMethod)": {
+     "Lines": {
+      "16": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Void RestWell.Client.Request.ProxyRequestBuilder::.ctor(System.Uri,RestWell.Client.Enums.HttpRequestMethod)": {
+     "Lines": {
+      "17": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+     }
+    }
+   },
+   "RestWell.Client.Request.ProxyRequestBuilder`1": {
+    "System.Void RestWell.Client.Request.ProxyRequestBuilder`1::.ctor(System.String,RestWell.Client.Enums.HttpRequestMethod)": {
+     "Lines": {
+      "28": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Void RestWell.Client.Request.ProxyRequestBuilder`1::.ctor(System.Uri,RestWell.Client.Enums.HttpRequestMethod)": {
+     "Lines": {
+      "29": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+     }
+    }
+   },
+   "RestWell.Client.Request.ProxyRequestBuilder`2": {
+    "System.Void RestWell.Client.Request.ProxyRequestBuilder`2::.ctor(System.String,RestWell.Client.Enums.HttpRequestMethod)": {
+     "Lines": {
+      "52": {
+       "Hits": 265
+      },
+      "54": {
+       "Hits": 265
+      },
+      "56": {
+       "Hits": 1
+      },
+      "59": {
+       "Hits": 264
+      },
+      "61": {
+       "Hits": 0
+      },
+      "64": {
+       "Hits": 264
+      },
+      "65": {
+       "Hits": 264
+      },
+      "66": {
+       "Hits": 264
+      },
+      "67": {
+       "Hits": 264
+      },
+      "68": {
+       "Hits": 264
+      },
+      "69": {
+       "Hits": 264
+      },
+      "70": {
+       "Hits": 264
+      }
+     },
+     "Branches": {
+      "54": [{
+       "Offset": 12,
+       "EndOffset": 14,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 12,
+       "EndOffset": 35,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "59": [{
+       "Offset": 36,
+       "EndOffset": 38,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 36,
+       "EndOffset": 65,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    },
+    "System.Void RestWell.Client.Request.ProxyRequestBuilder`2::.ctor(System.Uri,RestWell.Client.Enums.HttpRequestMethod)": {
+     "Lines": {
+      "72": {
+       "Hits": 332
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Client.Request.ProxyRequestBuilder`2<TRequestDto,TResponseDto> RestWell.Client.Request.ProxyRequestBuilder`2::CreateBuilder(System.String,RestWell.Client.Enums.HttpRequestMethod)": {
+     "Lines": {
+      "78": {
+       "Hits": 99
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Client.Request.ProxyRequestBuilder`2<TRequestDto,TResponseDto> RestWell.Client.Request.ProxyRequestBuilder`2::CreateBuilder(System.Uri,RestWell.Client.Enums.HttpRequestMethod)": {
+     "Lines": {
+      "80": {
+       "Hits": 166
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Client.Request.ProxyRequestBuilder`2<TRequestDto,TResponseDto> RestWell.Client.Request.ProxyRequestBuilder`2::Accept(System.String[])": {
+     "Lines": {
+      "91": {
+       "Hits": 82
+      },
+      "93": {
+       "Hits": 0
+      },
+      "96": {
+       "Hits": 82
+      }
+     },
+     "Branches": {
+      "91": [{
+       "Offset": 1,
+       "EndOffset": 3,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 1,
+       "EndOffset": 7,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 5,
+       "EndOffset": 7,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 5,
+       "EndOffset": 33,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    },
+    "RestWell.Client.Request.ProxyRequestBuilder`2<TRequestDto,TResponseDto> RestWell.Client.Request.ProxyRequestBuilder`2::AddHeader(System.String,System.String[])": {
+     "Lines": {
+      "109": {
+       "Hits": 152
+      },
+      "111": {
+       "Hits": 0
+      },
+      "114": {
+       "Hits": 152
+      },
+      "116": {
+       "Hits": 0
+      },
+      "119": {
+       "Hits": 152
+      },
+      "121": {
+       "Hits": 152
+      },
+      "124": {
+       "Hits": 152
+      },
+      "126": {
+       "Hits": 152
+      }
+     },
+     "Branches": {
+      "109": [{
+       "Offset": 6,
+       "EndOffset": 8,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 6,
+       "EndOffset": 34,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "114": [{
+       "Offset": 35,
+       "EndOffset": 37,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 35,
+       "EndOffset": 41,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 39,
+       "EndOffset": 41,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 39,
+       "EndOffset": 67,
+       "Path": 1,
+       "Ordinal": 5
+      }],
+      "119": [{
+       "Offset": 79,
+       "EndOffset": 81,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 79,
+       "EndOffset": 98,
+       "Path": 1,
+       "Ordinal": 7
+      }]
+     }
+    },
+    "RestWell.Client.Request.ProxyRequestBuilder`2<TRequestDto,TResponseDto> RestWell.Client.Request.ProxyRequestBuilder`2::AddPathArguments(System.Object[])": {
+     "Lines": {
+      "139": {
+       "Hits": 164
+      },
+      "141": {
+       "Hits": 0
+      },
+      "144": {
+       "Hits": 676
+      },
+      "146": {
+       "Hits": 174
+      },
+      "149": {
+       "Hits": 164
+      }
+     },
+     "Branches": {
+      "139": [{
+       "Offset": 1,
+       "EndOffset": 3,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 1,
+       "EndOffset": 7,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 5,
+       "EndOffset": 7,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 5,
+       "EndOffset": 33,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "144": [{
+       "Offset": 68,
+       "EndOffset": 39,
+       "Path": 1,
+       "Ordinal": 5
+      }, {
+       "Offset": 68,
+       "EndOffset": 70,
+       "Path": 0,
+       "Ordinal": 4
+      }]
+     }
+    },
+    "RestWell.Client.Request.ProxyRequestBuilder`2<TRequestDto,TResponseDto> RestWell.Client.Request.ProxyRequestBuilder`2::AddQueryParameter(System.String,System.Object[])": {
+     "Lines": {
+      "163": {
+       "Hits": 20
+      },
+      "165": {
+       "Hits": 0
+      },
+      "168": {
+       "Hits": 20
+      },
+      "170": {
+       "Hits": 0
+      },
+      "173": {
+       "Hits": 20
+      },
+      "175": {
+       "Hits": 20
+      },
+      "178": {
+       "Hits": 20
+      },
+      "180": {
+       "Hits": 20
+      }
+     },
+     "Branches": {
+      "163": [{
+       "Offset": 6,
+       "EndOffset": 8,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 6,
+       "EndOffset": 34,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "168": [{
+       "Offset": 35,
+       "EndOffset": 37,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 35,
+       "EndOffset": 41,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 39,
+       "EndOffset": 41,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 39,
+       "EndOffset": 67,
+       "Path": 1,
+       "Ordinal": 5
+      }],
+      "173": [{
+       "Offset": 79,
+       "EndOffset": 81,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 79,
+       "EndOffset": 98,
+       "Path": 1,
+       "Ordinal": 7
+      }]
+     }
+    },
+    "RestWell.Client.Request.ProxyRequestBuilder`2<TRequestDto,TResponseDto> RestWell.Client.Request.ProxyRequestBuilder`2::AppendToRoute(System.String[])": {
+     "Lines": {
+      "191": {
+       "Hits": 176
+      },
+      "193": {
+       "Hits": 0
+      },
+      "196": {
+       "Hits": 176
+      },
+      "198": {
+       "Hits": 176
+      }
+     },
+     "Branches": {
+      "191": [{
+       "Offset": 1,
+       "EndOffset": 3,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 1,
+       "EndOffset": 7,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 5,
+       "EndOffset": 7,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 5,
+       "EndOffset": 33,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    },
+    "RestWell.Client.Request.ProxyRequestBuilder`2<TRequestDto,TResponseDto> RestWell.Client.Request.ProxyRequestBuilder`2::Authorization(System.String,System.String)": {
+     "Lines": {
+      "210": {
+       "Hits": 0
+      },
+      "212": {
+       "Hits": 0
+      },
+      "215": {
+       "Hits": 0
+      },
+      "217": {
+       "Hits": 0
+      },
+      "220": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+      "210": [{
+       "Offset": 6,
+       "EndOffset": 8,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 6,
+       "EndOffset": 34,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "215": [{
+       "Offset": 40,
+       "EndOffset": 42,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 40,
+       "EndOffset": 68,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    },
+    "RestWell.Client.Request.IProxyRequest`2<TRequestDto,TResponseDto> RestWell.Client.Request.ProxyRequestBuilder`2::Build()": {
+     "Lines": {
+      "229": {
+       "Hits": 264
+      },
+      "230": {
+       "Hits": 264
+      },
+      "231": {
+       "Hits": 264
+      },
+      "232": {
+       "Hits": 264
+      },
+      "234": {
+       "Hits": 264
+      },
+      "235": {
+       "Hits": 264
+      },
+      "236": {
+       "Hits": 264
+      },
+      "237": {
+       "Hits": 264
+      },
+      "238": {
+       "Hits": 264
+      },
+      "239": {
+       "Hits": 264
+      }
+     },
+     "Branches": {
+     }
+    },
+    "RestWell.Client.Request.ProxyRequestBuilder`2<TRequestDto,TResponseDto> RestWell.Client.Request.ProxyRequestBuilder`2::SetRequestDto(TRequestDto)": {
+     "Lines": {
+      "250": {
+       "Hits": 32
+      },
+      "252": {
+       "Hits": 0
+      },
+      "255": {
+       "Hits": 32
+      },
+      "257": {
+       "Hits": 32
+      }
+     },
+     "Branches": {
+      "250": [{
+       "Offset": 6,
+       "EndOffset": 8,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 6,
+       "EndOffset": 34,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    },
+    "System.Text.StringBuilder RestWell.Client.Request.ProxyRequestBuilder`2::BuildQueryParameters(System.Text.StringBuilder,System.Collections.Generic.IDictionary`2<System.String,System.Collections.Generic.List`1<System.Object>>)": {
+     "Lines": {
+      "266": {
+       "Hits": 264
+      },
+      "268": {
+       "Hits": 10
+      },
+      "270": {
+       "Hits": 60
+      },
+      "272": {
+       "Hits": 80
+      },
+      "274": {
+       "Hits": 20
+      },
+      "279": {
+       "Hits": 264
+      }
+     },
+     "Branches": {
+      "266": [{
+       "Offset": 6,
+       "EndOffset": 8,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 6,
+       "EndOffset": 134,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "270": [{
+       "Offset": 120,
+       "EndOffset": 29,
+       "Path": 1,
+       "Ordinal": 5
+      }, {
+       "Offset": 120,
+       "EndOffset": 122,
+       "Path": 0,
+       "Ordinal": 4
+      }],
+      "272": [{
+       "Offset": 96,
+       "EndOffset": 51,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 96,
+       "EndOffset": 98,
+       "Path": 0,
+       "Ordinal": 2
+      }]
+     }
+    },
+    "System.Text.StringBuilder RestWell.Client.Request.ProxyRequestBuilder`2::BuildRoute(System.Text.StringBuilder,System.Collections.Generic.IEnumerable`1<System.String>)": {
+     "Lines": {
+      "284": {
+       "Hits": 528
+      },
+      "286": {
+       "Hits": 340
+      },
+      "288": {
+       "Hits": 1400
+      },
+      "290": {
+       "Hits": 360
+      },
+      "294": {
+       "Hits": 528
+      }
+     },
+     "Branches": {
+      "284": [{
+       "Offset": 6,
+       "EndOffset": 8,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 6,
+       "EndOffset": 74,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "288": [{
+       "Offset": 60,
+       "EndOffset": 29,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 60,
+       "EndOffset": 62,
+       "Path": 0,
+       "Ordinal": 2
+      }]
+     }
+    }
+   }
+  }
+ },
+ "F:\\Dev\\RestWell\\RestWell.Test\\bin\\Debug\\netcoreapp2.0\\RestWell.Test.Resource.WebApi.dll": {
+  "F:\\Dev\\RestWell\\RestWell.Test.Resource.WebApi\\Program.cs": {
+   "RestWell.Test.Resource.WebApi.Program": {
+    "Microsoft.AspNetCore.Hosting.IWebHost RestWell.Test.Resource.WebApi.Program::BuildWebHost(System.String[])": {
+     "Lines": {
+      "11": {
+       "Hits": 0
+      },
+      "12": {
+       "Hits": 0
+      },
+      "13": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Void RestWell.Test.Resource.WebApi.Program::Main(System.String[])": {
+     "Lines": {
+      "16": {
+       "Hits": 0
+      },
+      "17": {
+       "Hits": 0
+      },
+      "18": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell.Test.Resource.WebApi\\Startup.cs": {
+   "RestWell.Test.Resource.WebApi.Startup": {
+    "System.Void RestWell.Test.Resource.WebApi.Startup::.ctor(Microsoft.Extensions.Configuration.IConfiguration)": {
+     "Lines": {
+      "12": {
+       "Hits": 1
+      },
+      "13": {
+       "Hits": 1
+      },
+      "14": {
+       "Hits": 1
+      },
+      "15": {
+       "Hits": 1
+      }
+     },
+     "Branches": {
+     }
+    },
+    "Microsoft.Extensions.Configuration.IConfiguration RestWell.Test.Resource.WebApi.Startup::get_Configuration()": {
+     "Lines": {
+      "21": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Void RestWell.Test.Resource.WebApi.Startup::Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)": {
+     "Lines": {
+      "29": {
+       "Hits": 1
+      },
+      "30": {
+       "Hits": 1
+      },
+      "31": {
+       "Hits": 0
+      },
+      "32": {
+       "Hits": 0
+      },
+      "33": {
+       "Hits": 0
+      },
+      "35": {
+       "Hits": 1
+      },
+      "36": {
+       "Hits": 1
+      }
+     },
+     "Branches": {
+      "30": [{
+       "Offset": 9,
+       "EndOffset": 11,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 9,
+       "EndOffset": 20,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    },
+    "System.Void RestWell.Test.Resource.WebApi.Startup::ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)": {
+     "Lines": {
+      "40": {
+       "Hits": 1
+      },
+      "41": {
+       "Hits": 1
+      },
+      "42": {
+       "Hits": 1
+      }
+     },
+     "Branches": {
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell.Test.Resource.WebApi\\Dtos\\MessageRequestDto.cs": {
+   "RestWell.Test.Resource.WebApi.Dtos.MessageRequestDto": {
+    "System.String RestWell.Test.Resource.WebApi.Dtos.MessageRequestDto::get_Message()": {
+     "Lines": {
+      "7": {
+       "Hits": 60
+      }
+     },
+     "Branches": {
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell.Test.Resource.WebApi\\Dtos\\MessageResponseDto.cs": {
+   "RestWell.Test.Resource.WebApi.Dtos.MessageResponseDto": {
+    "System.String RestWell.Test.Resource.WebApi.Dtos.MessageResponseDto::get_Message()": {
+     "Lines": {
+      "7": {
+       "Hits": 792
+      }
+     },
+     "Branches": {
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell.Test.Resource.WebApi\\Controllers\\BasicRequestController.cs": {
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicDelete>d__0": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicDelete>d__0::MoveNext()": {
+     "Lines": {
+      "14": {
+       "Hits": 4
+      },
+      "15": {
+       "Hits": 4
+      },
+      "16": {
+       "Hits": 0
+      },
+      "17": {
+       "Hits": 0
+      },
+      "20": {
+       "Hits": 4
+      },
+      "21": {
+       "Hits": 4
+      }
+     },
+     "Branches": {
+      "15": [{
+       "Offset": 21,
+       "EndOffset": 23,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 21,
+       "EndOffset": 44,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 47,
+       "EndOffset": 49,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 47,
+       "EndOffset": 67,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "20": [{
+       "Offset": 102,
+       "EndOffset": 104,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 102,
+       "EndOffset": 169,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicDeleteError>d__1": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicDeleteError>d__1::MoveNext()": {
+     "Lines": {
+      "25": {
+       "Hits": 2
+      },
+      "26": {
+       "Hits": 2
+      },
+      "27": {
+       "Hits": 2
+      },
+      "28": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "27": [{
+       "Offset": 72,
+       "EndOffset": 74,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 72,
+       "EndOffset": 138,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicGet>d__2": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicGet>d__2::MoveNext()": {
+     "Lines": {
+      "32": {
+       "Hits": 4
+      },
+      "33": {
+       "Hits": 4
+      },
+      "34": {
+       "Hits": 0
+      },
+      "35": {
+       "Hits": 0
+      },
+      "38": {
+       "Hits": 4
+      },
+      "39": {
+       "Hits": 4
+      }
+     },
+     "Branches": {
+      "33": [{
+       "Offset": 21,
+       "EndOffset": 23,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 21,
+       "EndOffset": 44,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 47,
+       "EndOffset": 49,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 47,
+       "EndOffset": 67,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "38": [{
+       "Offset": 102,
+       "EndOffset": 104,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 102,
+       "EndOffset": 169,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicGetError>d__3": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicGetError>d__3::MoveNext()": {
+     "Lines": {
+      "43": {
+       "Hits": 2
+      },
+      "44": {
+       "Hits": 2
+      },
+      "45": {
+       "Hits": 2
+      },
+      "46": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "45": [{
+       "Offset": 72,
+       "EndOffset": 74,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 72,
+       "EndOffset": 138,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicHead>d__4": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicHead>d__4::MoveNext()": {
+     "Lines": {
+      "50": {
+       "Hits": 4
+      },
+      "51": {
+       "Hits": 4
+      },
+      "52": {
+       "Hits": 0
+      },
+      "53": {
+       "Hits": 0
+      },
+      "56": {
+       "Hits": 4
+      },
+      "57": {
+       "Hits": 4
+      }
+     },
+     "Branches": {
+      "51": [{
+       "Offset": 21,
+       "EndOffset": 23,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 21,
+       "EndOffset": 44,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 47,
+       "EndOffset": 49,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 47,
+       "EndOffset": 67,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "56": [{
+       "Offset": 96,
+       "EndOffset": 98,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 96,
+       "EndOffset": 163,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicHeadError>d__5": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicHeadError>d__5::MoveNext()": {
+     "Lines": {
+      "61": {
+       "Hits": 2
+      },
+      "62": {
+       "Hits": 2
+      },
+      "63": {
+       "Hits": 2
+      },
+      "64": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "63": [{
+       "Offset": 72,
+       "EndOffset": 74,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 72,
+       "EndOffset": 138,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicOptions>d__6": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicOptions>d__6::MoveNext()": {
+     "Lines": {
+      "68": {
+       "Hits": 4
+      },
+      "69": {
+       "Hits": 4
+      },
+      "70": {
+       "Hits": 0
+      },
+      "71": {
+       "Hits": 0
+      },
+      "74": {
+       "Hits": 4
+      },
+      "75": {
+       "Hits": 4
+      }
+     },
+     "Branches": {
+      "69": [{
+       "Offset": 21,
+       "EndOffset": 23,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 21,
+       "EndOffset": 44,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 47,
+       "EndOffset": 49,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 47,
+       "EndOffset": 67,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "74": [{
+       "Offset": 102,
+       "EndOffset": 104,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 102,
+       "EndOffset": 169,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicOptionsError>d__7": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicOptionsError>d__7::MoveNext()": {
+     "Lines": {
+      "79": {
+       "Hits": 2
+      },
+      "80": {
+       "Hits": 2
+      },
+      "81": {
+       "Hits": 2
+      },
+      "82": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "81": [{
+       "Offset": 72,
+       "EndOffset": 74,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 72,
+       "EndOffset": 138,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicPatch>d__8": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicPatch>d__8::MoveNext()": {
+     "Lines": {
+      "86": {
+       "Hits": 4
+      },
+      "87": {
+       "Hits": 4
+      },
+      "88": {
+       "Hits": 0
+      },
+      "89": {
+       "Hits": 0
+      },
+      "92": {
+       "Hits": 4
+      },
+      "93": {
+       "Hits": 4
+      }
+     },
+     "Branches": {
+      "87": [{
+       "Offset": 21,
+       "EndOffset": 23,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 21,
+       "EndOffset": 44,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 47,
+       "EndOffset": 49,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 47,
+       "EndOffset": 67,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "92": [{
+       "Offset": 102,
+       "EndOffset": 104,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 102,
+       "EndOffset": 169,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicPatchError>d__9": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicPatchError>d__9::MoveNext()": {
+     "Lines": {
+      "97": {
+       "Hits": 2
+      },
+      "98": {
+       "Hits": 2
+      },
+      "99": {
+       "Hits": 2
+      },
+      "100": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "99": [{
+       "Offset": 72,
+       "EndOffset": 74,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 72,
+       "EndOffset": 138,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicPost>d__10": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicPost>d__10::MoveNext()": {
+     "Lines": {
+      "104": {
+       "Hits": 4
+      },
+      "105": {
+       "Hits": 4
+      },
+      "106": {
+       "Hits": 0
+      },
+      "107": {
+       "Hits": 0
+      },
+      "110": {
+       "Hits": 4
+      },
+      "111": {
+       "Hits": 4
+      }
+     },
+     "Branches": {
+      "105": [{
+       "Offset": 21,
+       "EndOffset": 23,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 21,
+       "EndOffset": 44,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 47,
+       "EndOffset": 49,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 47,
+       "EndOffset": 67,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "110": [{
+       "Offset": 102,
+       "EndOffset": 104,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 102,
+       "EndOffset": 169,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicPostError>d__11": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicPostError>d__11::MoveNext()": {
+     "Lines": {
+      "115": {
+       "Hits": 2
+      },
+      "116": {
+       "Hits": 2
+      },
+      "117": {
+       "Hits": 2
+      },
+      "118": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "117": [{
+       "Offset": 72,
+       "EndOffset": 74,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 72,
+       "EndOffset": 138,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicPut>d__12": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicPut>d__12::MoveNext()": {
+     "Lines": {
+      "122": {
+       "Hits": 4
+      },
+      "123": {
+       "Hits": 4
+      },
+      "124": {
+       "Hits": 0
+      },
+      "125": {
+       "Hits": 0
+      },
+      "128": {
+       "Hits": 4
+      },
+      "129": {
+       "Hits": 4
+      }
+     },
+     "Branches": {
+      "123": [{
+       "Offset": 21,
+       "EndOffset": 23,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 21,
+       "EndOffset": 44,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 47,
+       "EndOffset": 49,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 47,
+       "EndOffset": 67,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "128": [{
+       "Offset": 102,
+       "EndOffset": 104,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 102,
+       "EndOffset": 169,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicPutError>d__13": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.BasicRequestController/<BasicPutError>d__13::MoveNext()": {
+     "Lines": {
+      "133": {
+       "Hits": 2
+      },
+      "134": {
+       "Hits": 2
+      },
+      "135": {
+       "Hits": 2
+      },
+      "136": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "135": [{
+       "Offset": 72,
+       "EndOffset": 74,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 72,
+       "EndOffset": 138,
+       "Path": 1,
+       "Ordinal": 1
+      }]
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell.Test.Resource.WebApi\\Controllers\\MessageDtoRequestController.cs": {
+   "RestWell.Test.Resource.WebApi.Controllers.MessageDtoRequestController": {
+    "Microsoft.AspNetCore.Mvc.IActionResult RestWell.Test.Resource.WebApi.Controllers.MessageDtoRequestController::MessageDtoDelete(RestWell.Test.Resource.WebApi.Dtos.MessageRequestDto)": {
+     "Lines": {
+      "13": {
+       "Hits": 2
+      },
+      "14": {
+       "Hits": 2
+      },
+      "15": {
+       "Hits": 0
+      },
+      "16": {
+       "Hits": 0
+      },
+      "19": {
+       "Hits": 2
+      },
+      "20": {
+       "Hits": 2
+      },
+      "21": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "14": [{
+       "Offset": 2,
+       "EndOffset": 4,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 2,
+       "EndOffset": 20,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 23,
+       "EndOffset": 25,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 23,
+       "EndOffset": 35,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    },
+    "Microsoft.AspNetCore.Mvc.IActionResult RestWell.Test.Resource.WebApi.Controllers.MessageDtoRequestController::MessageDtoGet(RestWell.Test.Resource.WebApi.Dtos.MessageRequestDto)": {
+     "Lines": {
+      "25": {
+       "Hits": 2
+      },
+      "26": {
+       "Hits": 2
+      },
+      "27": {
+       "Hits": 0
+      },
+      "28": {
+       "Hits": 0
+      },
+      "31": {
+       "Hits": 2
+      },
+      "32": {
+       "Hits": 2
+      },
+      "33": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "26": [{
+       "Offset": 2,
+       "EndOffset": 4,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 2,
+       "EndOffset": 20,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 23,
+       "EndOffset": 25,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 23,
+       "EndOffset": 35,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    },
+    "Microsoft.AspNetCore.Mvc.IActionResult RestWell.Test.Resource.WebApi.Controllers.MessageDtoRequestController::MessageDtoHead(RestWell.Test.Resource.WebApi.Dtos.MessageRequestDto)": {
+     "Lines": {
+      "37": {
+       "Hits": 0
+      },
+      "38": {
+       "Hits": 0
+      },
+      "39": {
+       "Hits": 0
+      },
+      "40": {
+       "Hits": 0
+      },
+      "43": {
+       "Hits": 0
+      },
+      "44": {
+       "Hits": 0
+      }
+     },
+     "Branches": {
+      "38": [{
+       "Offset": 2,
+       "EndOffset": 4,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 2,
+       "EndOffset": 20,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 23,
+       "EndOffset": 25,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 23,
+       "EndOffset": 35,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    },
+    "Microsoft.AspNetCore.Mvc.IActionResult RestWell.Test.Resource.WebApi.Controllers.MessageDtoRequestController::MessageDtoOptions(RestWell.Test.Resource.WebApi.Dtos.MessageRequestDto)": {
+     "Lines": {
+      "48": {
+       "Hits": 2
+      },
+      "49": {
+       "Hits": 2
+      },
+      "50": {
+       "Hits": 0
+      },
+      "51": {
+       "Hits": 0
+      },
+      "54": {
+       "Hits": 2
+      },
+      "55": {
+       "Hits": 2
+      },
+      "56": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "49": [{
+       "Offset": 2,
+       "EndOffset": 4,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 2,
+       "EndOffset": 20,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 23,
+       "EndOffset": 25,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 23,
+       "EndOffset": 35,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    },
+    "Microsoft.AspNetCore.Mvc.IActionResult RestWell.Test.Resource.WebApi.Controllers.MessageDtoRequestController::MessageDtoPatch(RestWell.Test.Resource.WebApi.Dtos.MessageRequestDto)": {
+     "Lines": {
+      "60": {
+       "Hits": 2
+      },
+      "61": {
+       "Hits": 2
+      },
+      "62": {
+       "Hits": 0
+      },
+      "63": {
+       "Hits": 0
+      },
+      "66": {
+       "Hits": 2
+      },
+      "67": {
+       "Hits": 2
+      },
+      "68": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "61": [{
+       "Offset": 2,
+       "EndOffset": 4,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 2,
+       "EndOffset": 20,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 23,
+       "EndOffset": 25,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 23,
+       "EndOffset": 35,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    },
+    "Microsoft.AspNetCore.Mvc.IActionResult RestWell.Test.Resource.WebApi.Controllers.MessageDtoRequestController::MessageDtoPost(RestWell.Test.Resource.WebApi.Dtos.MessageRequestDto)": {
+     "Lines": {
+      "72": {
+       "Hits": 2
+      },
+      "73": {
+       "Hits": 2
+      },
+      "74": {
+       "Hits": 0
+      },
+      "75": {
+       "Hits": 0
+      },
+      "78": {
+       "Hits": 2
+      },
+      "79": {
+       "Hits": 2
+      },
+      "80": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "73": [{
+       "Offset": 2,
+       "EndOffset": 4,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 2,
+       "EndOffset": 20,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 23,
+       "EndOffset": 25,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 23,
+       "EndOffset": 35,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    },
+    "Microsoft.AspNetCore.Mvc.IActionResult RestWell.Test.Resource.WebApi.Controllers.MessageDtoRequestController::MessageDtoPut(RestWell.Test.Resource.WebApi.Dtos.MessageRequestDto)": {
+     "Lines": {
+      "84": {
+       "Hits": 2
+      },
+      "85": {
+       "Hits": 2
+      },
+      "86": {
+       "Hits": 0
+      },
+      "87": {
+       "Hits": 0
+      },
+      "90": {
+       "Hits": 2
+      },
+      "91": {
+       "Hits": 2
+      },
+      "92": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "85": [{
+       "Offset": 2,
+       "EndOffset": 4,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 2,
+       "EndOffset": 20,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 23,
+       "EndOffset": 25,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 23,
+       "EndOffset": 35,
+       "Path": 1,
+       "Ordinal": 3
+      }]
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell.Test.Resource.WebApi\\Controllers\\MessageDtoResponseController.cs": {
+   "RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestDelete>d__0": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestDelete>d__0::MoveNext()": {
+     "Lines": {
+      "14": {
+       "Hits": 2
+      },
+      "15": {
+       "Hits": 2
+      },
+      "16": {
+       "Hits": 0
+      },
+      "17": {
+       "Hits": 0
+      },
+      "20": {
+       "Hits": 2
+      },
+      "21": {
+       "Hits": 2
+      },
+      "22": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "15": [{
+       "Offset": 24,
+       "EndOffset": 26,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 24,
+       "EndOffset": 47,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 50,
+       "EndOffset": 52,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 50,
+       "EndOffset": 70,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "21": [{
+       "Offset": 129,
+       "EndOffset": 131,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 129,
+       "EndOffset": 196,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestGet>d__1": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestGet>d__1::MoveNext()": {
+     "Lines": {
+      "26": {
+       "Hits": 2
+      },
+      "27": {
+       "Hits": 2
+      },
+      "28": {
+       "Hits": 0
+      },
+      "29": {
+       "Hits": 0
+      },
+      "32": {
+       "Hits": 2
+      },
+      "33": {
+       "Hits": 2
+      },
+      "34": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "27": [{
+       "Offset": 24,
+       "EndOffset": 26,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 24,
+       "EndOffset": 47,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 50,
+       "EndOffset": 52,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 50,
+       "EndOffset": 70,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "33": [{
+       "Offset": 129,
+       "EndOffset": 131,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 129,
+       "EndOffset": 196,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestHead>d__2": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestHead>d__2::MoveNext()": {
+     "Lines": {
+      "38": {
+       "Hits": 2
+      },
+      "39": {
+       "Hits": 2
+      },
+      "40": {
+       "Hits": 0
+      },
+      "41": {
+       "Hits": 0
+      },
+      "44": {
+       "Hits": 2
+      },
+      "45": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "39": [{
+       "Offset": 21,
+       "EndOffset": 23,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 21,
+       "EndOffset": 44,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 47,
+       "EndOffset": 49,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 47,
+       "EndOffset": 67,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "44": [{
+       "Offset": 96,
+       "EndOffset": 98,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 96,
+       "EndOffset": 163,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestOptions>d__3": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestOptions>d__3::MoveNext()": {
+     "Lines": {
+      "49": {
+       "Hits": 2
+      },
+      "50": {
+       "Hits": 2
+      },
+      "51": {
+       "Hits": 0
+      },
+      "52": {
+       "Hits": 0
+      },
+      "55": {
+       "Hits": 2
+      },
+      "56": {
+       "Hits": 2
+      },
+      "57": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "50": [{
+       "Offset": 24,
+       "EndOffset": 26,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 24,
+       "EndOffset": 47,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 50,
+       "EndOffset": 52,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 50,
+       "EndOffset": 70,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "56": [{
+       "Offset": 129,
+       "EndOffset": 131,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 129,
+       "EndOffset": 196,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestPatch>d__4": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestPatch>d__4::MoveNext()": {
+     "Lines": {
+      "61": {
+       "Hits": 2
+      },
+      "62": {
+       "Hits": 2
+      },
+      "63": {
+       "Hits": 0
+      },
+      "64": {
+       "Hits": 0
+      },
+      "67": {
+       "Hits": 2
+      },
+      "68": {
+       "Hits": 2
+      },
+      "69": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "62": [{
+       "Offset": 24,
+       "EndOffset": 26,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 24,
+       "EndOffset": 47,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 50,
+       "EndOffset": 52,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 50,
+       "EndOffset": 70,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "68": [{
+       "Offset": 129,
+       "EndOffset": 131,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 129,
+       "EndOffset": 196,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestPost>d__5": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestPost>d__5::MoveNext()": {
+     "Lines": {
+      "73": {
+       "Hits": 2
+      },
+      "74": {
+       "Hits": 2
+      },
+      "75": {
+       "Hits": 0
+      },
+      "76": {
+       "Hits": 0
+      },
+      "79": {
+       "Hits": 2
+      },
+      "80": {
+       "Hits": 2
+      },
+      "81": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "74": [{
+       "Offset": 24,
+       "EndOffset": 26,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 24,
+       "EndOffset": 47,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 50,
+       "EndOffset": 52,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 50,
+       "EndOffset": 70,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "80": [{
+       "Offset": 129,
+       "EndOffset": 131,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 129,
+       "EndOffset": 196,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestPut>d__6": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.MessageDtoResponseRequestController/<MessageDtoResponseRequestPut>d__6::MoveNext()": {
+     "Lines": {
+      "85": {
+       "Hits": 2
+      },
+      "86": {
+       "Hits": 2
+      },
+      "87": {
+       "Hits": 0
+      },
+      "88": {
+       "Hits": 0
+      },
+      "91": {
+       "Hits": 2
+      },
+      "92": {
+       "Hits": 2
+      },
+      "93": {
+       "Hits": 2
+      }
+     },
+     "Branches": {
+      "86": [{
+       "Offset": 24,
+       "EndOffset": 26,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 24,
+       "EndOffset": 47,
+       "Path": 1,
+       "Ordinal": 1
+      }, {
+       "Offset": 50,
+       "EndOffset": 52,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 50,
+       "EndOffset": 70,
+       "Path": 1,
+       "Ordinal": 3
+      }],
+      "92": [{
+       "Offset": 129,
+       "EndOffset": 131,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 129,
+       "EndOffset": 196,
+       "Path": 1,
+       "Ordinal": 5
+      }]
+     }
+    }
+   }
+  },
+  "F:\\Dev\\RestWell\\RestWell.Test.Resource.WebApi\\Controllers\\SecureRequestController.cs": {
+   "RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c": {
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestDelete>b__0_0(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "21": {
+       "Hits": 80
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestDelete>b__0_1(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "25": {
+       "Hits": 72
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestGet>b__1_0(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "44": {
+       "Hits": 80
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestGet>b__1_1(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "48": {
+       "Hits": 72
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestHead>b__2_0(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "67": {
+       "Hits": 80
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestHead>b__2_1(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "71": {
+       "Hits": 72
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestOptions>b__3_0(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "89": {
+       "Hits": 80
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestOptions>b__3_1(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "93": {
+       "Hits": 72
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestPatch>b__4_0(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "112": {
+       "Hits": 80
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestPatch>b__4_1(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "116": {
+       "Hits": 72
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestPost>b__5_0(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "135": {
+       "Hits": 82
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestPost>b__5_1(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "139": {
+       "Hits": 72
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestPut>b__6_0(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "158": {
+       "Hits": 82
+      }
+     },
+     "Branches": {
+     }
+    },
+    "System.Boolean RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<>c::<SecureRequestPut>b__6_1(System.Collections.Generic.KeyValuePair`2<System.String,Microsoft.Extensions.Primitives.StringValues>)": {
+     "Lines": {
+      "162": {
+       "Hits": 72
+      }
+     },
+     "Branches": {
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestDelete>d__0": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestDelete>d__0::MoveNext()": {
+     "Lines": {
+      "15": {
+       "Hits": 20
+      },
+      "16": {
+       "Hits": 20
+      },
+      "17": {
+       "Hits": 0
+      },
+      "18": {
+       "Hits": 0
+      },
+      "23": {
+       "Hits": 20
+      },
+      "24": {
+       "Hits": 18
+      },
+      "26": {
+       "Hits": 18
+      },
+      "27": {
+       "Hits": 18
+      },
+      "28": {
+       "Hits": 18
+      },
+      "29": {
+       "Hits": 18
+      },
+      "31": {
+       "Hits": 0
+      },
+      "33": {
+       "Hits": 2
+      },
+      "34": {
+       "Hits": 20
+      }
+     },
+     "Branches": {
+      "15": [{
+       "Offset": 14,
+       "EndOffset": 28,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 14,
+       "EndOffset": 482,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "16": [{
+       "Offset": 35,
+       "EndOffset": 37,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 35,
+       "EndOffset": 58,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 61,
+       "EndOffset": 63,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 61,
+       "EndOffset": 81,
+       "Path": 1,
+       "Ordinal": 5
+      }],
+      "21": [{
+       "Offset": 104,
+       "EndOffset": 106,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 104,
+       "EndOffset": 129,
+       "Path": 1,
+       "Ordinal": 7
+      }],
+      "23": [{
+       "Offset": 147,
+       "EndOffset": 152,
+       "Path": 0,
+       "Ordinal": 8
+      }, {
+       "Offset": 147,
+       "EndOffset": 412,
+       "Path": 1,
+       "Ordinal": 9
+      }],
+      "25": [{
+       "Offset": 176,
+       "EndOffset": 178,
+       "Path": 0,
+       "Ordinal": 10
+      }, {
+       "Offset": 176,
+       "EndOffset": 201,
+       "Path": 1,
+       "Ordinal": 11
+      }],
+      "26": [{
+       "Offset": 236,
+       "EndOffset": 241,
+       "Path": 0,
+       "Ordinal": 12
+      }, {
+       "Offset": 236,
+       "EndOffset": 399,
+       "Path": 1,
+       "Ordinal": 13
+      }],
+      "29": [{
+       "Offset": 302,
+       "EndOffset": 304,
+       "Path": 0,
+       "Ordinal": 14
+      }, {
+       "Offset": 302,
+       "EndOffset": 374,
+       "Path": 1,
+       "Ordinal": 15
+      }],
+      "33": [{
+       "Offset": 442,
+       "EndOffset": 444,
+       "Path": 0,
+       "Ordinal": 16
+      }, {
+       "Offset": 442,
+       "EndOffset": 511,
+       "Path": 1,
+       "Ordinal": 17
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestGet>d__1": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestGet>d__1::MoveNext()": {
+     "Lines": {
+      "38": {
+       "Hits": 20
+      },
+      "39": {
+       "Hits": 20
+      },
+      "40": {
+       "Hits": 0
+      },
+      "41": {
+       "Hits": 0
+      },
+      "46": {
+       "Hits": 20
+      },
+      "47": {
+       "Hits": 18
+      },
+      "49": {
+       "Hits": 18
+      },
+      "50": {
+       "Hits": 18
+      },
+      "51": {
+       "Hits": 18
+      },
+      "52": {
+       "Hits": 18
+      },
+      "54": {
+       "Hits": 0
+      },
+      "56": {
+       "Hits": 2
+      },
+      "57": {
+       "Hits": 20
+      }
+     },
+     "Branches": {
+      "38": [{
+       "Offset": 14,
+       "EndOffset": 28,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 14,
+       "EndOffset": 482,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "39": [{
+       "Offset": 35,
+       "EndOffset": 37,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 35,
+       "EndOffset": 58,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 61,
+       "EndOffset": 63,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 61,
+       "EndOffset": 81,
+       "Path": 1,
+       "Ordinal": 5
+      }],
+      "44": [{
+       "Offset": 104,
+       "EndOffset": 106,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 104,
+       "EndOffset": 129,
+       "Path": 1,
+       "Ordinal": 7
+      }],
+      "46": [{
+       "Offset": 147,
+       "EndOffset": 152,
+       "Path": 0,
+       "Ordinal": 8
+      }, {
+       "Offset": 147,
+       "EndOffset": 412,
+       "Path": 1,
+       "Ordinal": 9
+      }],
+      "48": [{
+       "Offset": 176,
+       "EndOffset": 178,
+       "Path": 0,
+       "Ordinal": 10
+      }, {
+       "Offset": 176,
+       "EndOffset": 201,
+       "Path": 1,
+       "Ordinal": 11
+      }],
+      "49": [{
+       "Offset": 236,
+       "EndOffset": 241,
+       "Path": 0,
+       "Ordinal": 12
+      }, {
+       "Offset": 236,
+       "EndOffset": 399,
+       "Path": 1,
+       "Ordinal": 13
+      }],
+      "52": [{
+       "Offset": 302,
+       "EndOffset": 304,
+       "Path": 0,
+       "Ordinal": 14
+      }, {
+       "Offset": 302,
+       "EndOffset": 374,
+       "Path": 1,
+       "Ordinal": 15
+      }],
+      "56": [{
+       "Offset": 442,
+       "EndOffset": 444,
+       "Path": 0,
+       "Ordinal": 16
+      }, {
+       "Offset": 442,
+       "EndOffset": 511,
+       "Path": 1,
+       "Ordinal": 17
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestHead>d__2": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestHead>d__2::MoveNext()": {
+     "Lines": {
+      "61": {
+       "Hits": 20
+      },
+      "62": {
+       "Hits": 20
+      },
+      "63": {
+       "Hits": 0
+      },
+      "64": {
+       "Hits": 0
+      },
+      "69": {
+       "Hits": 20
+      },
+      "70": {
+       "Hits": 18
+      },
+      "72": {
+       "Hits": 18
+      },
+      "73": {
+       "Hits": 18
+      },
+      "74": {
+       "Hits": 18
+      },
+      "76": {
+       "Hits": 0
+      },
+      "78": {
+       "Hits": 2
+      },
+      "79": {
+       "Hits": 20
+      }
+     },
+     "Branches": {
+      "61": [{
+       "Offset": 14,
+       "EndOffset": 28,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 14,
+       "EndOffset": 452,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "62": [{
+       "Offset": 35,
+       "EndOffset": 37,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 35,
+       "EndOffset": 58,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 61,
+       "EndOffset": 63,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 61,
+       "EndOffset": 81,
+       "Path": 1,
+       "Ordinal": 5
+      }],
+      "67": [{
+       "Offset": 104,
+       "EndOffset": 106,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 104,
+       "EndOffset": 129,
+       "Path": 1,
+       "Ordinal": 7
+      }],
+      "69": [{
+       "Offset": 147,
+       "EndOffset": 152,
+       "Path": 0,
+       "Ordinal": 8
+      }, {
+       "Offset": 147,
+       "EndOffset": 382,
+       "Path": 1,
+       "Ordinal": 9
+      }],
+      "71": [{
+       "Offset": 176,
+       "EndOffset": 178,
+       "Path": 0,
+       "Ordinal": 10
+      }, {
+       "Offset": 176,
+       "EndOffset": 201,
+       "Path": 1,
+       "Ordinal": 11
+      }],
+      "72": [{
+       "Offset": 236,
+       "EndOffset": 241,
+       "Path": 0,
+       "Ordinal": 12
+      }, {
+       "Offset": 236,
+       "EndOffset": 369,
+       "Path": 1,
+       "Ordinal": 13
+      }],
+      "74": [{
+       "Offset": 272,
+       "EndOffset": 274,
+       "Path": 0,
+       "Ordinal": 14
+      }, {
+       "Offset": 272,
+       "EndOffset": 344,
+       "Path": 1,
+       "Ordinal": 15
+      }],
+      "78": [{
+       "Offset": 412,
+       "EndOffset": 414,
+       "Path": 0,
+       "Ordinal": 16
+      }, {
+       "Offset": 412,
+       "EndOffset": 481,
+       "Path": 1,
+       "Ordinal": 17
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestOptions>d__3": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestOptions>d__3::MoveNext()": {
+     "Lines": {
+      "83": {
+       "Hits": 20
+      },
+      "84": {
+       "Hits": 20
+      },
+      "85": {
+       "Hits": 0
+      },
+      "86": {
+       "Hits": 0
+      },
+      "91": {
+       "Hits": 20
+      },
+      "92": {
+       "Hits": 18
+      },
+      "94": {
+       "Hits": 18
+      },
+      "95": {
+       "Hits": 18
+      },
+      "96": {
+       "Hits": 18
+      },
+      "97": {
+       "Hits": 18
+      },
+      "99": {
+       "Hits": 0
+      },
+      "101": {
+       "Hits": 2
+      },
+      "102": {
+       "Hits": 20
+      }
+     },
+     "Branches": {
+      "83": [{
+       "Offset": 14,
+       "EndOffset": 28,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 14,
+       "EndOffset": 482,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "84": [{
+       "Offset": 35,
+       "EndOffset": 37,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 35,
+       "EndOffset": 58,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 61,
+       "EndOffset": 63,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 61,
+       "EndOffset": 81,
+       "Path": 1,
+       "Ordinal": 5
+      }],
+      "89": [{
+       "Offset": 104,
+       "EndOffset": 106,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 104,
+       "EndOffset": 129,
+       "Path": 1,
+       "Ordinal": 7
+      }],
+      "91": [{
+       "Offset": 147,
+       "EndOffset": 152,
+       "Path": 0,
+       "Ordinal": 8
+      }, {
+       "Offset": 147,
+       "EndOffset": 412,
+       "Path": 1,
+       "Ordinal": 9
+      }],
+      "93": [{
+       "Offset": 176,
+       "EndOffset": 178,
+       "Path": 0,
+       "Ordinal": 10
+      }, {
+       "Offset": 176,
+       "EndOffset": 201,
+       "Path": 1,
+       "Ordinal": 11
+      }],
+      "94": [{
+       "Offset": 236,
+       "EndOffset": 241,
+       "Path": 0,
+       "Ordinal": 12
+      }, {
+       "Offset": 236,
+       "EndOffset": 399,
+       "Path": 1,
+       "Ordinal": 13
+      }],
+      "97": [{
+       "Offset": 302,
+       "EndOffset": 304,
+       "Path": 0,
+       "Ordinal": 14
+      }, {
+       "Offset": 302,
+       "EndOffset": 374,
+       "Path": 1,
+       "Ordinal": 15
+      }],
+      "101": [{
+       "Offset": 442,
+       "EndOffset": 444,
+       "Path": 0,
+       "Ordinal": 16
+      }, {
+       "Offset": 442,
+       "EndOffset": 511,
+       "Path": 1,
+       "Ordinal": 17
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestPatch>d__4": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestPatch>d__4::MoveNext()": {
+     "Lines": {
+      "106": {
+       "Hits": 20
+      },
+      "107": {
+       "Hits": 20
+      },
+      "108": {
+       "Hits": 0
+      },
+      "109": {
+       "Hits": 0
+      },
+      "114": {
+       "Hits": 20
+      },
+      "115": {
+       "Hits": 18
+      },
+      "117": {
+       "Hits": 18
+      },
+      "118": {
+       "Hits": 18
+      },
+      "119": {
+       "Hits": 18
+      },
+      "120": {
+       "Hits": 18
+      },
+      "122": {
+       "Hits": 0
+      },
+      "124": {
+       "Hits": 2
+      },
+      "125": {
+       "Hits": 20
+      }
+     },
+     "Branches": {
+      "106": [{
+       "Offset": 14,
+       "EndOffset": 28,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 14,
+       "EndOffset": 482,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "107": [{
+       "Offset": 35,
+       "EndOffset": 37,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 35,
+       "EndOffset": 58,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 61,
+       "EndOffset": 63,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 61,
+       "EndOffset": 81,
+       "Path": 1,
+       "Ordinal": 5
+      }],
+      "112": [{
+       "Offset": 104,
+       "EndOffset": 106,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 104,
+       "EndOffset": 129,
+       "Path": 1,
+       "Ordinal": 7
+      }],
+      "114": [{
+       "Offset": 147,
+       "EndOffset": 152,
+       "Path": 0,
+       "Ordinal": 8
+      }, {
+       "Offset": 147,
+       "EndOffset": 412,
+       "Path": 1,
+       "Ordinal": 9
+      }],
+      "116": [{
+       "Offset": 176,
+       "EndOffset": 178,
+       "Path": 0,
+       "Ordinal": 10
+      }, {
+       "Offset": 176,
+       "EndOffset": 201,
+       "Path": 1,
+       "Ordinal": 11
+      }],
+      "117": [{
+       "Offset": 236,
+       "EndOffset": 241,
+       "Path": 0,
+       "Ordinal": 12
+      }, {
+       "Offset": 236,
+       "EndOffset": 399,
+       "Path": 1,
+       "Ordinal": 13
+      }],
+      "120": [{
+       "Offset": 302,
+       "EndOffset": 304,
+       "Path": 0,
+       "Ordinal": 14
+      }, {
+       "Offset": 302,
+       "EndOffset": 374,
+       "Path": 1,
+       "Ordinal": 15
+      }],
+      "124": [{
+       "Offset": 442,
+       "EndOffset": 444,
+       "Path": 0,
+       "Ordinal": 16
+      }, {
+       "Offset": 442,
+       "EndOffset": 511,
+       "Path": 1,
+       "Ordinal": 17
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestPost>d__5": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestPost>d__5::MoveNext()": {
+     "Lines": {
+      "129": {
+       "Hits": 20
+      },
+      "130": {
+       "Hits": 20
+      },
+      "131": {
+       "Hits": 0
+      },
+      "132": {
+       "Hits": 0
+      },
+      "137": {
+       "Hits": 20
+      },
+      "138": {
+       "Hits": 18
+      },
+      "140": {
+       "Hits": 18
+      },
+      "141": {
+       "Hits": 18
+      },
+      "142": {
+       "Hits": 18
+      },
+      "143": {
+       "Hits": 18
+      },
+      "145": {
+       "Hits": 0
+      },
+      "147": {
+       "Hits": 2
+      },
+      "148": {
+       "Hits": 20
+      }
+     },
+     "Branches": {
+      "129": [{
+       "Offset": 14,
+       "EndOffset": 28,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 14,
+       "EndOffset": 482,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "130": [{
+       "Offset": 35,
+       "EndOffset": 37,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 35,
+       "EndOffset": 58,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 61,
+       "EndOffset": 63,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 61,
+       "EndOffset": 81,
+       "Path": 1,
+       "Ordinal": 5
+      }],
+      "135": [{
+       "Offset": 104,
+       "EndOffset": 106,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 104,
+       "EndOffset": 129,
+       "Path": 1,
+       "Ordinal": 7
+      }],
+      "137": [{
+       "Offset": 147,
+       "EndOffset": 152,
+       "Path": 0,
+       "Ordinal": 8
+      }, {
+       "Offset": 147,
+       "EndOffset": 412,
+       "Path": 1,
+       "Ordinal": 9
+      }],
+      "139": [{
+       "Offset": 176,
+       "EndOffset": 178,
+       "Path": 0,
+       "Ordinal": 10
+      }, {
+       "Offset": 176,
+       "EndOffset": 201,
+       "Path": 1,
+       "Ordinal": 11
+      }],
+      "140": [{
+       "Offset": 236,
+       "EndOffset": 241,
+       "Path": 0,
+       "Ordinal": 12
+      }, {
+       "Offset": 236,
+       "EndOffset": 399,
+       "Path": 1,
+       "Ordinal": 13
+      }],
+      "143": [{
+       "Offset": 302,
+       "EndOffset": 304,
+       "Path": 0,
+       "Ordinal": 14
+      }, {
+       "Offset": 302,
+       "EndOffset": 374,
+       "Path": 1,
+       "Ordinal": 15
+      }],
+      "147": [{
+       "Offset": 442,
+       "EndOffset": 444,
+       "Path": 0,
+       "Ordinal": 16
+      }, {
+       "Offset": 442,
+       "EndOffset": 511,
+       "Path": 1,
+       "Ordinal": 17
+      }]
+     }
+    }
+   },
+   "RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestPut>d__6": {
+    "System.Void RestWell.Test.Resource.WebApi.Controllers.SecureRequestController/<SecureRequestPut>d__6::MoveNext()": {
+     "Lines": {
+      "152": {
+       "Hits": 20
+      },
+      "153": {
+       "Hits": 20
+      },
+      "154": {
+       "Hits": 0
+      },
+      "155": {
+       "Hits": 0
+      },
+      "160": {
+       "Hits": 20
+      },
+      "161": {
+       "Hits": 18
+      },
+      "163": {
+       "Hits": 18
+      },
+      "164": {
+       "Hits": 18
+      },
+      "165": {
+       "Hits": 18
+      },
+      "166": {
+       "Hits": 18
+      },
+      "168": {
+       "Hits": 0
+      },
+      "170": {
+       "Hits": 2
+      },
+      "171": {
+       "Hits": 20
+      }
+     },
+     "Branches": {
+      "152": [{
+       "Offset": 14,
+       "EndOffset": 28,
+       "Path": 0,
+       "Ordinal": 0
+      }, {
+       "Offset": 14,
+       "EndOffset": 482,
+       "Path": 1,
+       "Ordinal": 1
+      }],
+      "153": [{
+       "Offset": 35,
+       "EndOffset": 37,
+       "Path": 0,
+       "Ordinal": 2
+      }, {
+       "Offset": 35,
+       "EndOffset": 58,
+       "Path": 1,
+       "Ordinal": 3
+      }, {
+       "Offset": 61,
+       "EndOffset": 63,
+       "Path": 0,
+       "Ordinal": 4
+      }, {
+       "Offset": 61,
+       "EndOffset": 81,
+       "Path": 1,
+       "Ordinal": 5
+      }],
+      "158": [{
+       "Offset": 104,
+       "EndOffset": 106,
+       "Path": 0,
+       "Ordinal": 6
+      }, {
+       "Offset": 104,
+       "EndOffset": 129,
+       "Path": 1,
+       "Ordinal": 7
+      }],
+      "160": [{
+       "Offset": 147,
+       "EndOffset": 152,
+       "Path": 0,
+       "Ordinal": 8
+      }, {
+       "Offset": 147,
+       "EndOffset": 412,
+       "Path": 1,
+       "Ordinal": 9
+      }],
+      "162": [{
+       "Offset": 176,
+       "EndOffset": 178,
+       "Path": 0,
+       "Ordinal": 10
+      }, {
+       "Offset": 176,
+       "EndOffset": 201,
+       "Path": 1,
+       "Ordinal": 11
+      }],
+      "163": [{
+       "Offset": 236,
+       "EndOffset": 241,
+       "Path": 0,
+       "Ordinal": 12
+      }, {
+       "Offset": 236,
+       "EndOffset": 399,
+       "Path": 1,
+       "Ordinal": 13
+      }],
+      "166": [{
+       "Offset": 302,
+       "EndOffset": 304,
+       "Path": 0,
+       "Ordinal": 14
+      }, {
+       "Offset": 302,
+       "EndOffset": 374,
+       "Path": 1,
+       "Ordinal": 15
+      }],
+      "170": [{
+       "Offset": 442,
+       "EndOffset": 444,
+       "Path": 0,
+       "Ordinal": 16
+      }, {
+       "Offset": 442,
+       "EndOffset": 511,
+       "Path": 1,
+       "Ordinal": 17
+      }]
+     }
+    }
+   }
+  }
+ }
+}

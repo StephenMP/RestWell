@@ -1,10 +1,10 @@
-﻿using RestWell.Client.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RestWell.Client.Enums;
 using Xunit;
 
-namespace RestWell.Test.Component.Client.Testing
+namespace RestWell.Test.Unit.Client.Testing
 {
     public class ProxyRequestBuilderFeatures
     {
