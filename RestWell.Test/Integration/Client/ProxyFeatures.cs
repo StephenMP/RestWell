@@ -26,10 +26,39 @@ namespace RestWell.Test.Integration.Client
 
         #region Public Methods
 
+        public static IEnumerable<object[]> GetGenericTestData(bool includeHeadRequest)
+        {
+            var testData = new List<object[]>();
+            var methods = new List<HttpRequestMethod> { HttpRequestMethod.Delete, HttpRequestMethod.Get, HttpRequestMethod.Options, HttpRequestMethod.Patch, HttpRequestMethod.Post, HttpRequestMethod.Put };
+            if (includeHeadRequest)
+            {
+                methods.Add(HttpRequestMethod.Head);
+            }
+
+            var accepts = new[] { "application/json", "application/xml" };
+
+            foreach (var method in methods)
+            {
+                foreach (var accept in accepts)
+                {
+                    testData.Add(new object[] { method, Guid.NewGuid().ToString(), accept });
+                }
+            }
+
+            return testData;
+        }
+
         [Fact]
         public void CanCreateProxy()
         {
             this.steps.GivenIHaveAProxy();
+            this.steps.ThenICanVerifyIHaveAProxy();
+        }
+
+        [Fact]
+        public void CanCreateProxyUsingDefaultConstructor()
+        {
+            this.steps.GivenIHaveAProxyUsingDefaultConstructor();
             this.steps.ThenICanVerifyIHaveAProxy();
         }
 
@@ -252,31 +281,5 @@ namespace RestWell.Test.Integration.Client
         }
 
         #endregion Protected Methods
-
-        #region Private Methods
-
-        public static IEnumerable<object[]> GetGenericTestData(bool includeHeadRequest)
-        {
-            var testData = new List<object[]>();
-            var methods = new List<HttpRequestMethod> { HttpRequestMethod.Delete, HttpRequestMethod.Get, HttpRequestMethod.Options, HttpRequestMethod.Patch, HttpRequestMethod.Post, HttpRequestMethod.Put };
-            if (includeHeadRequest)
-            {
-                methods.Add(HttpRequestMethod.Head);
-            }
-
-            var accepts = new[] { "application/json", "application/xml" };
-
-            foreach (var method in methods)
-            {
-                foreach (var accept in accepts)
-                {
-                    testData.Add(new object[] { method, Guid.NewGuid().ToString(), accept });
-                }
-            }
-
-            return testData;
-        }
-
-        #endregion Private Methods
     }
 }

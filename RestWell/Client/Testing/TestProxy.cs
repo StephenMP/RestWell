@@ -32,19 +32,6 @@ namespace RestWell.Client.Testing
         {
         }
 
-        private IProxyResponse<TResponseDto> Invoke<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
-        {
-            var requestKey = this.genericAnyRequest ?? request;
-
-            if (mockedRequests.ContainsKey(requestKey))
-            {
-                var mockedRequest = this.mockedRequests[requestKey] as TestProxyRequest<TRequestDto, TResponseDto>;
-                return mockedRequest?.ResponseToReturn;
-            }
-
-            return null;
-        }
-
         /// <summary>
         /// Invokes the specified request using the asynchronous framework.
         /// </summary>
@@ -94,5 +81,22 @@ namespace RestWell.Client.Testing
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private IProxyResponse<TResponseDto> Invoke<TRequestDto, TResponseDto>(IProxyRequest<TRequestDto, TResponseDto> request) where TRequestDto : class where TResponseDto : class
+        {
+            var requestKey = this.genericAnyRequest ?? request;
+
+            if (mockedRequests.ContainsKey(requestKey))
+            {
+                var mockedRequest = this.mockedRequests[requestKey] as TestProxyRequest<TRequestDto, TResponseDto>;
+                return mockedRequest?.ResponseToReturn;
+            }
+
+            return null;
+        }
+
+        #endregion Private Methods
     }
 }

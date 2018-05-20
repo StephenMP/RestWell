@@ -1,7 +1,7 @@
-using RestWell.Domain.Request;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using RestWell.Domain.Request;
 
 namespace RestWell.Client
 {

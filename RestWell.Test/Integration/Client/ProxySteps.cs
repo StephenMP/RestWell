@@ -22,6 +22,8 @@ namespace RestWell.Test.Integration.Client
     {
         #region Private Fields
 
+        private readonly Dictionary<Type, DelegatingHandler> delegatingHandlers;
+        private readonly TestWellEnvironment testEnvironment;
         private string acceptHeaderValue;
         private string basicMessage;
         private IProxyRequest<Missing, string> basicRequestProxyRequest;
@@ -29,19 +31,28 @@ namespace RestWell.Test.Integration.Client
         private MediaTypeWithQualityHeaderValue defaultAcceptHeader;
         private AuthenticationHeaderValue defaultAuthorizationHeader;
         private Action<HttpRequestMessage, CancellationToken> delegatingAction;
-        private Dictionary<Type, DelegatingHandler> delegatingHandlers;
+
         private bool disposedValue;
+
         private HttpRequestMethod httpRequestMethod;
+
         private IProxyRequest<MessageRequestDto, MessageResponseDto> messageDtoRequestProxyRequest;
+
         private IProxyResponse<MessageResponseDto> messageDtoRequestProxyResponse;
+
         private IProxyRequest<Missing, MessageResponseDto> messageDtoResponseRequestProxyRequest;
+
         private IProxyResponse<MessageResponseDto> messageDtoResponseRequestProxyResponse;
+
         private MessageRequestDto messageRequestDto;
+
         private IProxy proxy;
+
         private IProxyConfiguration proxyConfiguration;
+
         private IProxyRequest<Missing, MessageResponseDto> secureRequestProxyRequest;
+
         private IProxyResponse<MessageResponseDto> secureRequestProxyResponse;
-        private readonly TestWellEnvironment testEnvironment;
 
         #endregion Private Fields
 
@@ -187,6 +198,11 @@ namespace RestWell.Test.Integration.Client
             }
 
             this.proxyConfiguration = proxyConfigurationBuilder.Build();
+        }
+
+        internal void GivenIHaveAProxyUsingDefaultConstructor()
+        {
+            this.proxy = new Proxy();
         }
 
         internal void GivenIHaveASecureRequestDelegatingAction()

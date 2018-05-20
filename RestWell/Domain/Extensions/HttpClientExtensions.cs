@@ -1,13 +1,13 @@
-using Newtonsoft.Json;
-using RestWell.Client.Enums;
-using RestWell.Client.Request;
-using RestWell.Domain.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using RestWell.Client.Enums;
+using RestWell.Client.Request;
+using RestWell.Domain.Request;
 
 namespace RestWell.Domain.Extensions
 {

@@ -1,11 +1,13 @@
-using RestWell.Client.Enums;
 using System;
 using System.Collections.Generic;
+using RestWell.Client.Enums;
 
 namespace RestWell.Client.Request
 {
     public interface IProxyRequest
     {
+        #region Public Properties
+
         /// <summary>
         /// The headers which will be used on this request. Note that the DefaultProxyRequestHeaders
         /// will be used Unless specifically overriden here.
@@ -23,6 +25,8 @@ namespace RestWell.Client.Request
         /// </summary>
         /// <value>The request URI.</value>
         Uri RequestUri { get; set; }
+
+        #endregion Public Properties
     }
 
     public interface IProxyRequest<TRequestDto, TResponseDto> : IProxyRequest

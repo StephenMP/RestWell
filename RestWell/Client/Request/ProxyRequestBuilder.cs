@@ -1,40 +1,45 @@
-using RestWell.Client.Enums;
-using RestWell.Domain.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using RestWell.Client.Enums;
+using RestWell.Domain.Extensions;
 
 namespace RestWell.Client.Request
 {
     public class ProxyRequestBuilder : ProxyRequestBuilder<Missing, Missing>
     {
-
         #region Public Constructors
 
-        public ProxyRequestBuilder(string baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod) { }
-        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod) { }
+        public ProxyRequestBuilder(string baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod)
+        {
+        }
+
+        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod)
+        {
+        }
 
         #endregion Public Constructors
-
     }
 
     public class ProxyRequestBuilder<TResponseDto> : ProxyRequestBuilder<Missing, TResponseDto>
     {
-
         #region Public Constructors
 
-        public ProxyRequestBuilder(string baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod) { }
-        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod) { }
+        public ProxyRequestBuilder(string baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod)
+        {
+        }
+
+        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : base(baseUri, requestMethod)
+        {
+        }
 
         #endregion Public Constructors
-
     }
 
     public class ProxyRequestBuilder<TRequestDto, TResponseDto>
     {
-
         #region Private Fields
 
         private readonly Uri baseUri;
@@ -69,7 +74,9 @@ namespace RestWell.Client.Request
             this.routeAppendages = new List<string>();
         }
 
-        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : this(baseUri.ToString(), requestMethod) { }
+        public ProxyRequestBuilder(Uri baseUri, HttpRequestMethod requestMethod) : this(baseUri.ToString(), requestMethod)
+        {
+        }
 
         #endregion Public Constructors
 
@@ -295,6 +302,5 @@ namespace RestWell.Client.Request
         }
 
         #endregion Private Methods
-
     }
 }

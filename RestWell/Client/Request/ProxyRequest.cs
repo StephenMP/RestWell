@@ -1,12 +1,12 @@
-using RestWell.Client.Enums;
 using System;
 using System.Collections.Generic;
+using RestWell.Client.Enums;
 
 namespace RestWell.Client.Request
 {
     public class ProxyRequest<TRequestDto, TResponseDto> : IProxyRequest<TRequestDto, TResponseDto>
     {
-        #region Public Constructors
+        #region Internal Constructors
 
         internal ProxyRequest(IDictionary<string, List<string>> builderHeaders)
         {
@@ -21,7 +21,7 @@ namespace RestWell.Client.Request
             }
         }
 
-        #endregion Public Constructors
+        #endregion Internal Constructors
 
         #region Public Properties
 

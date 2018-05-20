@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
-using RestWell.Test.Resource.WebApi.Dtos;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using RestWell.Test.Resource.WebApi.Dtos;
 
 namespace RestWell.Test.Resource.WebApi.Controllers
 {
