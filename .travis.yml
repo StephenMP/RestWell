@@ -6,9 +6,16 @@ dotnet: 2.1.300
 install:
   - dotnet restore
 script:
-  - dotnet test RestWell.Test/RestWell.Test.csproj -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -p:Exclude="[RestWell.Test*]*"
+  - dotnet build -c Release
+  - dotnet test -c Release --no-build RestWell.Tests/RestWell.Tests.csproj -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -p:Exclude="[RestWell.Tests*]*"
   - curl -s https://codecov.io/bash > codecov
   - chmod +x codecov
-  - ./codecov -f ./RestWell.Test/coverage.opencover.xml
+  - ./codecov -f ./RestWell.Tests/coverage.opencover.xml
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: dotnet nuget push ./RestWell/bin/Release/*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
+  on:
+    branch: release
 notifications:
   email: false
