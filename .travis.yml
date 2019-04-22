@@ -1,6 +1,6 @@
 language: csharp
 solution: RestWell.sln
-dist: trusty
+dist: xenial
 mono: none
 dotnet: 2.1.300
 install:
